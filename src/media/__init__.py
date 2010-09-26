@@ -56,8 +56,12 @@ def getTracksFromFiles(files):
     return [getTrackFromFile(file) for file in files]
 
 
-def getTracks(filenames, sortByFilename=False):
-    """ Same as getTracksFromFiles(), but works for any kind of filenames (files, playlists, directories) """
+def getTracks(filenames, sortByFilename=False, ignoreHiddenFiles=True):
+    """
+        Same as getTracksFromFiles(), but works for any kind of filenames (files, playlists, directories)
+        If sortByFilename is True, files loaded from directories are sorted by filename instead of tags
+        If ignoreHiddenFiles is True, hidden files are ignored when walking directories
+    """
     allTracks = []
 
     # Directories
@@ -65,8 +69,9 @@ def getTracks(filenames, sortByFilename=False):
         mediaFiles, playlists = [], []
         for root, subdirs, files in os.walk(directory):
             for file in files:
-                if isSupported(file):            mediaFiles.append(os.path.join(root, file))
-                elif playlist.isSupported(file): playlists.append(os.path.join(root, file))
+               if not ignoreHiddenFiles or file[0] != '.':
+                    if isSupported(file):            mediaFiles.append(os.path.join(root, file))
+                    elif playlist.isSupported(file): playlists.append(os.path.join(root, file))
 
         if sortByFilename: allTracks.extend(sorted(getTracksFromFiles(mediaFiles), lambda t1, t2: cmp(t1.getFilePath(), t2.getFilePath())))
         else:              allTracks.extend(sorted(getTracksFromFiles(mediaFiles)))

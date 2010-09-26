@@ -54,9 +54,10 @@ FULL_SIZE_COVER_HEIGHT = 300
 ACCEPTED_FILE_FORMATS = {'.jpg': None, '.jpeg': None, '.png': None, '.gif': None}
 
 # Default preferences
-PREFS_DFT_DOWNLOAD_COVERS      = False
-PREFS_DFT_PREFER_USER_COVERS   = True
-PREFS_DFT_USER_COVER_FILENAMES = ['cover', 'art', 'front', '*']
+PREFS_DFT_DOWNLOAD_COVERS       = False
+PREFS_DFT_PREFER_USER_COVERS    = True
+PREFS_DFT_USER_COVER_FILENAMES  = ['cover', 'art', 'front', '*']
+PREFS_DFT_SEARCH_IN_PARENT_DIRS = False
 
 # Images for thumbnails
 THUMBNAIL_GLOSS = os.path.join(consts.dirPix, 'cover-gloss.png')
@@ -144,20 +145,34 @@ class Covers(modules.ThreadedModule):
 
     def getUserCover(self, trackPath):
         """ Return the path to a cover file in trackPath, None if no cover found """
-        # Create a dictionary with candidates
-        candidates = {}
-        for (file, path) in tools.listDir(trackPath, True):
-            (name, ext) = os.path.splitext(file.lower())
-            if ext in ACCEPTED_FILE_FORMATS:
-                candidates[name] = path
+        splitPath = tools.splitPath(trackPath)
 
-        # Check each possible name using the its index in the list as its priority
-        for name in prefs.get(__name__, 'user-cover-filenames', PREFS_DFT_USER_COVER_FILENAMES):
-            if name in candidates:
-                return candidates[name]
+        if prefs.get(__name__, 'search-in-parent-dirs', PREFS_DFT_SEARCH_IN_PARENT_DIRS): lvls = len(splitPath)
+        else:                                                                             lvls = 1
 
-            if name == '*' and len(candidates) != 0:
-                return candidates.values()[0]
+        while lvls != 0:
+
+            # Create the path we're currently looking into
+            currPath = os.path.join(*splitPath)
+
+            # Create a dictionary with candidates
+            candidates = {}
+            for (file, path) in tools.listDir(currPath, True):
+                (name, ext) = os.path.splitext(file.lower())
+                if ext in ACCEPTED_FILE_FORMATS:
+                    candidates[name] = path
+
+            # Check each possible name using its index in the list as its priority
+            for name in prefs.get(__name__, 'user-cover-filenames', PREFS_DFT_USER_COVER_FILENAMES):
+                if name in candidates:
+                    return candidates[name]
+
+                if name == '*' and len(candidates) != 0:
+                    return candidates.values()[0]
+
+            # No cover found, let's go one level higher
+            lvls      -= 1
+            splitPath  = splitPath[:-1]
 
         return None
 
@@ -380,15 +395,17 @@ class Covers(modules.ThreadedModule):
             self.cfgWin.getWidget('btn-cancel').connect('clicked', lambda btn: self.cfgWin.hide())
 
         if not self.cfgWin.isVisible():
-            downloadCovers     = prefs.get(__name__, 'download-covers',      PREFS_DFT_DOWNLOAD_COVERS)
-            preferUserCovers   = prefs.get(__name__, 'prefer-user-covers',   PREFS_DFT_PREFER_USER_COVERS)
-            userCoverFilenames = prefs.get(__name__, 'user-cover-filenames', PREFS_DFT_USER_COVER_FILENAMES)
+            downloadCovers     = prefs.get(__name__, 'download-covers',       PREFS_DFT_DOWNLOAD_COVERS)
+            preferUserCovers   = prefs.get(__name__, 'prefer-user-covers',    PREFS_DFT_PREFER_USER_COVERS)
+            userCoverFilenames = prefs.get(__name__, 'user-cover-filenames',  PREFS_DFT_USER_COVER_FILENAMES)
+            searchInParentDirs = prefs.get(__name__, 'search-in-parent-dirs', PREFS_DFT_SEARCH_IN_PARENT_DIRS)
 
             self.cfgWin.getWidget('btn-ok').grab_focus()
             self.cfgWin.getWidget('txt-filenames').set_text(', '.join(userCoverFilenames))
             self.cfgWin.getWidget('chk-downloadCovers').set_active(downloadCovers)
             self.cfgWin.getWidget('chk-preferUserCovers').set_active(preferUserCovers)
             self.cfgWin.getWidget('chk-preferUserCovers').set_sensitive(downloadCovers)
+            self.cfgWin.getWidget('chk-searchInParentDirs').set_active(searchInParentDirs)
 
         self.cfgWin.show()
 
@@ -397,11 +414,13 @@ class Covers(modules.ThreadedModule):
         """ Save configuration """
         downloadCovers     = self.cfgWin.getWidget('chk-downloadCovers').get_active()
         preferUserCovers   = self.cfgWin.getWidget('chk-preferUserCovers').get_active()
+        searchInParentDirs = self.cfgWin.getWidget('chk-searchInParentDirs').get_active()
         userCoverFilenames = [word.strip() for word in self.cfgWin.getWidget('txt-filenames').get_text().split(',')]
 
-        prefs.set(__name__, 'download-covers',      downloadCovers)
-        prefs.set(__name__, 'prefer-user-covers',   preferUserCovers)
-        prefs.set(__name__, 'user-cover-filenames', userCoverFilenames)
+        prefs.set(__name__, 'download-covers',       downloadCovers)
+        prefs.set(__name__, 'prefer-user-covers',    preferUserCovers)
+        prefs.set(__name__, 'user-cover-filenames',  userCoverFilenames)
+        prefs.set(__name__, 'search-in-parent-dirs', searchInParentDirs)
 
         self.cfgWin.hide()
 
@@ -423,7 +442,8 @@ class Covers(modules.ThreadedModule):
         helpDlg.addSection(_('User Covers'),
                            _('A user cover is a picture located in the same directory as the current track. '
                              'When specifying filenames, you do not need to provide file extensions, supported '
-                             'file formats (%s) are automatically used.' % ', '.join(ACCEPTED_FILE_FORMATS.iterkeys())))
+                             'file formats (%s) are automatically used. This module can be configured to search '
+                             'for user covers in parent directories are well.' % ', '.join(ACCEPTED_FILE_FORMATS.iterkeys())))
         helpDlg.addSection(_('Internet Covers'),
                            _('Covers may be downloaded from the Internet, based on the tags of the current track. '
                              'You can ask to always prefer user covers to Internet ones. In this case, if a user '

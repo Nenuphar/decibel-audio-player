@@ -75,7 +75,7 @@ class FileExplorer(modules.Module):
         self.tree = extTreeview.ExtTreeView(columns, True)
 
         self.scrolled.add(self.tree)
-        self.tree.setDNDSources([consts.DND_TARGETS[consts.DND_DAP_URI]])
+        self.tree.setDNDSources([consts.DND_TARGETS[consts.DND_DAP_TRACKS]])
         self.tree.connect('drag-data-get', self.onDragDataGet)
         self.tree.connect('key-press-event', self.onKeyPressed)
         self.tree.connect('exttreeview-button-pressed', self.onMouseButton)
@@ -151,8 +151,8 @@ class FileExplorer(modules.Module):
             Replace/extend the tracklist
             If 'path' is None, use the current selection
         """
-        if path is None: tracks = media.getTracks([row[ROW_FULLPATH] for row in self.tree.getSelectedRows()], self.addByFilename)
-        else:            tracks = media.getTracks([self.tree.getRow(path)[ROW_FULLPATH]], self.addByFilename)
+        if path is None: tracks = media.getTracks([row[ROW_FULLPATH] for row in self.tree.getSelectedRows()], self.addByFilename, not self.showHiddenFiles)
+        else:            tracks = media.getTracks([self.tree.getRow(path)[ROW_FULLPATH]], self.addByFilename, not self.showHiddenFiles)
 
         if replace: modules.postMsg(consts.MSG_CMD_TRACKLIST_SET, {'tracks': tracks, 'playNow': True})
         else:       modules.postMsg(consts.MSG_CMD_TRACKLIST_ADD, {'tracks': tracks, 'playNow': False})
@@ -393,8 +393,8 @@ class FileExplorer(modules.Module):
 
     def onDragDataGet(self, tree, context, selection, info, time):
         """ Provide information about the data being dragged """
-        import urllib
-        selection.set('text/uri-list', 8, ' '.join([urllib.pathname2url(file) for file in [row[ROW_FULLPATH] for row in tree.getSelectedRows()]]))
+        allTracks = media.getTracks([row[ROW_FULLPATH] for row in self.tree.getSelectedRows()], self.addByFilename, not self.showHiddenFiles)
+        selection.set(consts.DND_TARGETS[consts.DND_DAP_TRACKS][0], 8, '\n'.join([track.serialize() for track in allTracks]))
 
 
    # --== Message handlers ==--

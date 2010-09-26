@@ -175,3 +175,21 @@ def htmlEscape(string):
         else:          output += c
 
     return output
+
+
+def splitPath(path):
+    """
+        Return a list composed of all the elements forming the given path
+        For instance, splitPath('/some/path/foo') returns ['some', 'path', 'foo']
+    """
+    path       = os.path.abspath(path)
+    components = []
+
+    while True:
+        head, tail = os.path.split(path)
+
+        if tail == '':
+            return [head] + components
+        else:
+            path       = head
+            components = [tail] + components

@@ -4,10 +4,12 @@
 
 v1.06 ()
     [+] Albums in the Library can be added to favorites using the popup menu
+    [+] Added an option to search for covers in parent directories as well (#605644)
     [-] CD explorer not always removed when unloading the CD module (#603902)
     [-] AudioScrobbler submission blocked by '\0' bytes (#604016)
     [-] Tracklist scrolls up upon insertion (#607261)
     [-] List of explorers not kept sorted when renaming a library (#610202)
+    [ ] Respect the "Show hidden files" option when playing tracks from the File Explorer (#611703)
 
 
 v1.05 (27/06/10)
