@@ -44,9 +44,9 @@ PREFS_DEFAULT_SHOW_HIDDEN_FILES = False                                         
 
 # The possible types for a node of the tree
 (
-    TYPE_DIR,   # A directory
-    TYPE_FILE,  # A media file
-    TYPE_NONE   # A fake item, used to display a '+' in front of a directory when needed
+    TYPE_DIR,      # A directory
+    TYPE_FILE,     # A media file
+    TYPE_NONE      # A fake item, used to display a '+' in front of a directory when needed
 ) = range(3)
 
 
