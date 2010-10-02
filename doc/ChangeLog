@@ -9,6 +9,7 @@ v1.06 ()
     [-] AudioScrobbler submission blocked by '\0' bytes (#604016)
     [-] Tracklist scrolls up upon insertion (#607261)
     [-] List of explorers not kept sorted when renaming a library (#610202)
+    [-] File chooser dialog box does not appear on some systems
     [ ] Respect the "Show hidden files" option when playing tracks from the File Explorer (#611703)
 
 

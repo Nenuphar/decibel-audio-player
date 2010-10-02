@@ -18,6 +18,7 @@
 
 import gobject, gtk, gui, modules
 
+from gui     import fileChooser
 from tools   import consts, prefs
 from gettext import gettext as _
 
@@ -161,7 +162,7 @@ class Equalizer(modules.Module):
 
     def onBtnSave(self, btn):
         """ Save the current levels to a file"""
-        outFile = gui.fileChooser.save(self.cfgWindow, _('Save levels'), 'levels.dat')
+        outFile = fileChooser.save(self.cfgWindow, _('Save levels'), 'levels.dat')
 
         if outFile is not None:
             output = open(outFile, 'wt')
@@ -172,7 +173,7 @@ class Equalizer(modules.Module):
 
     def onBtnOpen(self, btn):
         """ Load the levels from a file"""
-        inFile = gui.fileChooser.openFile(self.cfgWindow, _('Load levels'))
+        inFile = fileChooser.openFile(self.cfgWindow, _('Load levels'))
 
         if inFile is not None:
             input = open(inFile, 'rt')
