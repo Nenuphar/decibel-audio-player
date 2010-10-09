@@ -10,6 +10,7 @@ v1.06 ()
     [-] Tracklist scrolls up upon insertion (#607261)
     [-] List of explorers not kept sorted when renaming a library (#610202)
     [-] File chooser dialog box does not appear on some systems
+    [-] Can't play previous track from the remote (#656040)
     [ ] Respect the "Show hidden files" option when playing tracks from the File Explorer (#611703)
 
 
