@@ -95,9 +95,19 @@ class Tracklist(modules.Module):
         modules.Module.__init__(self, handlers)
 
 
+    def __fmtColumnColor(self, col, cll, mdl, it):
+        """ When playing, tracks already played are slightly greyed out """
+        style         = self.window.get_style()
+        alreadyPlayed = self.list.hasMark() and mdl.get_path(it)[0] < self.list.getMark()
+
+        if alreadyPlayed: cll.set_property('foreground-gdk', style.text[gtk.STATE_INSENSITIVE])
+        else:             cll.set_property('foreground-gdk', style.text[gtk.STATE_NORMAL])
+
+
     def __fmtLengthColumn(self, col, cll, mdl, it):
         """ Format the column showing the length of the track (e.g., show 1:23 instead of 83) """
         cll.set_property('text', tools.sec2str(mdl.get_value(it, ROW_LEN)))
+        self.__fmtColumnColor(col, cll, mdl, it)
 
 
     def __getNextTrackIdx(self):
@@ -370,6 +380,7 @@ class Tracklist(modules.Module):
                    (None,          [(None, TYPE_PYOBJECT)],                            (None,),                                       False, False))
 
         self.list = ExtListView(columns, sortable=True, dndTargets=consts.DND_TARGETS.values(), useMarkup=False, canShowHideColumns=True)
+        self.list.get_column(1).set_cell_data_func(txtLRdr, self.__fmtColumnColor)
         self.list.get_column(4).set_cell_data_func(txtRRdr, self.__fmtLengthColumn)
         self.list.enableDNDReordering()
         wTree.get_widget('scrolled-tracklist').add(self.list)
