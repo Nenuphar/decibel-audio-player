@@ -277,16 +277,15 @@ class AudioCD(modules.ThreadedModule):
         columns = (('',   [(gtk.CellRendererPixbuf(), gtk.gdk.Pixbuf), (txtRdrLen, gobject.TYPE_STRING), (gtk.CellRendererText(), gobject.TYPE_STRING)], True),
                    (None, [(None, gobject.TYPE_PYOBJECT)],                                                                                               False))
 
-        # The album length is written in a smaller font, with a lighter color
-        txtRdrLen.set_property('scale', 0.85)
-        txtRdrLen.set_property('foreground', '#909090')
-
         self.tree     = extTreeview.ExtTreeView(columns, True)
         self.popup    = None
         self.cfgWin   = None
         self.expName  = MOD_L10N
         self.scrolled = gtk.ScrolledWindow()
         self.cacheDir = os.path.join(consts.dirCfg, MOD_INFO[modules.MODINFO_NAME])
+        # The album length is written in a smaller font, with a lighter color
+        txtRdrLen.set_property('scale', 0.85)
+        txtRdrLen.set_property('foreground-gdk', self.tree.get_style().text[gtk.STATE_INSENSITIVE])
         # Explorer
         self.tree.setDNDSources([consts.DND_TARGETS[consts.DND_DAP_TRACKS]])
         self.scrolled.add(self.tree)

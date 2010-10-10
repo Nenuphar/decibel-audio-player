@@ -128,7 +128,7 @@ class Library(modules.Module):
 
         # The album length is written in a smaller font, with a lighter color
         txtRdrAlbumLen.set_property('scale', 0.85)
-        txtRdrAlbumLen.set_property('foreground', '#909090')
+        txtRdrAlbumLen.set_property('foreground-gdk', self.tree.get_style().text[gtk.STATE_INSENSITIVE])
 
         self.tree.setDNDSources([consts.DND_TARGETS[consts.DND_DAP_TRACKS]])
         # GTK handlers
