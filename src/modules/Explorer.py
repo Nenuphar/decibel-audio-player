@@ -21,7 +21,7 @@ import gobject, gtk, modules
 from tools   import consts, icons, prefs
 from gettext import gettext as _
 
-MOD_INFO              = ('Explorer', 'Explorer', '', [], True, False)
+MOD_INFO              = ('Explorer', 'Explorer', '', [], True, False, consts.MODCAT_NONE)
 DEFAULT_LAST_EXPLORER = ('', '')     # Module name and explorer name
 
 # The rows in the combo box

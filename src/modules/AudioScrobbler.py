@@ -23,7 +23,7 @@ from tools     import consts
 from gettext   import gettext as _
 from tools.log import logger
 
-MOD_INFO = ('AudioScrobbler', 'AudioScrobbler', _('Keep your Last.fm profile up to date'), [], False, False)
+MOD_INFO = ('AudioScrobbler', 'AudioScrobbler', _('Keep your Last.fm profile up to date'), [], False, False, consts.MODCAT_INTERNET)
 
 CLI_ID         = 'dbl'
 CLI_VER        = '0.4'

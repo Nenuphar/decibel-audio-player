@@ -22,7 +22,7 @@ from tools   import consts
 from gettext import gettext as _
 
 
-MOD_INFO = ('ReplayGain', _('ReplayGain'), _('Normalize volume'), [], False, False)
+MOD_INFO = ('ReplayGain', _('ReplayGain'), _('Normalize volume'), [], False, False, consts.MODCAT_DECIBEL)
 
 
 class ReplayGain(modules.Module):

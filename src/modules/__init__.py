@@ -29,8 +29,9 @@ from gettext import gettext as _
     MODINFO_DESC,           # Description of the module, translated into the current locale
     MODINFO_DEPS,           # A list of special Python dependencies (e.g., pynotify)
     MODINFO_MANDATORY,      # True if the module cannot be disabled
-    MODINFO_CONFIGURABLE    # True if the module can be configured
-) = range(6)
+    MODINFO_CONFIGURABLE,   # True if the module can be configured
+    MODINFO_CATEGORY,       # Category the module belongs to
+) = range(7)
 
 
 # Values associated with a module

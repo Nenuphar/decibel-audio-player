@@ -3,6 +3,7 @@
 
 
 v1.06 ()
+    [+] Revamped the preferences dialog box
     [+] Albums in the Library can be added to favorites using the popup menu
     [+] Added an option to search for covers in parent directories as well (#605644)
     [-] CD explorer not always removed when unloading the CD module (#603902)

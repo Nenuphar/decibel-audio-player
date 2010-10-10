@@ -24,7 +24,7 @@ from gettext         import gettext as _
 from gobject         import TYPE_STRING, TYPE_INT, TYPE_PYOBJECT
 from gui.extListview import ExtListView
 
-MOD_INFO = ('Tracklist', 'Tracklist', '', [], True, False)
+MOD_INFO = ('Tracklist', 'Tracklist', '', [], True, False, consts.MODCAT_NONE)
 
 # Create a unique ID for each field of a row in the list
 (

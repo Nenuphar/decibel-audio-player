@@ -20,7 +20,7 @@ import dbus, dbus.service, gobject, media, modules, traceback
 
 from tools import consts, log
 
-MOD_INFO = ('D-Bus Support', 'D-Bus Support', '', [], True, False)
+MOD_INFO = ('D-Bus Support', 'D-Bus Support', '', [], True, False, consts.MODCAT_NONE)
 
 
 # MPRIS caps constants

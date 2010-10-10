@@ -23,7 +23,7 @@ from gettext   import gettext as _
 from tools.log import logger
 
 
-MOD_INFO = ('Twitter', 'Twitter', _('Update the status of your Twitter account'), [], False, True)
+MOD_INFO = ('Twitter', 'Twitter', _('Update the status of your Twitter account'), [], False, True, consts.MODCAT_INTERNET)
 
 DEFAULT_STATUS_MSG = '♫ Listening to {album} by {artist} ♫'
 

@@ -23,7 +23,7 @@ from tools     import consts
 from gettext   import gettext as _
 from tools.log import logger
 
-MOD_INFO = ('Zeitgeist', 'Zeitgeist', _('Send track information to the Zeitgeist service'), ['zeitgeist'], False, False)
+MOD_INFO = ('Zeitgeist', 'Zeitgeist', _('Send track information to the Zeitgeist service'), ['zeitgeist'], False, False, consts.MODCAT_DESKTOP)
 
 
 class Zeitgeist(modules.ThreadedModule):

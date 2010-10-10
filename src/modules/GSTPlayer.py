@@ -23,7 +23,7 @@ from tools import consts, prefs
 from media import audioplayer
 
 
-MOD_INFO           = ('GStreamer Player', 'GStreamer Player', '', [], True, False)
+MOD_INFO           = ('GStreamer Player', 'GStreamer Player', '', [], True, False, consts.MODCAT_NONE)
 MIN_PLAYBACK_DELAY = 1.5
 
 

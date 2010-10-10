@@ -21,7 +21,7 @@ import gtk, modules
 from tools   import consts, prefs, sec2str
 from gettext import gettext as _
 
-MOD_INFO = ('Control Panel', 'Control Panel', '', [], True, False)
+MOD_INFO = ('Control Panel', 'Control Panel', '', [], True, False, consts.MODCAT_NONE)
 
 PREFS_DEFAULT_VOLUME = 0.65
 

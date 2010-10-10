@@ -75,6 +75,12 @@ fileImgIcon128 = os.path.join(dirPix, 'decibel-audio-player-128.png')
 
 fileImgStar16 = os.path.join(dirPix, 'star-16.png')
 
+fileImgCatAll      = os.path.join(dirPix, 'category-all.png')
+fileImgCatDesktop  = os.path.join(dirPix, 'category-desktop.png')
+fileImgCatDecibel  = os.path.join(dirPix, 'category-decibel.png')
+fileImgCatExplorer = os.path.join(dirPix, 'category-explorer.png')
+fileImgCatInternet = os.path.join(dirPix, 'category-internet.png')
+
 
 # --- Files
 fileLog     = os.path.join(dirLog, 'log')
@@ -123,6 +129,16 @@ DND_TARGETS = {
     VIEW_MODE_MINI,
     VIEW_MODE_PLAYLIST,
 ) = range(3)
+
+
+# -- Categories a module can belong to
+(
+    MODCAT_NONE,
+    MODCAT_DECIBEL,
+    MODCAT_DESKTOP,
+    MODCAT_INTERNET,
+    MODCAT_EXPLORER,
+) = range(5)
 
 
 # --- Message that can be sent/received by modules

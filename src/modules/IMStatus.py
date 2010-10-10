@@ -22,7 +22,7 @@ from tools     import consts, prefs
 from gettext   import gettext as _
 from tools.log import logger
 
-MOD_INFO = ('Instant Messenger Status', _('Instant Messenger Status'), _('Update the status message of your IM client'), [], False, True)
+MOD_INFO = ('Instant Messenger Status', _('Instant Messenger Status'), _('Update the status message of your IM client'), [], False, True, consts.MODCAT_DESKTOP)
 MOD_NAME = MOD_INFO[modules.MODINFO_NAME]
 
 

@@ -21,7 +21,7 @@ import modules, tools
 from tools   import consts,  prefs
 from gettext import ngettext, gettext as _
 
-MOD_INFO = ('Status and Title Bars', 'Status and Title Bars', '', [], True, False)
+MOD_INFO = ('Status and Title Bars', 'Status and Title Bars', '', [], True, False, consts.MODCAT_NONE)
 
 
 class StatusbarTitlebar(modules.Module):

@@ -22,7 +22,7 @@ from gui     import fileChooser
 from tools   import consts, prefs
 from gettext import gettext as _
 
-MOD_INFO = ('Equalizer', _('Equalizer'), _('Tune the level of the frequency bands'), [], False, True)
+MOD_INFO = ('Equalizer', _('Equalizer'), _('Tune the level of the frequency bands'), [], False, True, consts.MODCAT_DECIBEL)
 
 
 # Entries of the presets combo box

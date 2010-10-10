@@ -22,7 +22,7 @@ from tools     import consts, prefs
 from gettext   import gettext as _
 from tools.log import logger
 
-MOD_INFO = ('Desktop Notification', _('Desktop Notification'), _('Display a desktop notification on track change'), ['pynotify'], False, True)
+MOD_INFO = ('Desktop Notification', _('Desktop Notification'), _('Display a desktop notification on track change'), ['pynotify'], False, True, consts.MODCAT_DESKTOP)
 
 
 # Default preferences

@@ -24,7 +24,7 @@ from gettext             import gettext as _
 from tools.log           import logger
 from media.track.cdTrack import CDTrack
 
-MOD_INFO = ('Audio CD', _('Audio CD'), _('Play audio discs'), ('DiscID', 'CDDB'), False, True)
+MOD_INFO = ('Audio CD', _('Audio CD'), _('Play audio discs'), ('DiscID', 'CDDB'), False, True, consts.MODCAT_EXPLORER)
 
 MOD_L10N             = MOD_INFO[modules.MODINFO_L10N]
 PREFS_DFT_DEVICE     = '/dev/cdrom'

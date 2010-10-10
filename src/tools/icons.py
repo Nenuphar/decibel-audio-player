@@ -35,6 +35,11 @@ __starDirMenuIcon   = None
 __mediaDirMenuIcon  = None
 __mediaFileMenuIcon = None
 
+__catDesktopIcon  = None
+__catDecibelIcon  = None
+__catExplorerIcon = None
+__catInternetIcon = None
+
 
 def __render(stock, size):
     """ Return the given stock icon rendered at the given size """
@@ -168,3 +173,43 @@ def mediaFileMenuIcon():
         cdromMenuIcon().composite(__mediaFileMenuIcon, 5, 5, 11, 11, 5, 5, 0.6875, 0.6875, gtk.gdk.INTERP_HYPER, 255)
 
     return __mediaFileMenuIcon
+
+
+def catDecibelIcon():
+    """ Directories """
+    global __catDecibelIcon
+
+    if __catDecibelIcon is None:
+        __catDecibelIcon = gtk.gdk.pixbuf_new_from_file(consts.fileImgCatDecibel)
+
+    return __catDecibelIcon
+
+
+def catDesktopIcon():
+    """ Directories """
+    global __catDesktopIcon
+
+    if __catDesktopIcon is None:
+        __catDesktopIcon = gtk.gdk.pixbuf_new_from_file(consts.fileImgCatDesktop)
+
+    return __catDesktopIcon
+
+
+def catInternetIcon():
+    """ Directories """
+    global __catInternetIcon
+
+    if __catInternetIcon is None:
+        __catInternetIcon = gtk.gdk.pixbuf_new_from_file(consts.fileImgCatInternet)
+
+    return __catInternetIcon
+
+
+def catExplorerIcon():
+    """ Directories """
+    global __catExplorerIcon
+
+    if __catExplorerIcon is None:
+        __catExplorerIcon = gtk.gdk.pixbuf_new_from_file(consts.fileImgCatExplorer)
+
+    return __catExplorerIcon

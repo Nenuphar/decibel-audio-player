@@ -25,7 +25,7 @@ from gobject               import idle_add, TYPE_STRING, TYPE_INT, TYPE_PYOBJECT
 from tools.log             import logger
 from media.track.fileTrack import FileTrack
 
-MOD_INFO = ('Library', _('Library'), _('Organize your music by tags'), [], False, True)
+MOD_INFO = ('Library', _('Library'), _('Organize your music by tags'), [], False, True, consts.MODCAT_EXPLORER)
 MOD_L10N = MOD_INFO[modules.MODINFO_L10N]
 
 

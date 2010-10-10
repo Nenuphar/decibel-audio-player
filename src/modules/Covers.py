@@ -24,7 +24,7 @@ from tools.log import logger
 
 
 # Module information
-MOD_INFO = ('Covers', _('Covers'), _('Show album covers'), [], False, True)
+MOD_INFO = ('Covers', _('Covers'), _('Show album covers'), [], False, True, consts.MODCAT_DECIBEL)
 MOD_NAME = MOD_INFO[modules.MODINFO_NAME]
 
 AS_API_KEY   = 'fd8dd98d26bb3f288f3e626502f9add6'   # Ingelrest François' Audioscrobbler API key

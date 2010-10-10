@@ -20,7 +20,7 @@ import media, modules, os.path, traceback
 
 from tools import consts, log, pickleSave, pickleLoad, prefs
 
-MOD_INFO = ('Command Line Support', 'Command Line Support', '', [], True, False)
+MOD_INFO = ('Command Line Support', 'Command Line Support', '', [], True, False, consts.MODCAT_NONE)
 
 
 class CommandLine(modules.ThreadedModule):

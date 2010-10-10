@@ -21,7 +21,7 @@ import gtk, modules
 from tools   import consts, loadGladeFile, prefs
 from gettext import gettext as _
 
-MOD_INFO = ('Status Icon', _('Status Icon'), _('Add an icon to the notification area'), [], False, False)
+MOD_INFO = ('Status Icon', _('Status Icon'), _('Add an icon to the notification area'), [], False, False, consts.MODCAT_DESKTOP)
 
 
 class StatusIcon(modules.Module):

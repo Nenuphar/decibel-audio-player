@@ -21,7 +21,7 @@ import dbus, modules, traceback
 from time  import time
 from tools import consts, log
 
-MOD_INFO = ('Gnome Media Keys', 'Gnome Media Keys', '', [], True, False)
+MOD_INFO = ('Gnome Media Keys', 'Gnome Media Keys', '', [], True, False, consts.MODCAT_NONE)
 
 # Generate a 'unique' application name so that multiple instances won't interfere with each other
 APP_UID = consts.appName + str(time())

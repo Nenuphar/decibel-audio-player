@@ -22,7 +22,7 @@ from media   import track
 from tools   import consts, prefs
 from gettext import gettext as _
 
-MOD_INFO = ('Status File', _('Status File'), _('Generate a text file with the current status'), [], False, True)
+MOD_INFO = ('Status File', _('Status File'), _('Generate a text file with the current status'), [], False, True, consts.MODCAT_DESKTOP)
 
 
 # Default preferences

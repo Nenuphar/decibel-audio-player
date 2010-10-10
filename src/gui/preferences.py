@@ -16,8 +16,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
-import gtk, gui, modules, tools, tools.icons
+import gtk, gui, modules, tools
 
+from tools   import consts, icons
 from gettext import gettext as _
 
 
@@ -40,15 +41,19 @@ class Preferences:
 
         from gui import extListview, window
 
-        self.window = window.Window('Preferences.glade', 'vbox1', __name__, _('Preferences'), 390, 350)
+        self.window  = window.Window('Preferences.glade', 'vbox1', __name__, _('Preferences'), 390, 350)
+        self.currCat = consts.MODCAT_NONE
+
         # List of modules
+        textRdr   = gtk.CellRendererText()
         toggleRdr = gtk.CellRendererToggle()
-        columns   = (('',   [(toggleRdr, gobject.TYPE_BOOLEAN)],             ROW_ENABLED,    False, True),
-                     ('',   [(gtk.CellRendererText(), gobject.TYPE_STRING)], ROW_TEXT,       True,  True),
-                     ('',   [(gtk.CellRendererPixbuf(), gtk.gdk.Pixbuf)],    ROW_ICON,       False, True),
-                     (None, [(None, gobject.TYPE_BOOLEAN)],                  ROW_UNLOADABLE, False, False),
-                     (None, [(None, gobject.TYPE_PYOBJECT)],                 ROW_INSTANCE,   False, False),
-                     (None, [(None, gobject.TYPE_PYOBJECT)],                 ROW_MODINFO,    False, False))
+
+        columns   = (('',   [(toggleRdr, gobject.TYPE_BOOLEAN)],          ROW_ENABLED,    False, True),
+                     ('',   [(textRdr, gobject.TYPE_STRING)],             ROW_TEXT,       True,  True),
+                     ('',   [(gtk.CellRendererPixbuf(), gtk.gdk.Pixbuf)], ROW_ICON,       False, True),
+                     (None, [(None, gobject.TYPE_BOOLEAN)],               ROW_UNLOADABLE, False, False),
+                     (None, [(None, gobject.TYPE_PYOBJECT)],              ROW_INSTANCE,   False, False),
+                     (None, [(None, gobject.TYPE_PYOBJECT)],              ROW_MODINFO,    False, False))
 
         self.list = extListview.ExtListView(columns, sortable=False, useMarkup=True, canShowHideColumns=False)
         self.list.set_headers_visible(False)
@@ -56,7 +61,30 @@ class Preferences:
         toggleRdr.connect('toggled', self.onModuleToggled)
         self.window.getWidget('scrolledwindow1').add(self.list)
         self.fillList()
+
+        self.list.get_column(1).set_cell_data_func(textRdr, self.__fmtColumnColor)
+
+        # Categories
+        self.iconview = self.window.getWidget('iconview')
+        # Create the store for the iconview
+        self.iconviewStore = gtk.ListStore(gobject.TYPE_STRING, gtk.gdk.Pixbuf, gobject.TYPE_INT)
+        categories = [
+                        (_('Decibel'),  icons.catDecibelIcon(),  consts.MODCAT_DECIBEL),
+                        (_('Desktop'),  icons.catDesktopIcon(),  consts.MODCAT_DESKTOP),
+                        (_('Internet'), icons.catInternetIcon(), consts.MODCAT_INTERNET),
+                        (_('Explorer'), icons.catExplorerIcon(), consts.MODCAT_EXPLORER),
+                     ]
+
+        for category in sorted(categories):
+            self.iconviewStore.append([category[0], category[1], category[2]])
+
+        self.iconview.set_model(self.iconviewStore)
+        self.iconview.set_text_column(0)
+        self.iconview.set_pixbuf_column(1)
+        self.iconview.set_size_request(59, -1)
+
         # GTK handlers
+        self.iconview.connect('selection-changed', self.onCategoryChanged)
         self.window.getWidget('btn-help').connect('clicked', self.onHelp)
         self.list.connect('extlistview-button-pressed', self.onButtonPressed)
         self.list.get_selection().connect('changed', self.onSelectionChanged)
@@ -64,25 +92,36 @@ class Preferences:
         self.window.getWidget('btn-close').connect('clicked', lambda btn: self.window.hide())
 
 
+    def __fmtColumnColor(self, col, cll, mdl, it):
+        """ Grey out module that are not enabled """
+        style   = self.list.get_style()
+        enabled = mdl.get_value(it, ROW_ENABLED)
+
+        if enabled: cll.set_property('foreground-gdk', style.text[gtk.STATE_NORMAL])
+        else:       cll.set_property('foreground-gdk', style.text[gtk.STATE_INSENSITIVE])
+
+
     def show(self):
         """ Show the dialog box """
         if not self.window.isVisible():
             self.list.unselectAll()
+            self.iconview.select_path((0,))
             self.window.getWidget('btn-close').grab_focus()
             self.window.getWidget('btn-prefs').set_sensitive(False)
         self.window.show()
 
 
     def fillList(self):
-        """ Fill the list of modules """
+        """ Fill the list of modules according to the currently selected category """
         rows = []
         for (name, data) in modules.getModules():
             instance     = data[modules.MOD_INSTANCE]
+            category     = data[modules.MOD_INFO][modules.MODINFO_CATEGORY]
             mandatory    = data[modules.MOD_INFO][modules.MODINFO_MANDATORY]
             configurable = data[modules.MOD_INFO][modules.MODINFO_CONFIGURABLE]
 
-            if configurable or not mandatory:
-                if configurable and instance is not None: icon = tools.icons.prefsBtnIcon()
+            if (configurable or not mandatory) and category == self.currCat:
+                if configurable and instance is not None: icon = icons.prefsBtnIcon()
                 else:                                     icon = None
 
                 text = '<b>%s</b>\n<small>%s</small>' % (tools.htmlEscape(_(name)), tools.htmlEscape(data[modules.MOD_INFO][modules.MODINFO_DESC]))
@@ -114,6 +153,16 @@ class Preferences:
         else:
             try:                             modules.load(name)
             except modules.LoadException, e: gui.errorMsgBox(self.window, _('Unable to load this module.'), str(e))
+
+        self.fillList()
+
+
+    def onCategoryChanged(self, iconview):
+        """ A new category has been selected """
+        selection = iconview.get_selected_items()
+
+        if len(selection) == 0: self.currCat = consts.MODCAT_NONE
+        else:                   self.currCat = self.iconviewStore[selection[0][0]][2]
 
         self.fillList()
 

@@ -21,7 +21,7 @@ import gobject, gtk, modules, os.path, tools
 from tools   import consts
 from gettext import gettext as _
 
-MOD_INFO = ('Track Panel', 'Track Panel', '', [], True, False)
+MOD_INFO = ('Track Panel', 'Track Panel', '', [], True, False, consts.MODCAT_NONE)
 
 
 class TrackPanel(modules.Module):
