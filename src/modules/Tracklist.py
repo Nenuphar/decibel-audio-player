@@ -97,11 +97,11 @@ class Tracklist(modules.Module):
 
     def __fmtColumnColor(self, col, cll, mdl, it):
         """ When playing, tracks already played are slightly greyed out """
-        style         = self.window.get_style()
-        alreadyPlayed = self.list.hasMark() and mdl.get_path(it)[0] < self.list.getMark()
+        style  = self.window.get_style()
+        played = self.list.hasMark() and mdl.get_path(it)[0] < self.list.getMark()
 
-        if alreadyPlayed: cll.set_property('foreground-gdk', style.text[gtk.STATE_INSENSITIVE])
-        else:             cll.set_property('foreground-gdk', style.text[gtk.STATE_NORMAL])
+        if played: cll.set_property('foreground-gdk', style.text[gtk.STATE_INSENSITIVE])
+        else:      cll.set_property('foreground-gdk', style.text[gtk.STATE_NORMAL])
 
 
     def __fmtLengthColumn(self, col, cll, mdl, it):
