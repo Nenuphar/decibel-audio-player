@@ -37,16 +37,22 @@ def show(parent):
     dlg.set_website(consts.urlMain)
     dlg.set_website_label(consts.urlMain)
     dlg.set_translator_credits(_('translator-credits'))
-    dlg.set_artists(['Sébastien Durel <sebastien.durel@gmail.com>'])
+
+    dlg.set_artists([
+        _('Decibel Audio Player icon:'),
+        '    Sébastien Durel <sebastien.durel@gmail.com>',
+        '',
+        _('Other icons:'),
+        '    7 icon pack <www.tehkseven.net>',
+        '    Tango project <tango.freedesktop.org>',
+    ])
 
     dlg.set_authors([
         _('Developer:'),
-        'François Ingelrest <Francois.Ingelrest@gmail.com>',
+        '    François Ingelrest <Francois.Ingelrest@gmail.com>',
         '',
         _('Thanks to:'),
-        ' * Emilio Pozuelo Monfort <pochu@ubuntu.com>',
-        ' * Matti Mårds <mamaar@gmail.com>',
-        ' * The CrystalXP forum crew',
+        '    Emilio Pozuelo Monfort <pochu@ubuntu.com>',
     ])
 
     # Set logo
