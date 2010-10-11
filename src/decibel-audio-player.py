@@ -120,7 +120,7 @@ def realStartup():
     # D-Bus
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
-    # Register some handlers
+    # Register a few handlers
     atexit.register(atExit)
     signal.signal(signal.SIGINT,  lambda sig, frame: onDelete(window, None))
     signal.signal(signal.SIGTERM, lambda sig, frame: onDelete(window, None))
