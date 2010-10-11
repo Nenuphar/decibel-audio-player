@@ -3,7 +3,6 @@
 
 
 v1.06 ()
-    [+] Revamped the preferences dialog box
     [+] Albums in the Library can be added to favorites using the popup menu
     [+] Added an option to search for covers in parent directories as well (#605644)
     [-] CD explorer not always removed when unloading the CD module (#603902)
@@ -12,6 +11,7 @@ v1.06 ()
     [-] List of explorers not kept sorted when renaming a library (#610202)
     [-] File chooser dialog box does not appear on some systems
     [-] Can't play previous track from the remote (#656040)
+    [ ] Revamped the preferences dialog box
     [ ] Respect the "Show hidden files" option when playing tracks from the File Explorer (#611703)
 
 
