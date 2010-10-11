@@ -13,6 +13,7 @@ v1.06 ()
     [-] Can't play previous track from the remote (#656040)
     [ ] Revamped the preferences dialog box
     [ ] Respect the "Show hidden files" option when playing tracks from the File Explorer (#611703)
+    [ ] Automatically show preferences the first time the application is started
 
 
 v1.05 (27/06/10)

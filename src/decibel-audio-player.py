@@ -138,8 +138,13 @@ def realStartup():
     wTree.get_widget('menu-help').connect('activate', onHelp)
     wTree.get_widget('menu-preferences').connect('activate', lambda item: modules.showPreferences())
 
-    # Let's go
+    # Now we can start all modules
     gobject.idle_add(modules.postMsg, consts.MSG_EVT_APP_STARTED)
+
+    # Immediately show the preferences the first time the application is started
+    if prefs.get(__name__, 'first-time', True):
+        prefs.set(__name__, 'first-time', False)
+        gobject.idle_add(modules.showPreferences)
 
 
 def onViewMode(item, mode):
