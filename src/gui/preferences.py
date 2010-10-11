@@ -81,7 +81,7 @@ class Preferences:
         self.iconview.set_model(self.iconviewStore)
         self.iconview.set_text_column(0)
         self.iconview.set_pixbuf_column(1)
-        self.iconview.set_size_request(85, -1)
+        self.iconview.set_size_request(84, -1)
 
         # GTK handlers
         self.iconview.connect('selection-changed', self.onCategoryChanged)
