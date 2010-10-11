@@ -333,7 +333,7 @@ class Tracklist(modules.Module):
 
     def togglePause(self):
         """ Start playing if not already playing """
-        if not self.list.hasMark():
+        if len(self.list) != 0 and not self.list.hasMark():
             if self.list.getSelectedRowsCount() != 0:
                 self.jumpTo(self.list.getFirstSelectedRowIndex())
             else:
