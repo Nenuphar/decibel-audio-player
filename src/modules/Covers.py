@@ -37,7 +37,13 @@ USER_AGENT = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/20080728
 # We store both the paths to the thumbnail and to the full size image
 (
     CVR_THUMB,
-    CVR_FULL
+    CVR_FULL,
+) = range(2)
+
+# Width/height of PIL images
+(
+    PIL_WIDTH,
+    PIL_HEIGHT,
 ) = range(2)
 
 # Constants for thumbnails
@@ -47,8 +53,8 @@ THUMBNAIL_OFFSETX =  11  # X-offset to render the thumbnail in the model
 THUMBNAIL_OFFSETY =   3  # Y-offset to render the thumbnail in the model
 
 # Constants for full size covers
-FULL_SIZE_COVER_WIDTH  = 300
-FULL_SIZE_COVER_HEIGHT = 300
+FULLSIZE_WIDTH  = 300
+FULLSIZE_HEIGHT = 300
 
 # File formats we can read
 ACCEPTED_FILE_FORMATS = {'.jpg': None, '.jpeg': None, '.png': None, '.gif': None}
@@ -79,6 +85,28 @@ class Covers(modules.ThreadedModule):
         modules.ThreadedModule.__init__(self, handlers)
 
 
+    def __resizeWithRatio(self, width, height, maxWidth, maxHeight):
+        """
+            Fit (width x height) into (maxWidth x maxHeight) while preserving the original ratio
+
+            Return a tuple (newWidth, newheight)
+        """
+        diffWidth  = width - maxWidth
+        diffHeight = height - maxHeight
+
+        if diffWidth <= 0 and diffHeight <= 0:
+            newWidth  = width
+            newHeight = height
+        elif diffHeight > diffWidth:
+            newHeight = maxHeight
+            newWidth  = width * maxHeight / height
+        else:
+            newWidth  = maxWidth
+            newHeight = height * maxWidth / width
+
+        return (newWidth, newHeight)
+
+
     def generateFullSizeCover(self, inFile, outFile, format):
         """ Resize inFile if needed, and write it to outFile (outFile and inFile may be equal) """
         import Image
@@ -87,13 +115,10 @@ class Covers(modules.ThreadedModule):
             # Open the image
             cover = Image.open(inFile)
 
-            # Resize in the best way we can
-            if cover.size[0] < FULL_SIZE_COVER_WIDTH: newWidth = cover.size[0]
-            else:                                     newWidth = FULL_SIZE_COVER_WIDTH
+            # Fit the image into FULLSIZE_WIDTH x FULLSIZE_HEIGHT
+            (newWidth, newHeight) = self.__resizeWithRatio(cover.size[PIL_WIDTH], cover.size[PIL_HEIGHT], FULLSIZE_WIDTH, FULLSIZE_HEIGHT)
 
-            if cover.size[1] < FULL_SIZE_COVER_HEIGHT: newHeight = cover.size[1]
-            else:                                      newHeight = FULL_SIZE_COVER_HEIGHT
-
+            # Resize it
             cover = cover.resize((newWidth, newHeight), Image.ANTIALIAS)
 
             # We're done
@@ -110,21 +135,17 @@ class Covers(modules.ThreadedModule):
             # Open the image
             cover = Image.open(inFile).convert('RGBA')
 
-            # Resize in the best way we can
-            if cover.size[0] < THUMBNAIL_WIDTH:
-                newWidth = cover.size[0]
-                offsetX  = (THUMBNAIL_WIDTH - cover.size[0]) / 2
-            else:
-                newWidth = THUMBNAIL_WIDTH
-                offsetX  = 0
+            # Fit the image into THUMBNAIL_WIDTH x THUMBNAIL_HEIGHT
+            (newWidth, newHeight) = self.__resizeWithRatio(cover.size[PIL_WIDTH], cover.size[PIL_HEIGHT], THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
 
-            if cover.size[1] < THUMBNAIL_HEIGHT:
-                newHeight = cover.size[1]
-                offsetY   = (THUMBNAIL_HEIGHT - cover.size[1]) / 2
-            else:
-                newHeight = THUMBNAIL_HEIGHT
-                offsetY   = 0
+            # We need to shift the image if it doesn't fully fill the thumbnail
+            if newWidth < THUMBNAIL_WIDTH: offsetX = (THUMBNAIL_WIDTH - newWidth) / 2
+            else:                          offsetX = 0
 
+            if newHeight < THUMBNAIL_HEIGHT: offsetY = (THUMBNAIL_HEIGHT - newHeight) / 2
+            else:                            offsetY = 0
+
+            # Resize the image
             cover = cover.resize((newWidth, newHeight), Image.ANTIALIAS)
 
             # Paste the resized cover into our model

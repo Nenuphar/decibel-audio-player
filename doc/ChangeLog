@@ -11,6 +11,7 @@ v1.06 ()
     [-] List of explorers not kept sorted when renaming a library (#610202)
     [-] File chooser dialog box does not appear on some systems
     [-] Can't play previous track from the remote (#656040)
+    [-] Scaling covers should preserve ratio (#654321)
     [ ] Revamped the preferences dialog box
     [ ] Respect the "Show hidden files" option when playing tracks from the File Explorer (#611703)
     [ ] Automatically show preferences the first time the application is started
