@@ -86,6 +86,10 @@ def realStartup():
 
     def onResize(win, rect):
         """ Save the new size of the window """
+        # The first label gets more or less a third of the window's width
+        wTree.get_widget('hbox-status1').set_size_request(rect.width / 3 + 15, -1)
+
+        # Save size and maximized state
         if win.window is not None and not win.window.get_state() & gtk.gdk.WINDOW_STATE_MAXIMIZED:
             prefs.set(__name__, 'win-width',  rect.width)
             prefs.set(__name__, 'win-height', rect.height)
