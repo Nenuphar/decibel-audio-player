@@ -3,6 +3,7 @@
 
 
 v1.07 ()
+    [ ] Don't preserve the ratio of covers when the distortion isn't noticeable
 
 
 v1.06 (17/10/10)

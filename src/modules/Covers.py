@@ -87,22 +87,37 @@ class Covers(modules.ThreadedModule):
 
     def __resizeWithRatio(self, width, height, maxWidth, maxHeight):
         """
-            Fit (width x height) into (maxWidth x maxHeight) while preserving the original ratio
+            Fit (width x height) into (maxWidth x maxHeight) while preserving the ratio of the original image
+            If the ratios are close to each other, distort the original image to fit exactly into (maxWidth x maxHeight)
 
             Return a tuple (newWidth, newheight)
         """
         diffWidth  = width - maxWidth
         diffHeight = height - maxHeight
 
+        # If the image is small enough, we don't need to scale it
         if diffWidth <= 0 and diffHeight <= 0:
             newWidth  = width
             newHeight = height
-        elif diffHeight > diffWidth:
-            newHeight = maxHeight
-            newWidth  = width * maxHeight / height
         else:
-            newWidth  = maxWidth
-            newHeight = height * maxWidth / width
+            # If the ratios are close to each other, we can afford some distortion in the original image
+            ratioSrc = width / float(height)
+            ratioDst = maxWidth / float(maxHeight)
+
+            if abs(ratioSrc - ratioDst) / float(min(ratioSrc, ratioDst)) <= 0.05: keepRatio = False
+            else:                                                                 keepRatio = True
+
+            # Scale image
+            if diffHeight > diffWidth:
+                newHeight = maxHeight
+
+                if keepRatio: newWidth = width * maxHeight / height
+                else:         newWidth = maxWidth
+            else:
+                newWidth = maxWidth
+
+                if keepRatio: newHeight = height * maxWidth / width
+                else:         newHeight = maxHeight
 
         return (newWidth, newHeight)
 
