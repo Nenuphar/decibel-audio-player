@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Decibel Audio Player
-Exec=decibel-audio-player
+Exec=decibel-audio-player %F
 Terminal=false
 Type=Application
 Icon=decibel-audio-player
