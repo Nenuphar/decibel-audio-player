@@ -78,7 +78,7 @@ MOD_L10N = MOD_INFO[modules.MODINFO_L10N]
 
 
 # Constants
-VERSION                           = 3                                      # Used to check compatibility
+VERSION                           = 4                                      # Used to check compatibility
 ROOT_PATH                         = os.path.join(consts.dirCfg, 'Library') # Path where libraries are stored
 FAKE_CHILD                        = (None, None, '', TYPE_NONE, '', None)  # We use a lazy tree
 PREFS_DEFAULT_PREFIXES            = {'the ': None}                         # Prefixes are put at the end of artists' names
@@ -252,16 +252,22 @@ class Library(modules.Module):
         # Create the database
         for track in mediaFiles:
             album = track.getExtendedAlbum()
+            genre = track.getGenre().lower()
 
             if track.hasAlbumArtist(): artist = track.getAlbumArtist()
             else:                      artist = track.getArtist()
 
             if artist in db:
                 allAlbums = db[artist]
-                if album in allAlbums: allAlbums[album].append(track)
-                else:                  allAlbums[album] = [track]
+
+                try:
+                    albumNfo = allAlbums[album]
+                    albumNfo[0][genre] = None
+                    albumNfo[1].append(track)
+                except:
+                    allAlbums[album] = ({genre: None}, [track])
             else:
-                db[artist] = {album: [track]}
+                db[artist] = {album: ({genre: None}, [track])}
 
         progress.pulse()
         yield True
@@ -295,9 +301,12 @@ class Library(modules.Module):
         overallNbArtists = len(db)
 
         # The 'artists' file contains all known artists with their index, the 'files' file contains the file structure of the root path
-        allArtists = sorted([(artist, str(indexArtist), len(db[artist])) for indexArtist, artist in enumerate(db)], key = lambda a: a[0].lower())
+        allArtists = sorted([(artist, str(indexArtist), len(albums)) for indexArtist, (artist, albums) in enumerate(db.iteritems())], key = lambda a: a[0].lower())
         pickleSave(os.path.join(libPath, 'files'),   newLibrary)
         pickleSave(os.path.join(libPath, 'artists'), allArtists)
+
+        # Keep track of genre through nested dictionaries genres -> artists -> albums
+        allGenres = {}
 
         for (artist, indexArtist, nbAlbums) in allArtists:
             artistPath       = os.path.join(libPath, indexArtist)
@@ -305,17 +314,29 @@ class Library(modules.Module):
             os.mkdir(artistPath)
 
             albums = []
-            for index, (name, tracks) in enumerate(db[artist].iteritems()):
+            for index, (name, (albumGenres, tracks)) in enumerate(db[artist].iteritems()):
                 length           = sum([track.getLength() for track in tracks])
                 overallNbTracks += len(tracks)
 
                 albums.append((name, str(index), len(tracks), length))
                 pickleSave(os.path.join(artistPath, str(index)), sorted(tracks, key = lambda track: track.getNumber()))
 
-            albums.sort(cmp = lambda a1, a2: cmp(db[artist][a1[0]][0], db[artist][a2[0]][0]))
+                # Update the dictionary with the genres
+                for genre in albumGenres:
+                    try:
+                        allGenres[genre][artist][name] = None
+                    except:
+                        try:
+                            allGenres[genre][artist] = {name: None}
+                        except:
+                            allGenres[genre] = {artist: {name: None}}
+
+            albums.sort()
             pickleSave(os.path.join(artistPath, 'albums'), albums)
             progress.pulse()
             yield True
+
+        pickleSave(os.path.join(libPath, 'genres'), allGenres)
 
         self.libraries[libName] = (path, overallNbArtists, overallNbAlbums, overallNbTracks)
         self.fillLibraryList()
@@ -329,7 +350,7 @@ class Library(modules.Module):
             if artist in db:
                 newFavorites[artist] = {}
                 for album in albums:
-                    if album in db[artist]:
+                    if album in db[artist][1]:
                         newFavorites[artist][album] = None
 
         self.saveFavorites(libName, newFavorites)
@@ -437,7 +458,7 @@ class Library(modules.Module):
                     self.addToFavorites(artist, album)
 
         # If some favorites were removed, we may have to reload the tree
-        if self.showOnlyFavorites and removed:
+        if self.showOnlyFavs and removed:
             self.saveTreeState()
             self.loadArtists(self.tree, self.currLib)
             self.restoreTreeState()
@@ -446,10 +467,16 @@ class Library(modules.Module):
     def switchFavoritesView(self, tree):
         """ Show all/favorites """
         self.saveTreeState()
-        self.showOnlyFavorites = not self.showOnlyFavorites
-        prefs.set(__name__, 'show-only-favorites', self.showOnlyFavorites)
+        self.showOnlyFavs = not self.showOnlyFavs
+        prefs.set(__name__, 'show-only-favorites', self.showOnlyFavs)
         self.loadArtists(self.tree, self.currLib)
         self.restoreTreeState()
+
+
+    def filterByGenre(self, genre):
+        """ Filter the library and keep only albums of the given genre """
+        self.currGenre = genre
+        self.loadArtists(self.tree, self.currLib)
 
 
     def showPopupMenu(self, tree, button, time, path):
@@ -493,9 +520,36 @@ class Library(modules.Module):
 
         # Show only favorites
         showFavorites = gtk.CheckMenuItem(_('Show Only Favorites'))
-        showFavorites.set_active(self.showOnlyFavorites)
+        showFavorites.set_active(self.showOnlyFavs)
         showFavorites.connect('toggled', lambda widget: self.switchFavoritesView(tree))
         popup.append(showFavorites)
+
+        # Separator
+        popup.append(gtk.SeparatorMenuItem())
+
+        # Filter by genre
+        genresMenu  = gtk.Menu()
+        filterGenre = gtk.MenuItem(_("Filter by Genre"));
+
+        filterGenre.set_submenu(genresMenu)
+        popup.append(filterGenre)
+
+        # Need to keep the mapping widget -> genre to handle activate events
+        self.genreItemToName = {}
+
+        for genre in sorted(self.allGenres):
+            genreItem = gtk.CheckMenuItem(genre.capitalize())
+            genreItem.set_active(genre == self.currGenre)
+            self.genreItemToName[genreItem] = genre
+            genreItem.connect('activate', lambda widget: self.filterByGenre(self.genreItemToName[widget]))
+            genresMenu.append(genreItem)
+
+        genresMenu.append(gtk.SeparatorMenuItem())
+
+        genreItem = gtk.CheckMenuItem(_('Unfiltered'))
+        genreItem.set_active(self.currGenre == None)
+        genreItem.connect('activate', lambda widget: self.filterByGenre(None))
+        genresMenu.append(genreItem)
 
         # Separator
         popup.append(gtk.SeparatorMenuItem())
@@ -555,15 +609,20 @@ class Library(modules.Module):
             tree.replaceContent([(icons.errorMenuIcon(), None, error, TYPE_NONE, None, None)])
             return
 
-        rows       = []
-        icon       = icons.dirMenuIcon()
-        prevChar   = ''
-        allArtists = pickleLoad(os.path.join(libPath, 'artists'))
+        rows           = []
+        icon           = icons.dirMenuIcon()
+        prevChar       = ''
+        allArtists     = pickleLoad(os.path.join(libPath, 'artists'))
+        self.allGenres = pickleLoad(os.path.join(libPath, 'genres'))
 
-        # Filter artists if needed
-        if self.showOnlyFavorites:
+        # Filter artists by favorites if needed
+        if self.showOnlyFavs:
             allArtists = [artist for artist in allArtists if self.isArtistInFavorites(artist[ART_NAME])]
             rows.append((icons.starMenuIcon(), None, '<b>%s</b>' % _('My Favorites'), TYPE_FAVORITES_BANNER, None, None))
+
+        # Filter artists by genre if needed
+        if self.currGenre is not None:
+            allArtists = [artist for artist in allArtists if artist[ART_NAME] in self.allGenres[self.currGenre]]
 
         # Create the rows
         for artist in allArtists:
@@ -592,8 +651,12 @@ class Library(modules.Module):
         allAlbums = pickleLoad(os.path.join(tree.getItem(node, ROW_FULLPATH), 'albums'))
 
         # Filter albums if only favorites should be shown
-        if self.showOnlyFavorites:
+        if self.showOnlyFavs:
             allAlbums = [album for album in allAlbums if self.isAlbumInFavorites(artist, album[ALB_NAME])]
+
+        # Filter artists by genre if needed
+        if self.currGenre is not None:
+            allAlbums = [album for album in allAlbums if album[ALB_NAME] in self.allGenres[self.currGenre][artist]]
 
         # The icon depends on whether the album is in the favorites
         for album in allAlbums:
@@ -625,13 +688,13 @@ class Library(modules.Module):
 
     def saveTreeState(self):
         """ Save the current tree state """
-        if self.showOnlyFavorites: self.treeStates[self.currLib + ' favorites'] = self.tree.saveState(ROW_NAME)
+        if self.showOnlyFavs: self.treeStates[self.currLib + ' favorites'] = self.tree.saveState(ROW_NAME)
         else:                      self.treeStates[self.currLib]                = self.tree.saveState(ROW_NAME)
 
 
     def restoreTreeState(self):
         """ Restore the tree state """
-        if self.showOnlyFavorites: name = self.currLib + ' favorites'
+        if self.showOnlyFavs: name = self.currLib + ' favorites'
         else:                      name = self.currLib
 
         if name in self.treeStates:
@@ -757,13 +820,15 @@ class Library(modules.Module):
 
     def onModLoaded(self):
         """ This is the real initialization function, called when the module has been loaded """
-        self.tree              = None
-        self.currLib           = None
-        self.cfgWindow         = None
-        self.libraries         = prefs.get(__name__, 'libraries',  PREFS_DEFAULT_LIBRARIES)
-        self.favorites         = None
-        self.treeStates        = prefs.get(__name__, 'tree-state', PREFS_DEFAULT_TREE_STATE)
-        self.showOnlyFavorites = prefs.get(__name__, 'show-only-favorites', PREFS_DEFAULT_SHOW_ONLY_FAVORITES)
+        self.tree         = None
+        self.currLib      = None
+        self.allGenres    = {}
+        self.currGenre    = None
+        self.cfgWindow    = None
+        self.libraries    = prefs.get(__name__, 'libraries',  PREFS_DEFAULT_LIBRARIES)
+        self.favorites    = None
+        self.treeStates   = prefs.get(__name__, 'tree-state', PREFS_DEFAULT_TREE_STATE)
+        self.showOnlyFavs = prefs.get(__name__, 'show-only-favorites', PREFS_DEFAULT_SHOW_ONLY_FAVORITES)
         # Scroll window
         self.scrolled = gtk.ScrolledWindow()
         self.scrolled.set_shadow_type(gtk.SHADOW_IN)
