@@ -689,13 +689,13 @@ class Library(modules.Module):
     def saveTreeState(self):
         """ Save the current tree state """
         if self.showOnlyFavs: self.treeStates[self.currLib + ' favorites'] = self.tree.saveState(ROW_NAME)
-        else:                      self.treeStates[self.currLib]                = self.tree.saveState(ROW_NAME)
+        else:                 self.treeStates[self.currLib]                = self.tree.saveState(ROW_NAME)
 
 
     def restoreTreeState(self):
         """ Restore the tree state """
         if self.showOnlyFavs: name = self.currLib + ' favorites'
-        else:                      name = self.currLib
+        else:                 name = self.currLib
 
         if name in self.treeStates:
             self.tree.restoreState(self.treeStates[name], ROW_NAME)
