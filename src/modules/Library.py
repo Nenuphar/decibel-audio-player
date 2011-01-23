@@ -84,7 +84,8 @@ FAKE_CHILD                        = (None, None, '', TYPE_NONE, '', None)  # We 
 PREFS_DEFAULT_PREFIXES            = {'the ': None}                         # Prefixes are put at the end of artists' names
 PREFS_DEFAULT_LIBRARIES           = {}                                     # No libraries at first
 PREFS_DEFAULT_TREE_STATE          = {}                                     # No state at first
-PREFS_DEFAULT_SHOW_ONLY_FAVORITES = False
+PREFS_DEFAULT_GENRE_FILTERS       = {}                                     # Unfiltered libraries by default
+PREFS_DEFAULT_SHOW_ONLY_FAVORITES = False                                  # Show all files by default
 
 
 class Library(modules.Module):
@@ -475,6 +476,12 @@ class Library(modules.Module):
 
     def filterByGenre(self, genre):
         """ Filter the library and keep only albums of the given genre """
+        # Save the new genre so that it can be restored later on
+        savedGenreFilters = prefs.get(__name__, 'genre-filters', PREFS_DEFAULT_GENRE_FILTERS)
+        savedGenreFilters[self.currLib] = genre
+        prefs.set(__name__, 'genre-filters', savedGenreFilters)
+
+        # Let's filter
         self.currGenre = genre
         self.loadArtists(self.tree, self.currLib)
 
@@ -601,6 +608,12 @@ class Library(modules.Module):
     def loadArtists(self, tree, name):
         """ Load the given library """
         libPath = os.path.join(ROOT_PATH, name)
+
+        # Load the last genre filter
+        savedGenreFilters = prefs.get(__name__, 'genre-filters', PREFS_DEFAULT_GENRE_FILTERS)
+
+        if name in savedGenreFilters: self.currGenre = savedGenreFilters[name]
+        else:                         self.currGenre = None
 
         # Make sure the version number is the good one
         if not os.path.exists(os.path.join(libPath, 'VERSION_%u' % VERSION)):
