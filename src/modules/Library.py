@@ -477,9 +477,11 @@ class Library(modules.Module):
 
     def filterByGenre(self, genre):
         """ Filter the library and keep only albums of the given genre """
+        self.saveTreeState()
         self.currGenre = genre
         self.saveGenreFilter(self.currLib, genre)
         self.loadArtists(self.tree, self.currLib)
+        self.restoreTreeState()
 
 
     def showPopupMenu(self, tree, button, time, path):
@@ -694,23 +696,22 @@ class Library(modules.Module):
 
     def saveTreeState(self):
         """ Save the current tree state """
-        if self.showOnlyFavs: self.treeStates[self.currLib + ' favorites'] = self.tree.saveState(ROW_NAME)
-        else:                 self.treeStates[self.currLib]                = self.tree.saveState(ROW_NAME)
+        state = self.tree.saveState(ROW_NAME)
+
+        try:    self.treeStates[self.currLib][(self.currGenre, self.showOnlyFavs)] = state
+        except: self.treeStates[self.currLib] = {(self.currGenre, self.showOnlyFavs): state}
 
 
     def restoreTreeState(self):
         """ Restore the tree state """
-        if self.showOnlyFavs: name = self.currLib + ' favorites'
-        else:                 name = self.currLib
-
-        if name in self.treeStates:
-            self.tree.restoreState(self.treeStates[name], ROW_NAME)
+        try:    self.tree.restoreState(self.treeStates[self.currLib][(self.currGenre, self.showOnlyFavs)], ROW_NAME)
+        except: pass
 
 
     def removeTreeStates(self, libName):
         """ Remove the tree states associated to the given library """
-        if libName in self.treeStates:                del self.treeStates[libName]
-        if libName + ' favorites' in self.treeStates: del self.treeStates[libName + ' favorites']
+        if libName in self.treeStates:
+            del self.treeStates[libName]
 
 
     def renameTreeStates(self, oldLibName, newLibName):
@@ -718,10 +719,6 @@ class Library(modules.Module):
         if oldLibName in self.treeStates:
             self.treeStates[newLibName] = self.treeStates[oldLibName]
             del self.treeStates[oldLibName]
-
-        if oldLibName + ' favorites' in self.treeStates:
-            self.treeStates[newLibName + ' favorites'] = self.treeStates[oldLibName + ' favorites']
-            del self.treeStates[oldLibName + ' favorites']
 
 
     # --== Filtering by genre ==--
@@ -850,7 +847,7 @@ class Library(modules.Module):
         self.cfgWindow    = None
         self.libraries    = prefs.get(__name__, 'libraries',  PREFS_DEFAULT_LIBRARIES)
         self.favorites    = None
-        self.treeStates   = prefs.get(__name__, 'tree-state', PREFS_DEFAULT_TREE_STATE)
+        self.treeStates   = prefs.get(__name__, 'tree-states-2', PREFS_DEFAULT_TREE_STATE)
         self.showOnlyFavs = prefs.get(__name__, 'show-only-favorites', PREFS_DEFAULT_SHOW_ONLY_FAVORITES)
         # Scroll window
         self.scrolled = gtk.ScrolledWindow()
@@ -866,7 +863,7 @@ class Library(modules.Module):
         if self.currLib is not None:
             self.saveTreeState()
             self.saveFavorites(self.currLib, self.favorites)
-            prefs.set(__name__, 'tree-state', self.treeStates)
+            prefs.set(__name__, 'tree-states-2', self.treeStates)
 
         prefs.set(__name__, 'libraries',  self.libraries)
         self.removeAllExplorers()
