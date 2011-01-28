@@ -476,13 +476,8 @@ class Library(modules.Module):
 
     def filterByGenre(self, genre):
         """ Filter the library and keep only albums of the given genre """
-        # Save the new genre so that it can be restored later on
-        savedGenreFilters = prefs.get(__name__, 'genre-filters', PREFS_DEFAULT_GENRE_FILTERS)
-        savedGenreFilters[self.currLib] = genre
-        prefs.set(__name__, 'genre-filters', savedGenreFilters)
-
-        # Let's filter
         self.currGenre = genre
+        self.saveGenreFilter(self.currLib, genre)
         self.loadArtists(self.tree, self.currLib)
 
 
@@ -609,12 +604,6 @@ class Library(modules.Module):
         """ Load the given library """
         libPath = os.path.join(ROOT_PATH, name)
 
-        # Load the last genre filter
-        savedGenreFilters = prefs.get(__name__, 'genre-filters', PREFS_DEFAULT_GENRE_FILTERS)
-
-        if name in savedGenreFilters: self.currGenre = savedGenreFilters[name]
-        else:                         self.currGenre = None
-
         # Make sure the version number is the good one
         if not os.path.exists(os.path.join(libPath, 'VERSION_%u' % VERSION)):
             logger.error('[%s] Version number does not match, loading of library "%s" aborted' % (MOD_INFO[modules.MODINFO_NAME], name))
@@ -729,6 +718,23 @@ class Library(modules.Module):
         if oldLibName + ' favorites' in self.treeStates:
             self.treeStates[newLibName + ' favorites'] = self.treeStates[oldLibName + ' favorites']
             del self.treeStates[oldLibName + ' favorites']
+
+
+    # --== Filtering by genre ==--
+
+    def loadGenreFilter(self, libName):
+        """ Load the last genre used to filter the given library """
+        savedGenreFilters = prefs.get(__name__, 'genre-filters', PREFS_DEFAULT_GENRE_FILTERS)
+
+        try:    return savedGenreFilters[libName]
+        except: return None
+
+
+    def saveGenreFilter(self, libName, genre):
+        """ Save the current genre used to filter the given library """
+        savedGenreFilters = prefs.get(__name__, 'genre-filters', PREFS_DEFAULT_GENRE_FILTERS)
+        savedGenreFilters[libName] = genre
+        prefs.set(__name__, 'genre-filters', savedGenreFilters)
 
 
     # --== Favorites ==--
@@ -877,6 +883,7 @@ class Library(modules.Module):
             # Switch to the new library
             self.currLib   = expName
             self.favorites = self.loadFavorites(self.currLib)
+            self.currGenre = self.loadGenreFilter(self.currLib)
             self.loadArtists(self.tree, self.currLib)
             self.restoreTreeState()
 
