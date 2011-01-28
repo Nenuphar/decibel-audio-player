@@ -22,7 +22,6 @@ from tools import consts
 
 
 __lbl               = None
-__dirBtnIcon        = None
 __dirMenuIcon       = None
 __starMenuIcon      = None
 __infoMenuIcon      = None
@@ -32,6 +31,7 @@ __playMenuIcon      = None
 __pauseMenuIcon     = None
 __cdromMenuIcon     = None
 __errorMenuIcon     = None
+__dirToolbarIcon    = None
 __starDirMenuIcon   = None
 __mediaDirMenuIcon  = None
 __mediaFileMenuIcon = None
@@ -62,14 +62,14 @@ def dirMenuIcon():
     return __dirMenuIcon
 
 
-def dirBtnIcon():
+def dirToolbarIcon():
     """ Directories """
-    global __dirBtnIcon
+    global __dirToolbarIcon
 
-    if __dirBtnIcon is None:
-        __dirBtnIcon = __render(gtk.STOCK_DIRECTORY, gtk.ICON_SIZE_BUTTON)
+    if __dirToolbarIcon is None:
+        __dirToolbarIcon = __render(gtk.STOCK_DIRECTORY, gtk.ICON_SIZE_LARGE_TOOLBAR)
 
-    return __dirBtnIcon
+    return __dirToolbarIcon
 
 
 def prefsBtnIcon():

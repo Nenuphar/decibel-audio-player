@@ -497,7 +497,7 @@ class FileExplorer(modules.Module):
 
     def populateFolderList(self):
         """ Populate the list of known folders """
-        self.cfgList.replaceContent([(name, icons.dirBtnIcon(), '<b>%s</b>\n<small>%s</small>' % (tools.htmlEscape(name), tools.htmlEscape(path)))
+        self.cfgList.replaceContent([(name, icons.dirToolbarIcon(), '<b>%s</b>\n<small>%s</small>' % (tools.htmlEscape(name), tools.htmlEscape(path)))
                                      for name, path in sorted(self.folders.iteritems())])
 
 

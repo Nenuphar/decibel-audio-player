@@ -982,7 +982,7 @@ class Library(modules.Module):
     def fillLibraryList(self):
         """ Fill the list of libraries """
         if self.cfgWindow is not None:
-            rows = [(name, icons.dirBtnIcon(), '<b>%s</b>\n<small>%s - %u %s</small>' % (htmlEscape(name), htmlEscape(path), nbTracks, htmlEscape(_('tracks'))))
+            rows = [(name, icons.dirToolbarIcon(), '<b>%s</b>\n<small>%s - %u %s</small>' % (htmlEscape(name), htmlEscape(path), nbTracks, htmlEscape(_('tracks'))))
                     for name, (path, nbArtists, nbAlbums, nbTracks) in sorted(self.libraries.iteritems())]
             self.cfgList.replaceContent(rows)
 
