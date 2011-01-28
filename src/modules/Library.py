@@ -150,7 +150,7 @@ class Library(modules.Module):
 
     def __drawCell(self, column, cell, model, iter):
         """ Use a different background color for alphabetical headers """
-        if model.get_value(iter, ROW_TYPE) == TYPE_HEADER: cell.set_property('cell-background-gdk', self.tree.style.bg[gtk.STATE_PRELIGHT])
+        if model.get_value(iter, ROW_TYPE) == TYPE_HEADER: cell.set_property('cell-background-gdk', self.tree.style.base[gtk.STATE_PRELIGHT])
         else:                                              cell.set_property('cell-background',     None)
 
 
