@@ -62,8 +62,9 @@ MOD_L10N = MOD_INFO[modules.MODINFO_L10N]
     TYPE_TRACK,             # Single track
     TYPE_HEADER,            # Alphabetical header
     TYPE_FAVORITES_BANNER,  # Favorites banner (when showing only favorites)
+    TYPE_GENRE_BANNER,      # Shown when filtering by genre
     TYPE_NONE               # Used for fake children
-) = range(6)
+) = range(7)
 
 
 # The format of a row in the treeview
@@ -617,14 +618,17 @@ class Library(modules.Module):
         allArtists     = pickleLoad(os.path.join(libPath, 'artists'))
         self.allGenres = pickleLoad(os.path.join(libPath, 'genres'))
 
+        # Filter artists by genre if needed
+        if self.currGenre is not None:
+            allArtists = [artist for artist in allArtists if artist[ART_NAME] in self.allGenres[self.currGenre]]
+            rows.append((icons.infoMenuIcon(), None, '<b>%s</b>' % self.currGenre.capitalize(), TYPE_GENRE_BANNER, None, None))
+        else:
+            rows.append((icons.infoMenuIcon(), None, '<b>%s</b>' % _('All genres'), TYPE_GENRE_BANNER, None, None))
+
         # Filter artists by favorites if needed
         if self.showOnlyFavs:
             allArtists = [artist for artist in allArtists if self.isArtistInFavorites(artist[ART_NAME])]
             rows.append((icons.starMenuIcon(), None, '<b>%s</b>' % _('My Favorites'), TYPE_FAVORITES_BANNER, None, None))
-
-        # Filter artists by genre if needed
-        if self.currGenre is not None:
-            allArtists = [artist for artist in allArtists if artist[ART_NAME] in self.allGenres[self.currGenre]]
 
         # Create the rows
         for artist in allArtists:

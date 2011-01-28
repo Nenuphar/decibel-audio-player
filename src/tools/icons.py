@@ -25,6 +25,7 @@ __lbl               = None
 __dirBtnIcon        = None
 __dirMenuIcon       = None
 __starMenuIcon      = None
+__infoMenuIcon      = None
 __prefsBtnIcon      = None
 __nullMenuIcon      = None
 __playMenuIcon      = None
@@ -119,6 +120,16 @@ def starMenuIcon():
         __starMenuIcon = gtk.gdk.pixbuf_new_from_file(consts.fileImgStar16)
 
     return __starMenuIcon
+
+
+def infoMenuIcon():
+    """ CD-ROM """
+    global __infoMenuIcon
+
+    if __infoMenuIcon is None:
+        __infoMenuIcon = __render(gtk.STOCK_INFO, gtk.ICON_SIZE_MENU)
+
+    return __infoMenuIcon
 
 
 def errorMenuIcon():
