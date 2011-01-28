@@ -495,6 +495,13 @@ class Library(modules.Module):
         if path is None: play.set_sensitive(False)
         else:            play.connect('activate', lambda widget: self.playPaths(tree, None, True))
 
+        # Add
+        add = gtk.ImageMenuItem(gtk.STOCK_ADD)
+        popup.append(add)
+
+        if path is None: add.set_sensitive(False)
+        else:            add.connect('activate', lambda widget: self.playPaths(tree, None, False))
+
         # Separator
         popup.append(gtk.SeparatorMenuItem())
 

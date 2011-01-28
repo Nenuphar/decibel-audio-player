@@ -334,12 +334,19 @@ class FileExplorer(modules.Module):
         """ Show a popup menu """
         popup = gtk.Menu()
 
-        # Play selection
+        # Play
         play = gtk.ImageMenuItem(gtk.STOCK_MEDIA_PLAY)
         popup.append(play)
 
         if path is None: play.set_sensitive(False)
         else:            play.connect('activate', lambda widget: self.play(True))
+
+        # Add
+        add = gtk.ImageMenuItem(gtk.STOCK_ADD)
+        popup.append(add)
+
+        if path is None: add.set_sensitive(False)
+        else:            add.connect('activate', lambda widget: self.play(False))
 
         popup.append(gtk.SeparatorMenuItem())
 

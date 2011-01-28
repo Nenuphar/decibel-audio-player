@@ -329,11 +329,20 @@ class AudioCD(modules.ThreadedModule):
         """ Show a popup menu """
         popup = gtk.Menu()
 
-        # Play selection
+        # Play
         play = gtk.ImageMenuItem(gtk.STOCK_MEDIA_PLAY)
         play.set_sensitive(tree.getNbChildren((0,)) != 0)
         play.connect('activate', lambda widget: self.playPaths(tree, None, True))
         popup.append(play)
+
+        # Add
+        add = gtk.ImageMenuItem(gtk.STOCK_ADD)
+        add.set_sensitive(tree.getNbChildren((0,)) != 0)
+        add.connect('activate', lambda widget: self.playPaths(tree, None, False))
+        popup.append(add)
+
+        # Separator
+        popup.append(gtk.SeparatorMenuItem())
 
         # Refresh the view
         refresh = gtk.ImageMenuItem(gtk.STOCK_REFRESH)
