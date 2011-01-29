@@ -260,7 +260,10 @@
 <widget class="GtkHBox" id="box-ctrl-buttons">
 <property name="spacing">12</property>
 <child>
-<widget class="GtkHBox" id="hbox1">
+<widget class="GtkVBox" id="vbox5">
+<property name="visible">True</property>
+<child>
+<widget class="GtkHBox" id="hbox3">
 <property name="spacing">6</property>
 <child>
 <widget class="GtkButton" id="btn-previous">
@@ -269,8 +272,9 @@
 <property name="receives_default">True</property>
 <property name="has_tooltip">True</property>
 <property name="tooltip" translatable="yes">Play the previous track</property>
+<property name="relief">half</property>
 <child>
-<widget class="GtkImage" id="image6">
+<widget class="GtkImage" id="image1">
 <property name="stock">gtk-media-previous</property>
 </widget>
 </child>
@@ -286,8 +290,9 @@
 <property name="receives_default">True</property>
 <property name="has_tooltip">True</property>
 <property name="tooltip" translatable="yes">Stop the current track</property>
+<property name="relief">half</property>
 <child>
-<widget class="GtkImage" id="image7">
+<widget class="GtkImage" id="image2">
 <property name="stock">gtk-media-stop</property>
 </widget>
 </child>
@@ -303,8 +308,9 @@
 <property name="receives_default">True</property>
 <property name="has_tooltip">True</property>
 <property name="tooltip" translatable="yes">Play the first track of the playlist</property>
+<property name="relief">half</property>
 <child>
-<widget class="GtkImage" id="image8">
+<widget class="GtkImage" id="image3">
 <property name="stock">gtk-media-play</property>
 </widget>
 </child>
@@ -320,8 +326,9 @@
 <property name="receives_default">True</property>
 <property name="has_tooltip">True</property>
 <property name="tooltip" translatable="yes">Play the next track</property>
+<property name="relief">half</property>
 <child>
-<widget class="GtkImage" id="image9">
+<widget class="GtkImage" id="image4">
 <property name="stock">gtk-media-next</property>
 </widget>
 </child>
@@ -332,7 +339,14 @@
 </child>
 </widget>
 <packing>
+<property name="fill">False</property>
+<property name="position">0</property>
+</packing>
+</child>
+</widget>
+<packing>
 <property name="expand">False</property>
+<property name="fill">False</property>
 <property name="position">0</property>
 </packing>
 </child>
@@ -397,6 +411,7 @@ audio-volume-medium</property>
 </widget>
 <packing>
 <property name="expand">False</property>
+<property name="fill">False</property>
 <property name="position">2</property>
 </packing>
 </child>
