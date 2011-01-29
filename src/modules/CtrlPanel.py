@@ -79,6 +79,8 @@ class CtrlPanel(modules.Module):
         self.sclSeek.connect('change-value', self.onSeekChangingValue)
         self.sclSeek.connect('value-changed', self.onSeekValueChanged)
         self.btnVolume.connect('value-changed', self.onVolumeValueChanged)
+        self.sclSeek.connect('button-press-event', self.onSeekButtonPressed)
+        self.sclSeek.connect('button-release-event', self.onSeekButtonReleased)
 
 
     def onAppQuit(self):
@@ -177,6 +179,24 @@ class CtrlPanel(modules.Module):
 
         self.lblElapsed.set_label(sec2str(value))
         self.lblRemaining.set_label(sec2str(self.currTrackLength - value))
+
+
+    def onSeekButtonPressed(self, range, event):
+        """ Mouse button has been pressed over the seek slider """
+        # Make left clicks act the same as middle clicks
+        if event.button == 1:
+            event.button = 2
+            range.emit('button-press-event', event)
+            return True
+
+
+    def onSeekButtonReleased(self, range, event):
+        """ Mouse button has been released over the seek slider """
+        # Make left clicks act the same as middle clicks
+        if event.button == 1:
+            event.button = 2
+            range.emit('button-release-event', event)
+            return True
 
 
     def onVolumeValueChanged(self, button, value):
