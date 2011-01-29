@@ -193,3 +193,19 @@ def splitPath(path):
         else:
             path       = head
             components = [tail] + components
+
+
+def isPulseAudioRunning():
+    """ Return whether pulseaudio is running """
+    # Kind of hack, no better solution for now
+    pipe      = os.popen('ps ax')
+    isRunning = False
+
+    for line in pipe:
+        if line.find('pulseaudio') != -1:
+            isRunning = True
+            break
+
+    pipe.close()
+
+    return isRunning
