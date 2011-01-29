@@ -74,22 +74,24 @@ class Tracklist(modules.Module):
     def __init__(self):
         """ Constructor """
         handlers = {
-                        consts.MSG_CMD_NEXT:              self.jumpToNext,
-                        consts.MSG_EVT_PAUSED:            lambda: self.onPausedToggled(icons.pauseMenuIcon()),
-                        consts.MSG_EVT_STOPPED:           self.onStopped,
-                        consts.MSG_EVT_UNPAUSED:          lambda: self.onPausedToggled(icons.playMenuIcon()),
-                        consts.MSG_CMD_PREVIOUS:          self.jumpToPrevious,
-                        consts.MSG_EVT_NEED_BUFFER:       self.onBufferingNeeded,
-                        consts.MSG_EVT_APP_STARTED:       self.onAppStarted,
-                        consts.MSG_CMD_TOGGLE_PAUSE:      self.togglePause,
-                        consts.MSG_CMD_TRACKLIST_DEL:     self.remove,
-                        consts.MSG_CMD_TRACKLIST_ADD:     self.insert,
-                        consts.MSG_CMD_TRACKLIST_SET:     self.set,
-                        consts.MSG_CMD_TRACKLIST_CLR:     lambda: self.set(None, None),
-                        consts.MSG_EVT_TRACK_ENDED_OK:    lambda: self.onTrackEnded(False),
-                        consts.MSG_CMD_TRACKLIST_REPEAT:  self.setRepeat,
-                        consts.MSG_EVT_TRACK_ENDED_ERROR: lambda: self.onTrackEnded(True),
-                        consts.MSG_CMD_TRACKLIST_SHUFFLE: self.shuffleTracklist,
+                        consts.MSG_CMD_NEXT:                 self.jumpToNext,
+                        consts.MSG_EVT_PAUSED:               lambda: self.onPausedToggled(icons.pauseMenuIcon()),
+                        consts.MSG_EVT_STOPPED:              self.onStopped,
+                        consts.MSG_EVT_UNPAUSED:             lambda: self.onPausedToggled(icons.playMenuIcon()),
+                        consts.MSG_CMD_PREVIOUS:             self.jumpToPrevious,
+                        consts.MSG_EVT_NEED_BUFFER:          self.onBufferingNeeded,
+                        consts.MSG_EVT_APP_STARTED:          self.onAppStarted,
+                        consts.MSG_CMD_TOGGLE_PAUSE:         self.togglePause,
+                        consts.MSG_CMD_TRACKLIST_DEL:        self.remove,
+                        consts.MSG_CMD_TRACKLIST_ADD:        self.insert,
+                        consts.MSG_CMD_TRACKLIST_SET:        self.set,
+                        consts.MSG_CMD_TRACKLIST_CLR:        lambda: self.set(None, None),
+                        consts.MSG_CMD_TRACKLIST_PLAY:       self.onTracklistPlay,
+                        consts.MSG_EVT_TRACK_ENDED_OK:       lambda: self.onTrackEnded(False),
+                        consts.MSG_CMD_TRACKLIST_REPEAT:     self.setRepeat,
+                        consts.MSG_EVT_TRACK_ENDED_ERROR:    lambda: self.onTrackEnded(True),
+                        consts.MSG_CMD_TRACKLIST_SHUFFLE:    self.shuffleTracklist,
+                        consts.MSG_CMD_TRACKLIST_PLAY_PAUSE: self.onTracklistPlayPause,
                    }
 
         modules.Module.__init__(self, handlers)
@@ -447,6 +449,20 @@ class Tracklist(modules.Module):
         """ Switch between paused and unpaused """
         if self.list.hasMark():
             self.list.setItem(self.list.getMark(), ROW_ICO, icon)
+
+
+    def onTracklistPlay(self, idx, seconds):
+        """ Play the given track """
+        self.jumpTo(idx)
+
+        if seconds != 0:
+            modules.postMsg(consts.MSG_CMD_SEEK, {'seconds': seconds})
+
+
+    def onTracklistPlayPause(self, idx, seconds):
+        """ Play the given track but pause immediately """
+        self.onTracklistPlay(idx, seconds)
+        modules.postMsg(consts.MSG_CMD_TOGGLE_PAUSE)
 
 
     # --== GTK handlers ==--

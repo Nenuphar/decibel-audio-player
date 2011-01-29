@@ -6,6 +6,7 @@ v1.07 ()
     [+] Libraries may be filtered by genre using the popup menu
     [+] Can't play wav files (#653496)
     [+] Add an automatic shuffle feature (#510278)
+    [+] Add a module that resumes playback on startup (#534031)
     [-] Don't spawn multiple instances from the .desktop file (#704221)
     [ ] Make left clicks on slider act the same as middle clicks (#676548)
     [ ] "Add" option is missing on right-click (#677168)
