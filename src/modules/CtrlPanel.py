@@ -66,9 +66,9 @@ class CtrlPanel(modules.Module):
         self.lblElapsed   = wTree.get_widget('lbl-elapsedTime')
         self.lblRemaining = wTree.get_widget('lbl-remainingTime')
 
-        # Hide the volume button when using playbin2 and pulseaudio together (#511589)
-        if tools.isPulseAudioRunning() and not prefs.getCmdLine()[0].playbin:
-            self.btnVolume.set_visible(False)
+        # Don't show the volume button when using playbin2 and pulseaudio together (#511589)
+        if not tools.isPulseAudioRunning() or prefs.getCmdLine()[0].playbin:
+            self.btnVolume.show()
 
         # Restore the volume
         volume = prefs.get(__name__, 'volume', PREFS_DEFAULT_VOLUME)
