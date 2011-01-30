@@ -94,7 +94,7 @@ def realStartup():
             prefs.set(__name__, 'win-width',  rect.width)
             prefs.set(__name__, 'win-height', rect.height)
 
-            if prefs.get(__name__, 'view-mode', DEFAULT_VIEW_MODE)in (consts.VIEW_MODE_FULL, consts.VIEW_MODE_PLAYLIST):
+            if prefs.get(__name__, 'view-mode', DEFAULT_VIEW_MODE)in (consts.VIEW_MODE_FULL, consts.VIEW_MODE_LEAN, consts.VIEW_MODE_PLAYLIST):
                 prefs.set(__name__, 'full-win-height', rect.height)
 
 
@@ -136,6 +136,7 @@ def realStartup():
     paned.connect('size-allocate', lambda win, rect: prefs.set(__name__, 'paned-pos', paned.get_position()))
     wTree.get_widget('menu-mode-mini').connect('activate', onViewMode, consts.VIEW_MODE_MINI)
     wTree.get_widget('menu-mode-full').connect('activate', onViewMode, consts.VIEW_MODE_FULL)
+    wTree.get_widget('menu-mode-lean').connect('activate', onViewMode, consts.VIEW_MODE_LEAN)
     wTree.get_widget('menu-mode-playlist').connect('activate', onViewMode, consts.VIEW_MODE_PLAYLIST)
     wTree.get_widget('menu-quit').connect('activate', lambda item: onDelete(window, None))
     wTree.get_widget('menu-about').connect('activate', onAbout)
@@ -164,21 +165,24 @@ def setViewMode(mode, resize):
 
     (winWidth, winHeight) = window.get_size()
 
-    if mode == consts.VIEW_MODE_FULL:
+    if mode in (consts.VIEW_MODE_FULL, consts.VIEW_MODE_LEAN):
         paned.get_child1().show()
         wTree.get_widget('statusbar').show()
-        wTree.get_widget('box-btn-tracklist').show()
         wTree.get_widget('scrolled-tracklist').show()
         wTree.get_widget('box-trkinfo').show()
+
+        if mode == consts.VIEW_MODE_FULL: wTree.get_widget('box-btn-tracklist').show()
+        else:                             wTree.get_widget('box-btn-tracklist').hide()
+
         if resize:
-            if lastMode != consts.VIEW_MODE_FULL: winWidth  = winWidth + paned.get_position()
-            if lastMode == consts.VIEW_MODE_MINI: winHeight = prefs.get(__name__, 'full-win-height', DEFAULT_WIN_HEIGHT)
+            if lastMode not in (consts.VIEW_MODE_FULL, consts.VIEW_MODE_LEAN): winWidth  = winWidth + paned.get_position()
+            if lastMode == consts.VIEW_MODE_MINI:                              winHeight = prefs.get(__name__, 'full-win-height', DEFAULT_WIN_HEIGHT)
 
             window.resize(winWidth, winHeight)
         return
 
     paned.get_child1().hide()
-    if resize and lastMode == consts.VIEW_MODE_FULL:
+    if resize and lastMode in (consts.VIEW_MODE_FULL, consts.VIEW_MODE_LEAN):
         winWidth = winWidth - paned.get_position()
         window.resize(winWidth, winHeight)
 
@@ -253,8 +257,9 @@ viewMode = prefs.get(__name__, 'view-mode', DEFAULT_VIEW_MODE)
 if viewMode == consts.VIEW_MODE_FULL:
     wTree.get_widget('menu-mode-full').set_active(True)
 else:
-    if viewMode == consts.VIEW_MODE_MINI: wTree.get_widget('menu-mode-mini').set_active(True)
-    else:                                 wTree.get_widget('menu-mode-playlist').set_active(True)
+    if viewMode == consts.VIEW_MODE_LEAN:   wTree.get_widget('menu-mode-lean').set_active(True)
+    elif viewMode == consts.VIEW_MODE_MINI: wTree.get_widget('menu-mode-mini').set_active(True)
+    else:                                   wTree.get_widget('menu-mode-playlist').set_active(True)
 
     setViewMode(viewMode, False)
 

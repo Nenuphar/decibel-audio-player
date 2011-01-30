@@ -126,9 +126,10 @@ DND_TARGETS = {
 # --- View modes
 (
     VIEW_MODE_FULL,
+    VIEW_MODE_LEAN,
     VIEW_MODE_MINI,
     VIEW_MODE_PLAYLIST,
-) = range(3)
+) = range(4)
 
 
 # -- Categories a module can belong to
