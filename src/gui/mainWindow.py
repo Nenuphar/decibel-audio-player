@@ -42,6 +42,7 @@ class MainWindow:
         if viewmode == consts.VIEW_MODE_FULL:       self.wtree.get_widget('menu-mode-full').set_active(True)
         elif viewmode == consts.VIEW_MODE_LEAN:     self.wtree.get_widget('menu-mode-lean').set_active(True)
         elif viewmode == consts.VIEW_MODE_MINI:     self.wtree.get_widget('menu-mode-mini').set_active(True)
+        elif viewmode == consts.VIEW_MODE_NETBOOK:  self.wtree.get_widget('menu-mode-netbook').set_active(True)
         elif viewmode == consts.VIEW_MODE_PLAYLIST: self.wtree.get_widget('menu-mode-playlist').set_active(True)
 
         # Restore the size and the state of the window
@@ -73,6 +74,7 @@ class MainWindow:
         self.wtree.get_widget('menu-mode-mini').connect('activate', self.onViewMode, consts.VIEW_MODE_MINI)
         self.wtree.get_widget('menu-mode-full').connect('activate', self.onViewMode, consts.VIEW_MODE_FULL)
         self.wtree.get_widget('menu-mode-lean').connect('activate', self.onViewMode, consts.VIEW_MODE_LEAN)
+        self.wtree.get_widget('menu-mode-netbook').connect('activate', self.onViewMode, consts.VIEW_MODE_NETBOOK)
         self.wtree.get_widget('menu-mode-playlist').connect('activate', self.onViewMode, consts.VIEW_MODE_PLAYLIST)
 
         self.wtree.get_widget('menu-help').connect('activate', self.onHelp)
@@ -93,11 +95,13 @@ class MainWindow:
         # First restore the initial window state (e.g., VIEW_MODE_FULL)
         if currMode == consts.VIEW_MODE_LEAN:       self.__fromModeLean()
         elif currMode == consts.VIEW_MODE_MINI:     self.__fromModeMini()
+        elif currMode == consts.VIEW_MODE_NETBOOK:  self.__fromModeNetbook()
         elif currMode == consts.VIEW_MODE_PLAYLIST: self.__fromModePlaylist()
 
         # Now we can switch to the new mode
         if mode == consts.VIEW_MODE_LEAN:       self.__toModeLean()
         elif mode == consts.VIEW_MODE_MINI:     self.__toModeMini()
+        elif mode == consts.VIEW_MODE_NETBOOK:  self.__toModeNetbook()
         elif mode == consts.VIEW_MODE_PLAYLIST: self.__toModePlaylist()
 
         # Save the new mode
@@ -116,10 +120,56 @@ class MainWindow:
         self.wtree.get_widget('box-btn-tracklist').hide()
 
 
+    # --== Netbook Mode ==--
+
+    def __fromModeNetbook(self):
+        """ Switch from netbook mode to full mode """
+        self.wtree.get_widget('box-trkinfo').show()
+        self.wtree.get_widget('box-btn-tracklist').show()
+
+        slider           = self.wtree.get_widget('box-slider')
+        btnVolume        = self.wtree.get_widget('btn-volume')
+        ctrlPanel        = self.wtree.get_widget('box-ctrl-panel')
+        ctrlButtons      = self.wtree.get_widget('box-ctrl-buttons-2')
+        comboExplorer    = self.wtree.get_widget('combo-explorer')
+        ctrlButtonsBox   = self.wtree.get_widget('box-ctrl-buttons-1')
+        boxComboExplorer = self.wtree.get_widget('box-combo-explorer')
+
+        slider.reparent(ctrlPanel)
+        btnVolume.reparent(ctrlPanel)
+        ctrlButtons.reparent(ctrlButtonsBox)
+        comboExplorer.reparent(boxComboExplorer)
+
+        slider.set_size_request(-1, -1)
+        comboExplorer.set_size_request(-1, -1)
+
+
+    def __toModeNetbook(self):
+        """ Switch from full mode to netbook mode """
+        self.wtree.get_widget('box-trkinfo').hide()
+        self.wtree.get_widget('box-btn-tracklist').hide()
+
+        slider           = self.wtree.get_widget('box-slider')
+        btnVolume        = self.wtree.get_widget('btn-volume')
+        boxExplorer      = self.wtree.get_widget('box-explorer')
+        ctrlButtons      = self.wtree.get_widget('box-ctrl-buttons-2')
+        comboExplorer    = self.wtree.get_widget('combo-explorer')
+        boxComboExplorer = self.wtree.get_widget('box-combo-explorer')
+
+        slider.reparent(boxExplorer)
+        btnVolume.reparent(ctrlButtons)
+        comboExplorer.reparent(ctrlButtons)
+        ctrlButtons.reparent(boxComboExplorer)
+
+        slider.set_size_request(-1, 20)
+        comboExplorer.set_size_request(45, -1)
+        boxExplorer.child_set_property(slider, 'expand', False)
+
+
     # --== Mini Mode ==--
 
     def __fromModeMini(self):
-        """ Switch from playlist mode to mini mode """
+        """ Switch from mini mode to full mode """
         self.paned.get_child1().show()
         self.wtree.get_widget('statusbar').show()
         self.wtree.get_widget('box-btn-tracklist').show()

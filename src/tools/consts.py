@@ -124,12 +124,14 @@ DND_TARGETS = {
 
 
 # --- View modes
+# --- Don't change the order!
 (
     VIEW_MODE_FULL,
     VIEW_MODE_LEAN,
     VIEW_MODE_MINI,
     VIEW_MODE_PLAYLIST,
-) = range(4)
+    VIEW_MODE_NETBOOK,
+) = range(5)
 
 
 # -- Categories a module can belong to
