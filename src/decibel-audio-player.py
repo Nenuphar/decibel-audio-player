@@ -17,9 +17,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
-import dbus, optparse
+import dbus, gettext, gobject, gtk, locale, optparse, sys
 
-from tools import consts
+from gui   import mainWindow
+from tools import consts, loadGladeFile, log, prefs
 
 
 # Command line
@@ -53,162 +54,12 @@ if not optOptions.multiple_instances:
         dbusSession.close()
 
     if shouldStop:
-        import sys
         sys.exit(1)
 
 
-# Start a new instance
-import gettext, gobject, gtk, locale
-
-from tools import loadGladeFile, log, prefs
-
-DEFAULT_VIEW_MODE       = consts.VIEW_MODE_FULL
-DEFAULT_PANED_POS       = 300
-DEFAULT_WIN_WIDTH       = 750
-DEFAULT_WIN_HEIGHT      = 470
-DEFAULT_MAXIMIZED_STATE = False
-
-
-def realStartup():
-    """
-        Perform all the initialization stuff which is not mandatory to display the window
-        This function should be called within the GTK main loop, once the window has been displayed
-    """
-    import atexit, dbus.mainloop.glib, modules, signal
-
-
-    def onDelete(win, event):
-        """ Use our own quit sequence, that will itself destroy the window """
-        window.hide()
-        modules.postQuitMsg()
-        return True
-
-
-    def onResize(win, rect):
-        """ Save the new size of the window """
-        # The first label gets more or less a third of the window's width
-        wTree.get_widget('hbox-status1').set_size_request(rect.width / 3 + 15, -1)
-
-        # Save size and maximized state
-        if win.window is not None and not win.window.get_state() & gtk.gdk.WINDOW_STATE_MAXIMIZED:
-            prefs.set(__name__, 'win-width',  rect.width)
-            prefs.set(__name__, 'win-height', rect.height)
-
-            if prefs.get(__name__, 'view-mode', DEFAULT_VIEW_MODE)in (consts.VIEW_MODE_FULL, consts.VIEW_MODE_LEAN, consts.VIEW_MODE_PLAYLIST):
-                prefs.set(__name__, 'full-win-height', rect.height)
-
-
-    def onAbout(item):
-        """ Show the about dialog box """
-        import gui.about
-        gui.about.show(window)
-
-
-    def onHelp(item):
-        """ Show help page in the web browser """
-        import webbrowser
-        webbrowser.open(consts.urlHelp)
-
-
-    def onState(win, evt):
-        """ Save the new state of the window """
-        prefs.set(__name__, 'win-is-maximized', bool(evt.new_window_state & gtk.gdk.WINDOW_STATE_MAXIMIZED))
-
-
-    def atExit():
-        """ Final function, called just before exiting the Python interpreter """
-        prefs.save()
-        log.logger.info('Stopped')
-
-
-    # D-Bus
-    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
-
-    # Register a few handlers
-    atexit.register(atExit)
-    signal.signal(signal.SIGINT,  lambda sig, frame: onDelete(window, None))
-    signal.signal(signal.SIGTERM, lambda sig, frame: onDelete(window, None))
-
-    # GTK handlers
-    window.connect('delete-event', onDelete)
-    window.connect('size-allocate', onResize)
-    window.connect('window-state-event', onState)
-    paned.connect('size-allocate', lambda win, rect: prefs.set(__name__, 'paned-pos', paned.get_position()))
-    wTree.get_widget('menu-mode-mini').connect('activate', onViewMode, consts.VIEW_MODE_MINI)
-    wTree.get_widget('menu-mode-full').connect('activate', onViewMode, consts.VIEW_MODE_FULL)
-    wTree.get_widget('menu-mode-lean').connect('activate', onViewMode, consts.VIEW_MODE_LEAN)
-    wTree.get_widget('menu-mode-playlist').connect('activate', onViewMode, consts.VIEW_MODE_PLAYLIST)
-    wTree.get_widget('menu-quit').connect('activate', lambda item: onDelete(window, None))
-    wTree.get_widget('menu-about').connect('activate', onAbout)
-    wTree.get_widget('menu-help').connect('activate', onHelp)
-    wTree.get_widget('menu-preferences').connect('activate', lambda item: modules.showPreferences())
-
-    # Now we can start all modules
-    gobject.idle_add(modules.postMsg, consts.MSG_EVT_APP_STARTED)
-
-    # Immediately show the preferences the first time the application is started
-    if prefs.get(__name__, 'first-time', True):
-        prefs.set(__name__, 'first-time', False)
-        gobject.idle_add(modules.showPreferences)
-
-
-def onViewMode(item, mode):
-    """ Wrapper for setViewMode(): Don't do anything if the mode the same as the current one """
-    if item.get_active() and mode != prefs.get(__name__, 'view-mode', DEFAULT_VIEW_MODE):
-        setViewMode(mode, True)
-
-
-def setViewMode(mode, resize):
-    """ Change the view mode to the given one """
-    lastMode = prefs.get(__name__, 'view-mode', DEFAULT_VIEW_MODE)
-    prefs.set(__name__, 'view-mode', mode)
-
-    (winWidth, winHeight) = window.get_size()
-
-    if mode in (consts.VIEW_MODE_FULL, consts.VIEW_MODE_LEAN):
-        paned.get_child1().show()
-        wTree.get_widget('statusbar').show()
-        wTree.get_widget('scrolled-tracklist').show()
-        wTree.get_widget('box-trkinfo').show()
-
-        if mode == consts.VIEW_MODE_FULL: wTree.get_widget('box-btn-tracklist').show()
-        else:                             wTree.get_widget('box-btn-tracklist').hide()
-
-        if resize:
-            if lastMode not in (consts.VIEW_MODE_FULL, consts.VIEW_MODE_LEAN): winWidth  = winWidth + paned.get_position()
-            if lastMode == consts.VIEW_MODE_MINI:                              winHeight = prefs.get(__name__, 'full-win-height', DEFAULT_WIN_HEIGHT)
-
-            window.resize(winWidth, winHeight)
-        return
-
-    paned.get_child1().hide()
-    if resize and lastMode in (consts.VIEW_MODE_FULL, consts.VIEW_MODE_LEAN):
-        winWidth = winWidth - paned.get_position()
-        window.resize(winWidth, winHeight)
-
-    if mode == consts.VIEW_MODE_PLAYLIST:
-        wTree.get_widget('statusbar').show()
-        wTree.get_widget('box-btn-tracklist').hide()
-        wTree.get_widget('scrolled-tracklist').show()
-        wTree.get_widget('box-trkinfo').show()
-        if resize and lastMode == consts.VIEW_MODE_MINI:
-            window.resize(winWidth, prefs.get(__name__, 'full-win-height', DEFAULT_WIN_HEIGHT))
-        return
-
-    wTree.get_widget('statusbar').hide()
-    wTree.get_widget('box-btn-tracklist').hide()
-    wTree.get_widget('scrolled-tracklist').hide()
-
-    if mode == consts.VIEW_MODE_MINI: wTree.get_widget('box-trkinfo').show()
-    else:                             wTree.get_widget('box-trkinfo').hide()
-
-    if resize: window.resize(winWidth, 1)
-
-
-# --== Entry point ==--
-
-
 log.logger.info('Started')
+prefs.setCmdLine((optOptions, optArgs))
+
 
 # Localization
 locale.setlocale(locale.LC_ALL, '')
@@ -217,8 +68,6 @@ gettext.bindtextdomain(consts.appNameShort, consts.dirLocale)
 gtk.glade.textdomain(consts.appNameShort)
 gtk.glade.bindtextdomain(consts.appNameShort, consts.dirLocale)
 
-# Command line
-prefs.setCmdLine((optOptions, optArgs))
 
 # PyGTK initialization
 gobject.threads_init()
@@ -229,11 +78,12 @@ gtk.window_set_default_icon_list(gtk.gdk.pixbuf_new_from_file(consts.fileImgIcon
                                  gtk.gdk.pixbuf_new_from_file(consts.fileImgIcon64),
                                  gtk.gdk.pixbuf_new_from_file(consts.fileImgIcon128))
 
+
 # Create the GUI
-wTree  = loadGladeFile('MainWindow.glade')
-paned  = wTree.get_widget('pan-main')
-window = wTree.get_widget('win-main')
-prefs.setWidgetsTree(wTree)
+wtree  = loadGladeFile('MainWindow.glade')
+window = wtree.get_widget('win-main')
+
+prefs.setWidgetsTree(wtree)
 
 # RGBA support
 try:
@@ -243,30 +93,39 @@ try:
 except:
     log.logger.info('No RGBA support (requires PyGTK 2.10+)')
 
-# Show all widgets and restore the window size BEFORE hiding some of them when restoring the view mode
-# Resizing must be done before showing the window to make sure that the WM correctly places the window
-if prefs.get(__name__, 'win-is-maximized', DEFAULT_MAXIMIZED_STATE):
-    window.maximize()
+# This object takes care of the window (mainly event handlers)
+mainWindow.MainWindow(wtree, window)
 
-window.resize(prefs.get(__name__, 'win-width', DEFAULT_WIN_WIDTH), prefs.get(__name__, 'win-height', DEFAULT_WIN_HEIGHT))
-window.show_all()
 
-# Restore last view mode
-viewMode = prefs.get(__name__, 'view-mode', DEFAULT_VIEW_MODE)
+def delayedStartup():
+    """
+        Perform all the initialization stuff that is not mandatory to display the window
+        This function should be called within the GTK main loop, once the window has been displayed
+    """
+    import atexit, dbus.mainloop.glib, modules, signal
 
-if viewMode == consts.VIEW_MODE_FULL:
-    wTree.get_widget('menu-mode-full').set_active(True)
-else:
-    if viewMode == consts.VIEW_MODE_LEAN:   wTree.get_widget('menu-mode-lean').set_active(True)
-    elif viewMode == consts.VIEW_MODE_MINI: wTree.get_widget('menu-mode-mini').set_active(True)
-    else:                                   wTree.get_widget('menu-mode-playlist').set_active(True)
+    def atExit():
+        """ Final function, called just before exiting the Python interpreter """
+        prefs.save()
+        log.logger.info('Stopped')
 
-    setViewMode(viewMode, False)
+    # D-Bus
+    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
-# Restore sizes once more
-window.resize(prefs.get(__name__, 'win-width', DEFAULT_WIN_WIDTH), prefs.get(__name__, 'win-height', DEFAULT_WIN_HEIGHT))
-paned.set_position(prefs.get(__name__, 'paned-pos', DEFAULT_PANED_POS))
+    # Register a few handlers
+    atexit.register(atExit)
+    signal.signal(signal.SIGINT,  lambda sig, frame: onDelete(window, None))
+    signal.signal(signal.SIGTERM, lambda sig, frame: onDelete(window, None))
 
-# Initialization done, let's continue the show
-gobject.idle_add(realStartup)
+    # Now we can start all modules
+    gobject.idle_add(modules.postMsg, consts.MSG_EVT_APP_STARTED)
+
+    # Immediately show the preferences the first time the application is started
+    if prefs.get(__name__, 'first-time', True):
+        prefs.set(__name__, 'first-time', False)
+        gobject.idle_add(modules.showPreferences)
+
+
+# Let's go
+gobject.idle_add(delayedStartup)
 gtk.main()

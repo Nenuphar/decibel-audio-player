@@ -23,6 +23,7 @@ from gettext import gettext as _
 # --- Not a constant, but it fits well here
 random.seed(int(time.time()))
 
+
 # --- Miscellaneous
 socketTimeout = 10
 
@@ -36,7 +37,6 @@ appNameShort = 'decibel-audio-player'
 # --- URLs
 urlMain = 'http://decibel.silent-blade.org'
 urlHelp = 'http://decibel.silent-blade.org/index.php?n=Main.Help'
-
 
 
 # --- Directories
