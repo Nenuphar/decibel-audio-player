@@ -92,17 +92,22 @@ class MainWindow:
         if currMode == mode:
             return
 
+        requestedSize = self.window.get_size()
+
         # First restore the initial window state (e.g., VIEW_MODE_FULL)
-        if currMode == consts.VIEW_MODE_LEAN:       self.__fromModeLean()
-        elif currMode == consts.VIEW_MODE_MINI:     self.__fromModeMini()
-        elif currMode == consts.VIEW_MODE_NETBOOK:  self.__fromModeNetbook()
-        elif currMode == consts.VIEW_MODE_PLAYLIST: self.__fromModePlaylist()
+        if currMode == consts.VIEW_MODE_LEAN:       requestedSize = self.__fromModeLean(requestedSize)
+        elif currMode == consts.VIEW_MODE_MINI:     requestedSize = self.__fromModeMini(requestedSize)
+        elif currMode == consts.VIEW_MODE_NETBOOK:  requestedSize = self.__fromModeNetbook(requestedSize)
+        elif currMode == consts.VIEW_MODE_PLAYLIST: requestedSize = self.__fromModePlaylist(requestedSize)
 
         # Now we can switch to the new mode
-        if mode == consts.VIEW_MODE_LEAN:       self.__toModeLean()
-        elif mode == consts.VIEW_MODE_MINI:     self.__toModeMini()
-        elif mode == consts.VIEW_MODE_NETBOOK:  self.__toModeNetbook()
-        elif mode == consts.VIEW_MODE_PLAYLIST: self.__toModePlaylist()
+        if mode == consts.VIEW_MODE_LEAN:       requestedSize = self.__toModeLean(requestedSize)
+        elif mode == consts.VIEW_MODE_MINI:     requestedSize = self.__toModeMini(requestedSize)
+        elif mode == consts.VIEW_MODE_NETBOOK:  requestedSize = self.__toModeNetbook(requestedSize)
+        elif mode == consts.VIEW_MODE_PLAYLIST: requestedSize = self.__toModePlaylist(requestedSize)
+
+        # Do only one resize(), because intermediate get_size() don't return the correct size until the event queue has been processed by GTK
+        self.window.resize(requestedSize[0], requestedSize[1])
 
         # Save the new mode
         prefs.set(__name__, 'view-mode', mode)
@@ -110,19 +115,23 @@ class MainWindow:
 
     # --== Lean Mode ==--
 
-    def __fromModeLean(self):
+    def __fromModeLean(self, requestedSize):
         """ Switch from lean mode to full mode """
         self.wtree.get_widget('box-btn-tracklist').show()
 
+        return requestedSize
 
-    def __toModeLean(self):
+
+    def __toModeLean(self, requestedSize):
         """ Switch from full mode to lean mode """
         self.wtree.get_widget('box-btn-tracklist').hide()
+
+        return requestedSize
 
 
     # --== Netbook Mode ==--
 
-    def __fromModeNetbook(self):
+    def __fromModeNetbook(self, requestedSize):
         """ Switch from netbook mode to full mode """
         self.wtree.get_widget('box-trkinfo').show()
         self.wtree.get_widget('box-btn-tracklist').show()
@@ -143,8 +152,10 @@ class MainWindow:
         slider.set_size_request(-1, -1)
         comboExplorer.set_size_request(-1, -1)
 
+        return requestedSize
 
-    def __toModeNetbook(self):
+
+    def __toModeNetbook(self, requestedSize):
         """ Switch from full mode to netbook mode """
         self.wtree.get_widget('box-trkinfo').hide()
         self.wtree.get_widget('box-btn-tracklist').hide()
@@ -165,51 +176,55 @@ class MainWindow:
         comboExplorer.set_size_request(45, -1)
         boxExplorer.child_set_property(slider, 'expand', False)
 
+        return requestedSize
+
 
     # --== Mini Mode ==--
 
-    def __fromModeMini(self):
+    def __fromModeMini(self, requestedSize):
         """ Switch from mini mode to full mode """
         self.paned.get_child1().show()
         self.wtree.get_widget('statusbar').show()
         self.wtree.get_widget('box-btn-tracklist').show()
         self.wtree.get_widget('scrolled-tracklist').show()
 
-        (winWidth, winHeight) = self.window.get_size()
-        self.window.resize(winWidth + self.paned.get_position(), prefs.get(__name__, 'full-win-height', 470))
+        (winWidth, winHeight) = requestedSize
+
+        return (winWidth + self.paned.get_position(), prefs.get(__name__, 'full-win-height', 470))
 
 
-    def __toModeMini(self):
+    def __toModeMini(self, requestedSize):
         """ Switch from full mode to mini mode """
         self.paned.get_child1().hide()
         self.wtree.get_widget('statusbar').hide()
         self.wtree.get_widget('box-btn-tracklist').hide()
         self.wtree.get_widget('scrolled-tracklist').hide()
 
-        (winWidth, winHeight) = self.window.get_size()
-        self.window.resize(winWidth - self.paned.get_position(), 1)
+        (winWidth, winHeight) = requestedSize
+
+        return (winWidth - self.paned.get_position(), 1)
 
 
     # --== Playlist Mode ==--
 
-    def __fromModePlaylist(self):
+    def __fromModePlaylist(self, requestedSize):
         """ Switch from playlist mode to full mode """
-        (winWidth, winHeight) = self.window.get_size()
-        winWidth = winWidth + self.paned.get_position()
-        self.window.resize(winWidth, winHeight)
-
         self.paned.get_child1().show()
         self.wtree.get_widget('box-btn-tracklist').show()
 
+        (winWidth, winHeight) = requestedSize
 
-    def __toModePlaylist(self):
+        return (winWidth + self.paned.get_position(), winHeight)
+
+
+    def __toModePlaylist(self, requestedSize):
         """ Switch from full mode to playlist mode """
-        (winWidth, winHeight) = self.window.get_size()
-        winWidth = winWidth - self.paned.get_position()
-        self.window.resize(winWidth, winHeight)
-
         self.paned.get_child1().hide()
         self.wtree.get_widget('box-btn-tracklist').hide()
+
+        (winWidth, winHeight) = requestedSize
+
+        return (winWidth - self.paned.get_position(), winHeight)
 
 
     # --== GTK Handlers ==--
