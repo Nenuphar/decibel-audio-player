@@ -59,7 +59,7 @@ class TrackPanel(modules.Module):
         else:               self.img.set_from_file(imgPath)
 
 
-    def __showCover(self, x, y):
+    def __showCover(self, mouseX, mouseY):
         """
             Display a popup window showing the full size cover.
             The window closes automatically when clicked or when the mouse leaves it.
@@ -80,11 +80,22 @@ class TrackPanel(modules.Module):
         frame.add(evtBox)
         self.coverWindow.add(frame)
 
-        # Center the window around (x, y)
-        pixbuf = image.get_pixbuf()
-        width  = pixbuf.get_width()
-        height = pixbuf.get_height()
-        self.coverWindow.move(int(x - width/2), int(y - height/2))
+        # Center the window around (x, y), but make sure it isn't out of the screen
+        width  = image.get_pixbuf().get_width()
+        height = image.get_pixbuf().get_height()
+
+        posX = int(mouseX - (width / 2))
+        posY = int(mouseY - (height / 2))
+
+        (resoX, resoY) = tools.getDefaultScreenResolution()
+
+        if posX < 0:               posX = 0
+        elif posX + width > resoX: posX = resoX - width
+
+        if posY < 0:                posY = 0
+        elif posY + height > resoY: posY = resoY - height
+
+        self.coverWindow.move(posX, posY)
 
         # Destroy the window when clicked and when the mouse leaves it
         evtBox.connect('button-press-event', self.onCoverWindowDestroy)

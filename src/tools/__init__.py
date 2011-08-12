@@ -164,6 +164,11 @@ def getCursorPosition():
     return (cursorNfo[1], cursorNfo[2])
 
 
+def getDefaultScreenResolution():
+    """ Return the resolution of the default screen """
+    return (gtk.gdk.screen_width(), gtk.gdk.screen_height())
+
+
 def htmlEscape(string):
     """ Replace characters &, <, and > by their equivalent HTML code """
     output = ''
