@@ -3,6 +3,7 @@
 
 
 v1.08 ()
+    [-] Keyboard interruption (Ctrl+C) doesn't work (#817803)
 
 
 v1.07 (06/03/11)

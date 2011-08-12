@@ -109,13 +109,18 @@ def delayedStartup():
         prefs.save()
         log.logger.info('Stopped')
 
+    def onInterrupt(window):
+        """ Handler for interrupt signals e.g., Ctrl-C """
+        window.hide()
+        modules.postQuitMsg()
+
     # D-Bus
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
     # Register a few handlers
     atexit.register(atExit)
-    signal.signal(signal.SIGINT,  lambda sig, frame: onDelete(window, None))
-    signal.signal(signal.SIGTERM, lambda sig, frame: onDelete(window, None))
+    signal.signal(signal.SIGINT,  lambda sig, frame: onInterrupt(window))
+    signal.signal(signal.SIGTERM, lambda sig, frame: onInterrupt(window))
 
     # Now we can start all modules
     gobject.idle_add(modules.postMsg, consts.MSG_EVT_APP_STARTED)
