@@ -26,7 +26,7 @@ from tools.log import logger
 MOD_INFO = ('AudioScrobbler', 'AudioScrobbler', _('Keep your Last.fm profile up to date'), [], False, False, consts.MODCAT_INTERNET)
 
 CLI_ID         = 'dbl'
-CLI_VER        = '0.4'
+CLI_VER        = '0.5'
 MOD_NAME       = MOD_INFO[modules.MODINFO_NAME]
 PROTO_VER      = '1.2'
 AS_SERVER      = 'post.audioscrobbler.com'
@@ -268,6 +268,7 @@ class AudioScrobbler(modules.ThreadedModule):
                  )
 
         self.cache.append('&'.join(['%s=%s' % (key, val) for (key, val) in params]))
+        self.saveCache()
 
 
     def getFromCache(self, howMany):
@@ -283,6 +284,7 @@ class AudioScrobbler(modules.ThreadedModule):
     def removeFromCache(self, howMany):
         """ Remove the oldest howMany tracks from the cache """
         self.cache[:] = self.cache[howMany:]
+        self.saveCache()
 
 
     def getCacheSize(self):
@@ -349,6 +351,5 @@ class AudioScrobbler(modules.ThreadedModule):
             self.currTrack[TRK_UNPAUSED_TIMESTAMP] = int(time())
         self.paused = False
         self.onTrackEnded(False)
-        self.saveCache()
         if self.getCacheSize() != 0:
             logger.info('[%s] %u track(s) left in cache' % (MOD_NAME, self.getCacheSize()))

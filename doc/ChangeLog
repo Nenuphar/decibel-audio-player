@@ -4,6 +4,7 @@
 
 v1.08 ()
     [-] Keyboard interruption (Ctrl+C) doesn't work (#817803)
+    [-] AudioScrobbler cache lost when Decibel is not closed properly (#787989)
 
 
 v1.07 (06/03/11)
