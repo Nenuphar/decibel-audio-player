@@ -141,17 +141,18 @@ class TrackPanel(modules.Module):
             self.__setImage(pathThumbnail)
 
             # Create symbolic links to these covers so that external apps can access them
-            ext      = os.path.splitext(pathFullSize)[1]
-            extThumb = os.path.splitext(pathThumbnail)[1]
+            if pathFullSize is not None and pathFullSize is not None:
+                ext      = os.path.splitext(pathFullSize)[1]
+                extThumb = os.path.splitext(pathThumbnail)[1]
 
-            link      = os.path.join(consts.dirCfg, 'current-cover' + ext)
-            linkThumb = os.path.join(consts.dirCfg, 'current-cover-small' + extThumb)
+                link      = os.path.join(consts.dirCfg, 'current-cover' + ext)
+                linkThumb = os.path.join(consts.dirCfg, 'current-cover-small' + extThumb)
 
-            os.system('rm -f "%s"' % link)
-            os.system('rm -f "%s"' % linkThumb)
+                os.system('rm -f "%s"' % link)
+                os.system('rm -f "%s"' % linkThumb)
 
-            os.system('ln -s "%s" "%s"' % (pathFullSize, link))
-            os.system('ln -s "%s" "%s"' % (pathThumbnail, linkThumb))
+                os.system('ln -s "%s" "%s"' % (pathFullSize, link))
+                os.system('ln -s "%s" "%s"' % (pathThumbnail, linkThumb))
 
 
     # --== GTK handlers ==--
