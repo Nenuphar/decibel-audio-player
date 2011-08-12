@@ -164,6 +164,11 @@ class Track:
         except: raise RuntimeError, 'The track is an unknown type of resource'
 
 
+    def getFilename(self):
+        """ Return the filename only, not the full path """
+        return os.path.split(self.tags[TAG_RES])[1]
+
+
     def getExtendedAlbum(self):
         """ Return the album name plus the disc number, if any """
         if self.getDiscNumber() != consts.UNKNOWN_DISC_NUMBER:

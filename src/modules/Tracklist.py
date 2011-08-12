@@ -37,9 +37,10 @@ MOD_INFO = ('Tracklist', 'Tracklist', '', [], True, False, consts.MODCAT_NONE)
     ROW_BTR,   # Bit rate
     ROW_GNR,   # Genre
     ROW_DAT,   # Date
+    ROW_FIL,   # Filename
     ROW_PTH,   # Path to the file
-    ROW_TRK    # The Track object
-) = range(11)
+    ROW_TRK,   # The Track object
+) = range(12)
 
 # Create a unique ID for each column that the user can see
 (
@@ -52,7 +53,8 @@ MOD_INFO = ('Tracklist', 'Tracklist', '', [], True, False, consts.MODCAT_NONE)
     COL_LENGTH,
     COL_PATH,
     COL_BITRATE,
-) = range(9)
+    COL_FILENAME,
+) = range(10)
 
 PREFS_DEFAULT_REPEAT_STATUS      = False
 PREFS_DEFAULT_COLUMNS_VISIBILITY = {
@@ -64,6 +66,7 @@ PREFS_DEFAULT_COLUMNS_VISIBILITY = {
                                         COL_GENRE    : False,
                                         COL_LENGTH   : True,
                                         COL_BITRATE  : False,
+                                        COL_FILENAME : False,
                                         COL_PATH     : False,
                                    }
 
@@ -170,7 +173,7 @@ class Tracklist(modules.Module):
     def insert(self, tracks, playNow, position=None):
         """ Insert some tracks in the tracklist, append them if position is None """
         rows = [[icons.nullMenuIcon(), track.getNumber(), track.getTitle(), track.getArtist(), track.getExtendedAlbum(),
-                    track.getLength(), track.getBitrate(), track.getGenre(), track.getDate(), track.getURI(), track] for track in tracks]
+                    track.getLength(), track.getBitrate(), track.getGenre(), track.getDate(), track.getFilename(), track.getURI(), track] for track in tracks]
 
         if len(rows) != 0:
             self.previousTracklist = [row[ROW_TRK] for row in self.list]
@@ -378,6 +381,7 @@ class Tracklist(modules.Module):
                    (_('Bit Rate'), [(txtRRdr, TYPE_STRING)],                           (ROW_BTR, ROW_ART, ROW_ALB, ROW_NUM, ROW_TIT), False, visible[COL_BITRATE]),
                    (_('Genre'),    [(txtLRdr, TYPE_STRING)],                           (ROW_GNR, ROW_ART, ROW_ALB, ROW_NUM, ROW_TIT), False, visible[COL_GENRE]),
                    (_('Date'),     [(txtLRdr, TYPE_INT)],                              (ROW_DAT, ROW_ART, ROW_ALB, ROW_NUM, ROW_TIT), False, visible[COL_DATE]),
+                   (_('Filename'), [(txtLRdr, TYPE_STRING)],                           (ROW_FIL,),                                    False, visible[COL_FILENAME]),
                    (_('Path'),     [(txtLRdr, TYPE_STRING)],                           (ROW_PTH,),                                    False, visible[COL_PATH]),
                    (None,          [(None, TYPE_PYOBJECT)],                            (None,),                                       False, False))
 
@@ -528,6 +532,7 @@ class Tracklist(modules.Module):
         elif colTitle == _('Genre'):    colId = COL_GENRE
         elif colTitle == _('Date'):     colId = COL_DATE
         elif colTitle == _('Bit Rate'): colId = COL_BITRATE
+        elif colTitle == _('File'):     colId = COL_FILENAME
         else:                           colId = COL_PATH
 
         visibility = tools.prefs.get(__name__, 'columns-visibility-2', PREFS_DEFAULT_COLUMNS_VISIBILITY)
