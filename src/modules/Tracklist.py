@@ -172,7 +172,7 @@ class Tracklist(modules.Module):
 
     def insert(self, tracks, playNow, position=None):
         """ Insert some tracks in the tracklist, append them if position is None """
-        rows = [[icons.nullMenuIcon(), track.getNumber(), track.getTitle(), track.getArtist(), track.getExtendedAlbum(),
+        rows = [[icons.nullMenuIcon(), track.getNumber(), track.getTitleOrFilename(), track.getArtist(), track.getExtendedAlbum(),
                     track.getLength(), track.getBitrate(), track.getGenre(), track.getDate(), track.getFilename(), track.getURI(), track] for track in tracks]
 
         if len(rows) != 0:

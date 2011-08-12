@@ -119,7 +119,7 @@ class TrackPanel(modules.Module):
         """ A new track is being played """
         self.currTrack = track
 
-        self.__setTitle(track.getTitle(), track.getLength())
+        self.__setTitle(track.getTitleOrFilename(), track.getLength())
         self.txtMisc.set_text(_('by %(artist)s\nfrom %(album)s' % {'artist': track.getArtist(), 'album': track.getExtendedAlbum()}))
 
 

@@ -158,6 +158,17 @@ class Track:
     def getSafeMBTrackId(self): return self.__get(TAG_MBT, '')
 
 
+    def getTitleOrFilename(self):
+        """
+            If the track is properly tagged, return the title
+            Otherwise, return the filename
+        """
+        title = self.getTitle()
+
+        if title == consts.UNKNOWN_TITLE: return self.getFilename()
+        else:                             return title
+
+
     def getURI(self):
         """ Return the complete URI to the resource """
         try:    return self.tags[TAG_SCH] + '://' + self.tags[TAG_RES]
