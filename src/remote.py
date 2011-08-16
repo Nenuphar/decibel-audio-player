@@ -16,7 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
-import dbus, os.path, sys
+import dbus, os, sys
 
 (
     PLAY,
@@ -65,6 +65,10 @@ if not cmdLineOk:
         print '%s| %s| %s' % (cmd.ljust(9), data[CMD_ARGS].ljust(17), data[CMD_HELP])
     sys.exit(1)
 
+# Make sure that paths are absolute
+if commands[cmdName][CMD_NAME] in (ADD, SET):
+    absPaths = [os.path.join(os.getcwd(), path) for path in sys.argv[2:]]
+
 # Connect to D-BUS
 session        = dbus.SessionBus()
 activeServices = session.get_object('org.freedesktop.DBus', '/org/freedesktop/DBus').ListNames()
@@ -77,10 +81,8 @@ cmd       = commands[cmdName][CMD_NAME]
 player    = dbus.Interface(session.get_object('org.mpris.dap', '/Player'),    'org.freedesktop.MediaPlayer')
 tracklist = dbus.Interface(session.get_object('org.mpris.dap', '/TrackList'), 'org.freedesktop.MediaPlayer')
 
-if   cmd == SET:      tracklist.SetTracks(sys.argv[2:], True)
-elif cmd == ADD:
-    print 'Hello'
-    tracklist.AddTracks(sys.argv[2:], False)
+if   cmd == SET:      tracklist.SetTracks(absPaths, True)
+elif cmd == ADD:      tracklist.AddTracks(absPaths, False)
 elif cmd == PLAY:     player.Play()
 elif cmd == NEXT:     player.Next()
 elif cmd == STOP:     player.Stop()
