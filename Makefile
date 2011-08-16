@@ -18,7 +18,7 @@ APPDIR = $(PREFIX)/share/applications
 ICONDIR = $(PREFIX)/share/pixmaps
 LOCALEDIR = $(PREFIX)/share/locale
 
-CONFIGURE_IN = sed -e 's!prefix!$(prefix)!g'
+CONFIGURE_IN = sed -e 's!prefix!$(PREFIX)!g'
 
 LANGUAGES = `find locale/ -maxdepth 1 -mindepth 1 -type d -printf "%f "`
 
