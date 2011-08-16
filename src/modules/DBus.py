@@ -18,7 +18,7 @@
 
 import dbus, dbus.service, gobject, media, modules, traceback
 
-from tools import consts, log
+from tools import consts, log, prefs
 
 MOD_INFO = ('D-Bus Support', 'D-Bus Support', '', [], True, False, consts.MODCAT_NONE)
 
@@ -194,6 +194,15 @@ class DBusObjectRoot(dbus.service.Object):
     def MprisVersion(self):
         """ Returns a struct that represents the version of the MPRIS spec being implemented """
         return (1, 0)
+
+
+    # This function is not part of the MPRIS
+
+
+    @dbus.service.method(consts.dbusInterface, in_signature='', out_signature='')
+    def RaiseWindow(self):
+        """ Raises the window """
+        prefs.getWidgetsTree().get_widget('win-main').present()
 
 
 
