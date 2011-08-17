@@ -150,7 +150,7 @@ DND_TARGETS = {
     # --== COMMANDS ==--
 
     # GStreamer player
-    MSG_CMD_PLAY,                 # Play a resource                            Parameters: 'uri'
+    MSG_CMD_PLAY,                 # Play a resource                            Parameters: 'uri', 'forced'
     MSG_CMD_STOP,                 # Stop playing                               Parameters:
     MSG_CMD_SEEK,                 # Jump to a position                         Parameters: 'seconds'
     MSG_CMD_STEP,                 # Step back or forth                         Parameters: 'seconds'

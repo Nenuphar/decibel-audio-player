@@ -155,7 +155,7 @@ class Tracklist(modules.Module):
             self.jumpTo(where)
 
 
-    def jumpTo(self, trackIdx, sendPlayMsg = True):
+    def jumpTo(self, trackIdx, sendPlayMsg = True, forced = True):
         """ Jump to the track located at the given index """
         if self.list.hasMark() and self.list.getItem(self.list.getMark(), ROW_ICO) != icons.errorMenuIcon():
             self.list.setItem(self.list.getMark(), ROW_ICO, icons.nullMenuIcon())
@@ -164,7 +164,7 @@ class Tracklist(modules.Module):
         self.list.setItem(trackIdx, ROW_ICO, icons.playMenuIcon())
 
         if sendPlayMsg:
-            modules.postMsg(consts.MSG_CMD_PLAY, {'uri': self.list.getItem(trackIdx, ROW_TRK).getURI()})
+            modules.postMsg(consts.MSG_CMD_PLAY, {'uri': self.list.getItem(trackIdx, ROW_TRK).getURI(), 'forced': forced})
 
         modules.postMsg(consts.MSG_EVT_NEW_TRACK,   {'track': self.list.getRow(trackIdx)[ROW_TRK]})
         modules.postMsg(consts.MSG_EVT_TRACK_MOVED, {'hasPrevious': self.__hasPreviousTrack(), 'hasNext': self.__hasNextTrack()})
@@ -424,7 +424,7 @@ class Tracklist(modules.Module):
 
             if self.list.getItem(currIdx, ROW_ICO) != icons.errorMenuIcon():
                 track = self.list.getItem(currIdx, ROW_TRK).getURI()
-                self.jumpTo(currIdx, track != self.bufferedTrack)
+                self.jumpTo(currIdx, track != self.bufferedTrack, forced = False)
                 self.bufferedTrack = None
                 return
 
