@@ -26,8 +26,9 @@ from tools import consts, loadGladeFile, log, prefs
 # Command line
 optparser = optparse.OptionParser(usage='Usage: %prog [options] [FILE(s)]')
 optparser.add_option('-p', '--playbin', action='store_true', default=False, help='use the playbin GStreamer component instead of playbin2')
-optparser.add_option('--no-glossy-cover', action='store_true', default=False, help='disable the gloss effect applied to covers')
 optparser.add_option('--multiple-instances', action='store_true', default=False, help='start a new instance even if one is already running')
+optparser.add_option('--no-glossy-cover', action='store_true', default=False, help='disable the gloss effect applied to covers')
+optparser.add_option('--volume-button', action='store_true', default=False, help='always show the volume button')
 
 (optOptions, optArgs) = optparser.parse_args()
 
