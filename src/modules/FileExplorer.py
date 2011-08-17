@@ -130,11 +130,6 @@ class FileExplorer(modules.Module):
                    }
 
 
-    def sortKey(self, row):
-        """ Key function used to compare two rows of the tree """
-        return row[ROW_NAME].lower()
-
-
     def setShowHiddenFiles(self, showHiddenFiles):
         """ Show/hide hidden files """
         if showHiddenFiles != self.showHiddenFiles:
@@ -203,9 +198,12 @@ class FileExplorer(modules.Module):
                 elif playlist.isSupported(file):
                     playlists.append((icons.mediaFileMenuIcon(), tools.htmlEscape(unicode(file, errors='replace')), TYPE_FILE, path))
 
-        playlists.sort(key=self.sortKey)
-        mediaFiles.sort(key=self.sortKey)
-        directories.sort(key=self.sortKey)
+        # Individually sort each type of file by name (disregarding the case)
+        sortKey = lambda row: row[ROW_NAME].lower()
+
+        playlists.sort(key=sortKey)
+        mediaFiles.sort(key=sortKey)
+        directories.sort(key=sortKey)
 
         return (directories, playlists, mediaFiles)
 
@@ -275,7 +273,7 @@ class FileExplorer(modules.Module):
                 break
 
             file      = disk[diskIndex]
-            cmpResult = cmp(self.sortKey(self.tree.getRow(rowPath)), self.sortKey(file))
+            cmpResult = cmp(self.tree.getRow(rowPath), file)
 
             if cmpResult < 0:
                 # We can't remove the only child left, to prevent the node from being closed automatically
