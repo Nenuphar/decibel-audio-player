@@ -50,7 +50,7 @@ class StatusFile(modules.ThreadedModule):
     def configure(self, parent):
         """ Show the configuration window """
         if self.cfgWindow is None:
-            self.cfgWindow = gui.window.Window('StatusFile.glade', 'vbox1', __name__, MOD_INFO[modules.MODINFO_L10N], 355, 345)
+            self.cfgWindow = gui.window.Window('StatusFile.ui', 'vbox1', __name__, MOD_INFO[modules.MODINFO_L10N], 355, 345)
             self.btnOk     = self.cfgWindow.getWidget('btn-ok')
             self.txtFile   = self.cfgWindow.getWidget('txt-file')
             self.txtStatus = self.cfgWindow.getWidget('txt-status')

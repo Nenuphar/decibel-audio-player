@@ -125,7 +125,7 @@ msgstr ""
 "Podaj nazwę użytkownika i hasło \n"
 "z %(reason)s"
 
-#: ../src/gui/authentication.py:133 ../res/Authentication.glade.h:1
+#: ../src/gui/authentication.py:133 ../res/Authentication.ui.h:1
 msgid "Password required"
 msgstr "Wymagane hasło"
 
@@ -363,11 +363,11 @@ msgstr ""
 "\n"
 
 #: ../src/modules/CtrlPanel.py:78 ../src/modules/CtrlPanel.py:136
-#: ../res/StatusIconMenu.glade.h:2
+#: ../res/StatusIconMenu.ui.h:2
 msgid "Pause the current track"
 msgstr "Wstrzymaj odtwarzanie"
 
-#: ../src/modules/CtrlPanel.py:95 ../res/MainWindow.glade.h:12
+#: ../src/modules/CtrlPanel.py:95 ../res/MainWindow.ui.h:12
 msgid "Play the first track of the playlist"
 msgstr "Odtwórz pierwszy utwór na liście odtwarzania"
 
@@ -411,7 +411,7 @@ msgstr ""
 msgid "Clear Playlist"
 msgstr ""
 
-#: ../src/modules/Tracklist.py:338 ../res/MainWindow.glade.h:18
+#: ../src/modules/Tracklist.py:338 ../res/MainWindow.ui.h:18
 msgid "Repeat"
 msgstr "Powtórz"
 
@@ -443,7 +443,7 @@ msgstr "wczytywanie..."
 msgid "Collapse all"
 msgstr ""
 
-#: ../src/modules/FileExplorer.py:349 ../res/FileExplorer.glade.h:7
+#: ../src/modules/FileExplorer.py:349 ../res/FileExplorer.ui.h:7
 msgid "Show hidden files"
 msgstr "Pokaż ukryte pliki"
 
@@ -829,336 +829,336 @@ msgstr ""
 msgid "Normalize volume"
 msgstr ""
 
-#: ../res/AudioCD.glade.h:1
+#: ../res/AudioCD.ui.h:1
 msgid "<b>CDDB</b>"
 msgstr "<b>CDDB</b>"
 
-#: ../res/AudioCD.glade.h:2 ../res/DesktopNotification.glade.h:2
-#: ../res/FileExplorer.glade.h:1
+#: ../res/AudioCD.ui.h:2 ../res/DesktopNotification.ui.h:2
+#: ../res/FileExplorer.ui.h:1
 msgid "<b>Miscellaneous</b>"
 msgstr "<b>Różne</b>"
 
-#: ../res/AudioCD.glade.h:3
+#: ../res/AudioCD.ui.h:3
 msgid "CD-ROM device:"
 msgstr "Urządzenie CD-ROM:"
 
-#: ../res/AudioCD.glade.h:4
+#: ../res/AudioCD.ui.h:4
 msgid "Clear cache"
 msgstr "Wyczyść cache"
 
-#: ../res/AudioCD.glade.h:5
+#: ../res/AudioCD.ui.h:5
 msgid "Download disc information"
 msgstr "Pobierz informacje o dysku"
 
-#: ../res/AudioCD.glade.h:6
+#: ../res/AudioCD.ui.h:6
 msgid "Download disc information from an online database"
 msgstr "Pobierz informacje o dysku z internetowej bazy danych"
 
-#: ../res/AudioCD.glade.h:7
+#: ../res/AudioCD.ui.h:7
 msgid "Location of your CD-ROM device"
 msgstr "Lokalizacja twojego urządzenia CD-ROM"
 
-#: ../res/AudioCD.glade.h:8
+#: ../res/AudioCD.ui.h:8
 msgid "Remove all disc information from your hard drive"
 msgstr "Usuń wszystkie informacje o dysku z twojego dysku twardego"
 
-#: ../res/AudioCD.glade.h:9
+#: ../res/AudioCD.ui.h:9
 msgid "Save disc information on your hard drive"
 msgstr "Zapisz informacje o dysku na twoim dysku twardym"
 
-#: ../res/AudioCD.glade.h:10
+#: ../res/AudioCD.ui.h:10
 msgid "Save information in a local cache"
 msgstr "Zapisz informacje w lokalnej pamięci cache"
 
-#: ../res/AudioCDMenu.glade.h:1
+#: ../res/AudioCDMenu.ui.h:1
 msgid "Add to Playlist"
 msgstr "Dodaj do listy odtwarzania"
 
-#: ../res/AudioCDMenu.glade.h:2
+#: ../res/AudioCDMenu.ui.h:2
 msgid "Append selection to the playlist"
 msgstr "Dodaj zaznaczenie do listy odtwarzania"
 
-#: ../res/AudioCDMenu.glade.h:3
+#: ../res/AudioCDMenu.ui.h:3
 msgid "Replace the playlist by the selection and start playback"
 msgstr "Podmień listę odtwarzania zaznaczeniem i rozpocznij odtwarzanie"
 
-#: ../res/AudioCDMenu.glade.h:4
+#: ../res/AudioCDMenu.ui.h:4
 msgid "Rescan the audio disc"
 msgstr "Przeskanuj ponownie dysk audio"
 
-#: ../res/Authentication.glade.h:2
+#: ../res/Authentication.ui.h:2
 msgid "Password:"
 msgstr "Hasło:"
 
-#: ../res/Authentication.glade.h:3
+#: ../res/Authentication.ui.h:3
 msgid "Remember this password"
 msgstr "Zapamiętaj to hasło:"
 
-#: ../res/Authentication.glade.h:4
+#: ../res/Authentication.ui.h:4
 msgid "Username:"
 msgstr "Nazwa użytkownika:"
 
-#: ../res/Authentication.glade.h:5 ../res/Progress.glade.h:1
+#: ../res/Authentication.ui.h:5 ../res/Progress.ui.h:1
 msgid "label"
 msgstr "etykieta"
 
-#: ../res/Covers.glade.h:1
+#: ../res/Covers.ui.h:1
 msgid "<b>Internet Covers</b>"
 msgstr "<b>Okładki z Internetu</b>"
 
-#: ../res/Covers.glade.h:2
+#: ../res/Covers.ui.h:2
 msgid "<b>User Covers</b>"
 msgstr "<b>Okładki użytkownika</b>"
 
-#: ../res/Covers.glade.h:3
+#: ../res/Covers.ui.h:3
 msgid "Always prefer user covers"
 msgstr "Preferuj okładki użytkownika"
 
-#: ../res/Covers.glade.h:4
+#: ../res/Covers.ui.h:4
 msgid "Don't download covers when there is a user one"
 msgstr "Nie pobieraj z Internetu, jeśli istnieje okładka użytkownika"
 
-#: ../res/Covers.glade.h:5
+#: ../res/Covers.ui.h:5
 msgid "Download covers"
 msgstr "Pobierz okładki"
 
-#: ../res/Covers.glade.h:6
+#: ../res/Covers.ui.h:6
 msgid "Filenames to look for (e.g., folder, cover)"
 msgstr "Nazwy plików do wyszukiwania (np. folder, cover)"
 
-#: ../res/Covers.glade.h:7
+#: ../res/Covers.ui.h:7
 msgid "Filenames:"
 msgstr "Nazwy plików:"
 
-#: ../res/Covers.glade.h:8
+#: ../res/Covers.ui.h:8
 msgid "Try to download covers from the Internet"
 msgstr "Próbuj pobierać okładki z Internetu"
 
-#: ../res/DesktopNotification.glade.h:1
+#: ../res/DesktopNotification.ui.h:1
 msgid "<b>Body</b>"
 msgstr "<b>Body</b>"
 
-#: ../res/DesktopNotification.glade.h:3
+#: ../res/DesktopNotification.ui.h:3
 msgid "<b>Title</b>"
 msgstr "<b>Tytuł</b>"
 
-#: ../res/DesktopNotification.glade.h:4
+#: ../res/DesktopNotification.ui.h:4
 msgid "Notification timeout:"
 msgstr "Limit czasu powiadomienia:"
 
-#: ../res/DesktopNotification.glade.h:5
+#: ../res/DesktopNotification.ui.h:5
 msgid "Show a \"skip track\" button"
 msgstr "Pokaż przycisk \"przeskocz utwór\""
 
-#: ../res/DesktopNotification.glade.h:6
+#: ../res/DesktopNotification.ui.h:6
 msgid "Time during which the notification is displayed"
 msgstr "Czas wyświetlania powiadomienia"
 
-#: ../res/DesktopNotification.glade.h:7
+#: ../res/DesktopNotification.ui.h:7
 msgid "seconds"
 msgstr "sekundy"
 
-#: ../res/FileExplorer.glade.h:2
+#: ../res/FileExplorer.ui.h:2
 msgid "<b>Root Folders</b>"
 msgstr "<b>Foldery Root</b>"
 
-#: ../res/FileExplorer.glade.h:3
+#: ../res/FileExplorer.ui.h:3
 msgid "Add a new root folder to the file explorer"
 msgstr "Dodaj nowy folder roota do przeglądarki plików"
 
-#: ../res/FileExplorer.glade.h:4
+#: ../res/FileExplorer.ui.h:4
 msgid "Remove the selected root folders"
 msgstr "Usuń zaznaczone foldery roota"
 
-#: ../res/FileExplorer.glade.h:5 ../res/Library.glade.h:4
+#: ../res/FileExplorer.ui.h:5 ../res/Library.ui.h:4
 msgid "Rename"
 msgstr "Zmień nazwe"
 
-#: ../res/FileExplorer.glade.h:6
+#: ../res/FileExplorer.ui.h:6
 msgid "Rename the selected root folder"
 msgstr "Zmień nazwę wybranego folderu roota"
 
-#: ../res/FileExplorer.glade.h:8
+#: ../res/FileExplorer.ui.h:8
 msgid "Whether hidden files should be shown in the file explorer"
 msgstr "Czy ukryte pliki mają być wyświetlane w przeglądarce plików"
 
-#: ../res/IMStatus.glade.h:1
+#: ../res/IMStatus.ui.h:1
 msgid "<b>Sanitized Words</b>"
 msgstr "<b>Sanitaryzowane słowa</b>"
 
-#: ../res/IMStatus.glade.h:2 ../res/Twitter.glade.h:1
+#: ../res/IMStatus.ui.h:2 ../res/Twitter.ui.h:1
 msgid "<b>Status</b>"
 msgstr "<b>Status</b>"
 
-#: ../res/IMStatus.glade.h:3
+#: ../res/IMStatus.ui.h:3
 msgid "<b>When Stopping or Quitting</b>"
 msgstr "<b>Przy Zatrzymaniu lub Wyjściu<b/>"
 
-#: ../res/IMStatus.glade.h:4
+#: ../res/IMStatus.ui.h:4
 msgid "Do nothing"
 msgstr "Nic nie rób"
 
-#: ../res/IMStatus.glade.h:5 ../res/Twitter.glade.h:2
+#: ../res/IMStatus.ui.h:5 ../res/Twitter.ui.h:2
 msgid "Message:"
 msgstr "Wiadomość:"
 
-#: ../res/IMStatus.glade.h:6
+#: ../res/IMStatus.ui.h:6
 msgid "Set status to:"
 msgstr "Ustaw status na:"
 
-#: ../res/IMStatus.glade.h:7
+#: ../res/IMStatus.ui.h:7
 msgid "Update even if not available"
 msgstr "Zaktualizuj nawet, gdy nie jest to dostępne"
 
-#: ../res/IMStatus.glade.h:8
+#: ../res/IMStatus.ui.h:8
 msgid "Update when paused"
 msgstr "Zaktualizuj podczas pauzy"
 
-#: ../res/IMStatus.glade.h:9
+#: ../res/IMStatus.ui.h:9
 msgid "Update your status even if you are marked as unavailable"
 msgstr ""
 "Zaktualizuj twój status nawet, gdy jesteś zaznaczony jako niedostępny"
 
-#: ../res/IMStatus.glade.h:10
+#: ../res/IMStatus.ui.h:10
 msgid "Update your status on pause/unpause events"
 msgstr "Zaktualizuj twój status podczas zdarzenia pauzy/kontynuacji"
 
-#: ../res/Library.glade.h:1
+#: ../res/Library.ui.h:1
 msgid "<b>Libraries</b>"
 msgstr "<b>Biblioteki</b>"
 
-#: ../res/Library.glade.h:2
+#: ../res/Library.ui.h:2
 msgid "Add a new library"
 msgstr "Dodaj nową bibliotekę"
 
-#: ../res/Library.glade.h:3
+#: ../res/Library.ui.h:3
 msgid "Remove the selected libraries"
 msgstr "Usuń zaznaczone biblioteki"
 
-#: ../res/Library.glade.h:5
+#: ../res/Library.ui.h:5
 msgid "Rename the selected library"
 msgstr "Zmień nazwę zaznaczonej biblioteki"
 
-#: ../res/Library.glade.h:6
+#: ../res/Library.ui.h:6
 msgid "Update the selected library by rescanning the disk"
 msgstr "Zaktualizuj zaznaczoną bibliotekę poprzez ponowne skanowanie dysku"
 
-#: ../res/MainWindow.glade.h:1
+#: ../res/MainWindow.ui.h:1
 msgid "Clear"
 msgstr "Wyczyść"
 
-#: ../res/MainWindow.glade.h:2
+#: ../res/MainWindow.ui.h:2
 msgid "Clear the playlist"
 msgstr "Wyczyść listę odtwarzania"
 
-#: ../res/MainWindow.glade.h:3
+#: ../res/MainWindow.ui.h:3
 msgid "Display about dialog box"
 msgstr "Wyświetl okno dialogowe \"O\""
 
-#: ../res/MainWindow.glade.h:4 ../res/StatusIconMenu.glade.h:1
+#: ../res/MainWindow.ui.h:4 ../res/StatusIconMenu.ui.h:1
 msgid "Display preferences"
 msgstr "Wyświetl preferencje"
 
-#: ../res/MainWindow.glade.h:5
+#: ../res/MainWindow.ui.h:5
 msgid "Elapsed time"
 msgstr "Czas odtwarzania"
 
-#: ../res/MainWindow.glade.h:6
+#: ../res/MainWindow.ui.h:6
 msgid "Full"
 msgstr ""
 
-#: ../res/MainWindow.glade.h:7
+#: ../res/MainWindow.ui.h:7
 msgid "Mini"
 msgstr ""
 
-#: ../res/MainWindow.glade.h:8
+#: ../res/MainWindow.ui.h:8
 msgid "Nano"
 msgstr ""
 
-#: ../res/MainWindow.glade.h:9
+#: ../res/MainWindow.ui.h:9
 msgid "Online _Help"
 msgstr "Pomoc online"
 
-#: ../res/MainWindow.glade.h:10
+#: ../res/MainWindow.ui.h:10
 msgid "Open the online help web page"
 msgstr "Otwórz stronę pomocy online"
 
-#: ../res/MainWindow.glade.h:11
+#: ../res/MainWindow.ui.h:11
 msgid "Play all tracks endlessly"
 msgstr "Odtwarzaj wszystkie utwory bez końca"
 
-#: ../res/MainWindow.glade.h:13 ../res/StatusIconMenu.glade.h:3
+#: ../res/MainWindow.ui.h:13 ../res/StatusIconMenu.ui.h:3
 msgid "Play the next track"
 msgstr "Odtwórz następny utwór"
 
-#: ../res/MainWindow.glade.h:14 ../res/StatusIconMenu.glade.h:4
+#: ../res/MainWindow.ui.h:14 ../res/StatusIconMenu.ui.h:4
 msgid "Play the previous track"
 msgstr "Odtwórz poprzedni utwór"
 
-#: ../res/MainWindow.glade.h:15
+#: ../res/MainWindow.ui.h:15
 msgid "Playlist"
 msgstr ""
 
-#: ../res/MainWindow.glade.h:16 ../res/StatusIconMenu.glade.h:6
+#: ../res/MainWindow.ui.h:16 ../res/StatusIconMenu.ui.h:6
 msgid "Quit the application"
 msgstr "Zakończ program"
 
-#: ../res/MainWindow.glade.h:17
+#: ../res/MainWindow.ui.h:17
 msgid "Remaining time"
 msgstr "Czas pozostały"
 
-#: ../res/MainWindow.glade.h:19
+#: ../res/MainWindow.ui.h:19
 msgid "Seek a position in the current track"
 msgstr "Znajdź pozycję w odtwarzanym utworze"
 
-#: ../res/MainWindow.glade.h:20
+#: ../res/MainWindow.ui.h:20
 msgid "Select an explorer"
 msgstr "Wybierz przeglądarkę"
 
-#: ../res/MainWindow.glade.h:21
+#: ../res/MainWindow.ui.h:21
 msgid "Shuffle"
 msgstr "Odtwarzanie losowe"
 
-#: ../res/MainWindow.glade.h:22
+#: ../res/MainWindow.ui.h:22
 msgid "Shuffle the playlist"
 msgstr "Odtwarzaj losowo listę"
 
-#: ../res/MainWindow.glade.h:23 ../res/StatusIconMenu.glade.h:7
+#: ../res/MainWindow.ui.h:23 ../res/StatusIconMenu.ui.h:7
 msgid "Stop the current track"
 msgstr "Zatrzymaj utwór"
 
-#: ../res/MainWindow.glade.h:24
+#: ../res/MainWindow.ui.h:24
 msgid "_Edit"
 msgstr "_Edycja"
 
-#: ../res/MainWindow.glade.h:25
+#: ../res/MainWindow.ui.h:25
 msgid "_File"
 msgstr "_Plik"
 
-#: ../res/MainWindow.glade.h:26
+#: ../res/MainWindow.ui.h:26
 msgid "_Help"
 msgstr "_Pomoc"
 
-#: ../res/MainWindow.glade.h:27
+#: ../res/MainWindow.ui.h:27
 msgid "_Mode"
 msgstr ""
 
-#: ../res/SelectPath.glade.h:1
+#: ../res/SelectPath.ui.h:1
 msgid "Name:"
 msgstr "Nazwa:"
 
-#: ../res/SelectPath.glade.h:2
+#: ../res/SelectPath.ui.h:2
 msgid "Path:"
 msgstr "Ścieżka:"
 
-#: ../res/StatusFile.glade.h:1
+#: ../res/StatusFile.ui.h:1
 msgid "<b>File</b>"
 msgstr "<b>Plik</b>"
 
-#: ../res/StatusFile.glade.h:2
+#: ../res/StatusFile.ui.h:2
 msgid "<b>Playing Status</b>"
 msgstr "<b>Status Odtwarzania</b>"
 
-#: ../res/StatusIconMenu.glade.h:5
+#: ../res/StatusIconMenu.ui.h:5
 msgid "Play/Unpause"
 msgstr "Odtwarzaj/Kontynuuj"

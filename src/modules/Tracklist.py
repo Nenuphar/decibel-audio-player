@@ -355,10 +355,10 @@ class Tracklist(modules.Module):
         self.bufferedTrack     = None
         self.previousTracklist = None
         # Retrieve widgets
-        self.window     = wTree.get_widget('win-main')
-        self.btnClear   = wTree.get_widget('btn-tracklistClear')
-        self.btnRepeat  = wTree.get_widget('btn-tracklistRepeat')
-        self.btnShuffle = wTree.get_widget('btn-tracklistShuffle')
+        self.window     = wTree.get_object('win-main')
+        self.btnClear   = wTree.get_object('btn-tracklistClear')
+        self.btnRepeat  = wTree.get_object('btn-tracklistRepeat')
+        self.btnShuffle = wTree.get_object('btn-tracklistShuffle')
         self.btnClear.set_sensitive(False)
         self.btnShuffle.set_sensitive(False)
         # Create the list and its columns
@@ -389,7 +389,7 @@ class Tracklist(modules.Module):
         self.list.get_column(1).set_cell_data_func(txtLRdr, self.__fmtColumnColor)
         self.list.get_column(4).set_cell_data_func(txtRRdr, self.__fmtLengthColumn)
         self.list.enableDNDReordering()
-        wTree.get_widget('scrolled-tracklist').add(self.list)
+        wTree.get_object('scrolled-tracklist').add(self.list)
         # GTK handlers
         self.list.connect('extlistview-dnd', self.onDND)
         self.list.connect('key-press-event', self.onKeyboard)
@@ -403,8 +403,8 @@ class Tracklist(modules.Module):
         # Restore preferences
         self.btnRepeat.set_active(tools.prefs.get(__name__, 'repeat-status', PREFS_DEFAULT_REPEAT_STATUS))
         # Set icons
-        wTree.get_widget('img-repeat').set_from_icon_name('stock_repeat', gtk.ICON_SIZE_BUTTON)
-        wTree.get_widget('img-shuffle').set_from_icon_name('stock_shuffle', gtk.ICON_SIZE_BUTTON)
+        wTree.get_object('img-repeat').set_from_icon_name('stock_repeat', gtk.ICON_SIZE_BUTTON)
+        wTree.get_object('img-shuffle').set_from_icon_name('stock_shuffle', gtk.ICON_SIZE_BUTTON)
 
 
     def onTrackEnded(self, withError):

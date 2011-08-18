@@ -94,7 +94,7 @@ class StatusIcon(modules.Module):
         self.popupMenu        = None
         self.isPlaying        = False
         self.icoNormal        = None
-        self.mainWindow       = prefs.getWidgetsTree().get_widget('win-main')
+        self.mainWindow       = prefs.getWidgetsTree().get_object('win-main')
         self.trackHasNext     = False
         self.trackHasPrev     = False
         self.emptyTracklist   = True
@@ -178,17 +178,17 @@ class StatusIcon(modules.Module):
     def onPopupMenu(self, statusIcon, button, time):
         """ The user asks for the popup menu """
         if self.popupMenu is None:
-            wTree              = loadGladeFile('StatusIconMenu.glade')
-            self.menuPlay      = wTree.get_widget('item-play')
-            self.menuStop      = wTree.get_widget('item-stop')
-            self.menuNext      = wTree.get_widget('item-next')
-            self.popupMenu     = wTree.get_widget('menu-popup')
-            self.menuPause     = wTree.get_widget('item-pause')
-            self.menuPrevious  = wTree.get_widget('item-previous')
-            self.menuSeparator = wTree.get_widget('item-separator')
+            wTree              = loadGladeFile('StatusIconMenu.ui')
+            self.menuPlay      = wTree.get_object('item-play')
+            self.menuStop      = wTree.get_object('item-stop')
+            self.menuNext      = wTree.get_object('item-next')
+            self.popupMenu     = wTree.get_object('menu-popup')
+            self.menuPause     = wTree.get_object('item-pause')
+            self.menuPrevious  = wTree.get_object('item-previous')
+            self.menuSeparator = wTree.get_object('item-separator')
             # Connect handlers
-            wTree.get_widget('item-quit').connect('activate', lambda btn: modules.postQuitMsg())
-            wTree.get_widget('item-preferences').connect('activate', lambda btn: modules.showPreferences())
+            wTree.get_object('item-quit').connect('activate', lambda btn: modules.postQuitMsg())
+            wTree.get_object('item-preferences').connect('activate', lambda btn: modules.showPreferences())
             self.menuPlay.connect('activate',     lambda btn: modules.postMsg(consts.MSG_CMD_TOGGLE_PAUSE))
             self.menuStop.connect('activate',     lambda btn: modules.postMsg(consts.MSG_CMD_STOP))
             self.menuNext.connect('activate',     lambda btn: modules.postMsg(consts.MSG_CMD_NEXT))

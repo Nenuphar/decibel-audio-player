@@ -69,8 +69,6 @@ prefs.setCmdLine((optOptions, optArgs))
 locale.setlocale(locale.LC_ALL, '')
 gettext.textdomain(consts.appNameShort)
 gettext.bindtextdomain(consts.appNameShort, consts.dirLocale)
-gtk.glade.textdomain(consts.appNameShort)
-gtk.glade.bindtextdomain(consts.appNameShort, consts.dirLocale)
 
 
 # PyGTK initialization
@@ -84,8 +82,8 @@ gtk.window_set_default_icon_list(gtk.gdk.pixbuf_new_from_file(consts.fileImgIcon
 
 
 # Create the GUI
-wtree  = loadGladeFile('MainWindow.glade')
-window = wtree.get_widget('win-main')
+wtree  = loadGladeFile('MainWindow.ui')
+window = wtree.get_object('win-main')
 
 prefs.setWidgetsTree(wtree)
 

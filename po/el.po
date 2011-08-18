@@ -119,7 +119,7 @@ msgstr ""
 "Εισάγετε το όνομα χρήστη και κωδικό για το\n"
 "%(reason)s"
 
-#: ../src/gui/authentication.py:133 ../res/Authentication.glade.h:1
+#: ../src/gui/authentication.py:133 ../res/Authentication.ui.h:1
 msgid "Password required"
 msgstr "Απαιτείται κωδικός"
 
@@ -364,11 +364,11 @@ msgstr ""
 "\n"
 
 #: ../src/modules/CtrlPanel.py:78 ../src/modules/CtrlPanel.py:136
-#: ../res/StatusIconMenu.glade.h:2
+#: ../res/StatusIconMenu.ui.h:2
 msgid "Pause the current track"
 msgstr "Παύση"
 
-#: ../src/modules/CtrlPanel.py:95 ../res/MainWindow.glade.h:12
+#: ../src/modules/CtrlPanel.py:95 ../res/MainWindow.ui.h:12
 msgid "Play the first track of the playlist"
 msgstr "Παίξε το πρώτο αρχείο στη λίστα"
 
@@ -412,7 +412,7 @@ msgstr ""
 msgid "Clear Playlist"
 msgstr ""
 
-#: ../src/modules/Tracklist.py:338 ../res/MainWindow.glade.h:18
+#: ../src/modules/Tracklist.py:338 ../res/MainWindow.ui.h:18
 msgid "Repeat"
 msgstr "Επανάληψη"
 
@@ -444,7 +444,7 @@ msgstr "φόρτωση..."
 msgid "Collapse all"
 msgstr ""
 
-#: ../src/modules/FileExplorer.py:349 ../res/FileExplorer.glade.h:7
+#: ../src/modules/FileExplorer.py:349 ../res/FileExplorer.ui.h:7
 msgid "Show hidden files"
 msgstr "Εμφάνιση κρυφών αρχείων"
 
@@ -846,336 +846,336 @@ msgstr ""
 msgid "Normalize volume"
 msgstr ""
 
-#: ../res/AudioCD.glade.h:1
+#: ../res/AudioCD.ui.h:1
 msgid "<b>CDDB</b>"
 msgstr "<b>CDDB</b>"
 
-#: ../res/AudioCD.glade.h:2 ../res/DesktopNotification.glade.h:2
-#: ../res/FileExplorer.glade.h:1
+#: ../res/AudioCD.ui.h:2 ../res/DesktopNotification.ui.h:2
+#: ../res/FileExplorer.ui.h:1
 msgid "<b>Miscellaneous</b>"
 msgstr "<b>Διάφορα</b>"
 
-#: ../res/AudioCD.glade.h:3
+#: ../res/AudioCD.ui.h:3
 msgid "CD-ROM device:"
 msgstr "Συσκευή CD-ROM"
 
-#: ../res/AudioCD.glade.h:4
+#: ../res/AudioCD.ui.h:4
 msgid "Clear cache"
 msgstr "Καθαρισμός προσωρινής μνήμης"
 
-#: ../res/AudioCD.glade.h:5
+#: ../res/AudioCD.ui.h:5
 msgid "Download disc information"
 msgstr "Κατέβασμα πληροφοριών δίσκου"
 
-#: ../res/AudioCD.glade.h:6
+#: ../res/AudioCD.ui.h:6
 msgid "Download disc information from an online database"
 msgstr ""
 "Κατεβάστε τα στοιχεία του δίσκου από μιά βάση δεδομένων στο διαδίκτυο"
 
-#: ../res/AudioCD.glade.h:7
+#: ../res/AudioCD.ui.h:7
 msgid "Location of your CD-ROM device"
 msgstr "Θέση της συσκευής ανάγνωσης CD"
 
-#: ../res/AudioCD.glade.h:8
+#: ../res/AudioCD.ui.h:8
 msgid "Remove all disc information from your hard drive"
 msgstr "Διαγράψτε όλες τα στοιχεία δίσκων από τον σκληρό σας δίσκο"
 
-#: ../res/AudioCD.glade.h:9
+#: ../res/AudioCD.ui.h:9
 msgid "Save disc information on your hard drive"
 msgstr "Αποθηκεύστε τα στοιχεία του δίσκου στον σκληρό σας δίσκο"
 
-#: ../res/AudioCD.glade.h:10
+#: ../res/AudioCD.ui.h:10
 msgid "Save information in a local cache"
 msgstr "Αποθηκεύστε τις πληροφορίες σε μια τοπική προσωρινή μνήμη"
 
-#: ../res/AudioCDMenu.glade.h:1
+#: ../res/AudioCDMenu.ui.h:1
 msgid "Add to Playlist"
 msgstr "Προσθήκη στη λίστα"
 
-#: ../res/AudioCDMenu.glade.h:2
+#: ../res/AudioCDMenu.ui.h:2
 msgid "Append selection to the playlist"
 msgstr "Προσθήκη στο τέλος της λίστας"
 
-#: ../res/AudioCDMenu.glade.h:3
+#: ../res/AudioCDMenu.ui.h:3
 msgid "Replace the playlist by the selection and start playback"
 msgstr "Αντικατάσταση της λίστας με την επιλογή και εκκίνηση αναπαραγωγής"
 
-#: ../res/AudioCDMenu.glade.h:4
+#: ../res/AudioCDMenu.ui.h:4
 msgid "Rescan the audio disc"
 msgstr "Επανεξέταση του δίσκου"
 
-#: ../res/Authentication.glade.h:2
+#: ../res/Authentication.ui.h:2
 msgid "Password:"
 msgstr "Κωδικός:"
 
-#: ../res/Authentication.glade.h:3
+#: ../res/Authentication.ui.h:3
 msgid "Remember this password"
 msgstr "Απομνημόνευση κωδικού"
 
-#: ../res/Authentication.glade.h:4
+#: ../res/Authentication.ui.h:4
 msgid "Username:"
 msgstr "Όνομα χρήστη:"
 
-#: ../res/Authentication.glade.h:5 ../res/Progress.glade.h:1
+#: ../res/Authentication.ui.h:5 ../res/Progress.ui.h:1
 msgid "label"
 msgstr "ετικέτα"
 
-#: ../res/Covers.glade.h:1
+#: ../res/Covers.ui.h:1
 msgid "<b>Internet Covers</b>"
 msgstr "<b>Εξώφυλλα διαδικτύου</b>"
 
-#: ../res/Covers.glade.h:2
+#: ../res/Covers.ui.h:2
 msgid "<b>User Covers</b>"
 msgstr "<b>Εξώφυλλα Χρήστη</b>"
 
-#: ../res/Covers.glade.h:3
+#: ../res/Covers.ui.h:3
 msgid "Always prefer user covers"
 msgstr "Πάντα προτίμηση εξώφυλλων χρήστη"
 
-#: ../res/Covers.glade.h:4
+#: ../res/Covers.ui.h:4
 msgid "Don't download covers when there is a user one"
 msgstr "Μην κατεβάζεις εξώφυλλα αν υπάρχει εξώφυλλο χρήστη."
 
-#: ../res/Covers.glade.h:5
+#: ../res/Covers.ui.h:5
 msgid "Download covers"
 msgstr "Κατέβασμα εξωφυλλων"
 
-#: ../res/Covers.glade.h:6
+#: ../res/Covers.ui.h:6
 msgid "Filenames to look for (e.g., folder, cover)"
 msgstr "Ονόματα αρχείων για εξώφυλλα (π.χ., folder, cover, κλπ)"
 
-#: ../res/Covers.glade.h:7
+#: ../res/Covers.ui.h:7
 msgid "Filenames:"
 msgstr "Ονόματα αρχείων:"
 
-#: ../res/Covers.glade.h:8
+#: ../res/Covers.ui.h:8
 msgid "Try to download covers from the Internet"
 msgstr "Προσπάθησε να κατεβάσεις εξώφυλλα από το διαδίκτυο"
 
-#: ../res/DesktopNotification.glade.h:1
+#: ../res/DesktopNotification.ui.h:1
 msgid "<b>Body</b>"
 msgstr "<b>Κορμός</b>"
 
-#: ../res/DesktopNotification.glade.h:3
+#: ../res/DesktopNotification.ui.h:3
 msgid "<b>Title</b>"
 msgstr "<b>Τίτλος</b>"
 
-#: ../res/DesktopNotification.glade.h:4
+#: ../res/DesktopNotification.ui.h:4
 msgid "Notification timeout:"
 msgstr "Χρόνος εμφάνισης ειδοποίησης"
 
-#: ../res/DesktopNotification.glade.h:5
+#: ../res/DesktopNotification.ui.h:5
 msgid "Show a \"skip track\" button"
 msgstr "Έμφάνισε ένα κουμπί \"Επόμενου\""
 
-#: ../res/DesktopNotification.glade.h:6
+#: ../res/DesktopNotification.ui.h:6
 msgid "Time during which the notification is displayed"
 msgstr "Χρόνος κατά τον οποίο η ειδοποίηση εμφανίζεται"
 
-#: ../res/DesktopNotification.glade.h:7
+#: ../res/DesktopNotification.ui.h:7
 msgid "seconds"
 msgstr "δευτερόλεπτα"
 
-#: ../res/FileExplorer.glade.h:2
+#: ../res/FileExplorer.ui.h:2
 msgid "<b>Root Folders</b>"
 msgstr "<b>Αρχικοί φάκελοι</b>"
 
-#: ../res/FileExplorer.glade.h:3
+#: ../res/FileExplorer.ui.h:3
 msgid "Add a new root folder to the file explorer"
 msgstr "Πρόσθήκη νέου αρχικού φακέλου στον εξερευνητή αρχείων"
 
-#: ../res/FileExplorer.glade.h:4
+#: ../res/FileExplorer.ui.h:4
 msgid "Remove the selected root folders"
 msgstr "Αφαίρεση επιλεγμένων φακέλων"
 
-#: ../res/FileExplorer.glade.h:5 ../res/Library.glade.h:4
+#: ../res/FileExplorer.ui.h:5 ../res/Library.ui.h:4
 msgid "Rename"
 msgstr "Μετονομασία"
 
-#: ../res/FileExplorer.glade.h:6
+#: ../res/FileExplorer.ui.h:6
 msgid "Rename the selected root folder"
 msgstr "Μετονομασία του επιλεγμένου αρχικού φακέλου"
 
-#: ../res/FileExplorer.glade.h:8
+#: ../res/FileExplorer.ui.h:8
 msgid "Whether hidden files should be shown in the file explorer"
 msgstr "Αν τα κρυμμένα αρχεία θα εμφανίζονται στον εξερευνητή αρχείων"
 
-#: ../res/IMStatus.glade.h:1
+#: ../res/IMStatus.ui.h:1
 msgid "<b>Sanitized Words</b>"
 msgstr "<b>Απαγορευμένες λέξεις</b>"
 
-#: ../res/IMStatus.glade.h:2 ../res/Twitter.glade.h:1
+#: ../res/IMStatus.ui.h:2 ../res/Twitter.ui.h:1
 msgid "<b>Status</b>"
 msgstr "<b>Κατάσταση</b>"
 
-#: ../res/IMStatus.glade.h:3
+#: ../res/IMStatus.ui.h:3
 msgid "<b>When Stopping or Quitting</b>"
 msgstr "<b>Κατά το σταμάτημα ή την έξοδο</b>"
 
-#: ../res/IMStatus.glade.h:4
+#: ../res/IMStatus.ui.h:4
 msgid "Do nothing"
 msgstr "Καμία ενέργεια"
 
-#: ../res/IMStatus.glade.h:5 ../res/Twitter.glade.h:2
+#: ../res/IMStatus.ui.h:5 ../res/Twitter.ui.h:2
 msgid "Message:"
 msgstr "Μήνυμα:"
 
-#: ../res/IMStatus.glade.h:6
+#: ../res/IMStatus.ui.h:6
 msgid "Set status to:"
 msgstr "Αλλαγή προσωπικού μηνύματος σε:"
 
-#: ../res/IMStatus.glade.h:7
+#: ../res/IMStatus.ui.h:7
 msgid "Update even if not available"
 msgstr "Ανανέωση ακόμα και όταν είσαι μή διαθέσιμος"
 
-#: ../res/IMStatus.glade.h:8
+#: ../res/IMStatus.ui.h:8
 msgid "Update when paused"
 msgstr "Ανανέωση όταν γίνεται παύση"
 
-#: ../res/IMStatus.glade.h:9
+#: ../res/IMStatus.ui.h:9
 msgid "Update your status even if you are marked as unavailable"
 msgstr "Ανανέωση ακόμα και όταν η κατάστασή σας είναι μή διαθέσιμος"
 
-#: ../res/IMStatus.glade.h:10
+#: ../res/IMStatus.ui.h:10
 msgid "Update your status on pause/unpause events"
 msgstr "Ανανέωση του προσωπικού μηνύματος κατά την παύση της αναπαραγωγής"
 
-#: ../res/Library.glade.h:1
+#: ../res/Library.ui.h:1
 msgid "<b>Libraries</b>"
 msgstr "<b>Βιβλιοθήκες</b>"
 
-#: ../res/Library.glade.h:2
+#: ../res/Library.ui.h:2
 msgid "Add a new library"
 msgstr "Προσθήκη νέας βιβλιοθήκης"
 
-#: ../res/Library.glade.h:3
+#: ../res/Library.ui.h:3
 msgid "Remove the selected libraries"
 msgstr "Αφαίρεση επιλεγμένων βιβλιοθηκών"
 
-#: ../res/Library.glade.h:5
+#: ../res/Library.ui.h:5
 msgid "Rename the selected library"
 msgstr "Μετονομασία επιλεγμένης βιβλιοθήκης"
 
-#: ../res/Library.glade.h:6
+#: ../res/Library.ui.h:6
 msgid "Update the selected library by rescanning the disk"
 msgstr "Ανανέωση της επιλεγμένης βιβλιοθήκης με επανανίχνευση του δίσκου"
 
-#: ../res/MainWindow.glade.h:1
+#: ../res/MainWindow.ui.h:1
 msgid "Clear"
 msgstr "Καθαρισμός"
 
-#: ../res/MainWindow.glade.h:2
+#: ../res/MainWindow.ui.h:2
 msgid "Clear the playlist"
 msgstr "Καθαρισμός λίστας αναπαραγωγής"
 
-#: ../res/MainWindow.glade.h:3
+#: ../res/MainWindow.ui.h:3
 msgid "Display about dialog box"
 msgstr "Εμφάνιση διαλόγου πληροφοριών προγράμματος"
 
-#: ../res/MainWindow.glade.h:4 ../res/StatusIconMenu.glade.h:1
+#: ../res/MainWindow.ui.h:4 ../res/StatusIconMenu.ui.h:1
 msgid "Display preferences"
 msgstr "Εμφάνιση επιλογών"
 
-#: ../res/MainWindow.glade.h:5
+#: ../res/MainWindow.ui.h:5
 msgid "Elapsed time"
 msgstr "Χρόνος που πέρασε"
 
-#: ../res/MainWindow.glade.h:6
+#: ../res/MainWindow.ui.h:6
 msgid "Full"
 msgstr ""
 
-#: ../res/MainWindow.glade.h:7
+#: ../res/MainWindow.ui.h:7
 msgid "Mini"
 msgstr ""
 
-#: ../res/MainWindow.glade.h:8
+#: ../res/MainWindow.ui.h:8
 msgid "Nano"
 msgstr ""
 
-#: ../res/MainWindow.glade.h:9
+#: ../res/MainWindow.ui.h:9
 msgid "Online _Help"
 msgstr "Βοήθεια στο διαδίκτυο"
 
-#: ../res/MainWindow.glade.h:10
+#: ../res/MainWindow.ui.h:10
 msgid "Open the online help web page"
 msgstr "Άνοιγμα της ιστοσελίδας περιεχομένων βοήθειας"
 
-#: ../res/MainWindow.glade.h:11
+#: ../res/MainWindow.ui.h:11
 msgid "Play all tracks endlessly"
 msgstr "Αναπαραγωγή όλων των κομματιών χωρίς τέλος"
 
-#: ../res/MainWindow.glade.h:13 ../res/StatusIconMenu.glade.h:3
+#: ../res/MainWindow.ui.h:13 ../res/StatusIconMenu.ui.h:3
 msgid "Play the next track"
 msgstr "Αναπαραγωγή επόμενου κομματιού"
 
-#: ../res/MainWindow.glade.h:14 ../res/StatusIconMenu.glade.h:4
+#: ../res/MainWindow.ui.h:14 ../res/StatusIconMenu.ui.h:4
 msgid "Play the previous track"
 msgstr "Αναπαραγωγή προηγούμενου κομματιού"
 
-#: ../res/MainWindow.glade.h:15
+#: ../res/MainWindow.ui.h:15
 msgid "Playlist"
 msgstr ""
 
-#: ../res/MainWindow.glade.h:16 ../res/StatusIconMenu.glade.h:6
+#: ../res/MainWindow.ui.h:16 ../res/StatusIconMenu.ui.h:6
 msgid "Quit the application"
 msgstr "Έξοδος από την εφαρμογή"
 
-#: ../res/MainWindow.glade.h:17
+#: ../res/MainWindow.ui.h:17
 msgid "Remaining time"
 msgstr "Υπόλοιπος χρόνος"
 
-#: ../res/MainWindow.glade.h:19
+#: ../res/MainWindow.ui.h:19
 msgid "Seek a position in the current track"
 msgstr "Αναζήτηση θέσης στο τρέχον κομμάτι"
 
-#: ../res/MainWindow.glade.h:20
+#: ../res/MainWindow.ui.h:20
 msgid "Select an explorer"
 msgstr "Επιλογή εξερευνητή"
 
-#: ../res/MainWindow.glade.h:21
+#: ../res/MainWindow.ui.h:21
 msgid "Shuffle"
 msgstr "Ανακάτεμα"
 
-#: ../res/MainWindow.glade.h:22
+#: ../res/MainWindow.ui.h:22
 msgid "Shuffle the playlist"
 msgstr "Ανακάτεμα της λίστας αναπαραγωγής"
 
-#: ../res/MainWindow.glade.h:23 ../res/StatusIconMenu.glade.h:7
+#: ../res/MainWindow.ui.h:23 ../res/StatusIconMenu.ui.h:7
 msgid "Stop the current track"
 msgstr "Διακοπή αναπαραγωγής"
 
-#: ../res/MainWindow.glade.h:24
+#: ../res/MainWindow.ui.h:24
 msgid "_Edit"
 msgstr "_Επεξεργασία"
 
-#: ../res/MainWindow.glade.h:25
+#: ../res/MainWindow.ui.h:25
 msgid "_File"
 msgstr "_Αρχείο"
 
-#: ../res/MainWindow.glade.h:26
+#: ../res/MainWindow.ui.h:26
 msgid "_Help"
 msgstr "_Βοήθεια"
 
-#: ../res/MainWindow.glade.h:27
+#: ../res/MainWindow.ui.h:27
 msgid "_Mode"
 msgstr ""
 
-#: ../res/SelectPath.glade.h:1
+#: ../res/SelectPath.ui.h:1
 msgid "Name:"
 msgstr "Όνομα:"
 
-#: ../res/SelectPath.glade.h:2
+#: ../res/SelectPath.ui.h:2
 msgid "Path:"
 msgstr "Διαδρομή:"
 
-#: ../res/StatusFile.glade.h:1
+#: ../res/StatusFile.ui.h:1
 msgid "<b>File</b>"
 msgstr "<b>Αρχείο</b>"
 
-#: ../res/StatusFile.glade.h:2
+#: ../res/StatusFile.ui.h:2
 msgid "<b>Playing Status</b>"
 msgstr "<b>Κατάσταση Αναπαραγωγής</b>"
 
-#: ../res/StatusIconMenu.glade.h:5
+#: ../res/StatusIconMenu.ui.h:5
 msgid "Play/Unpause"
 msgstr "Έναρξη/Συνέχεια"

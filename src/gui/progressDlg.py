@@ -31,12 +31,12 @@ class ProgressDlg:
         self.parent    = parent
         self.cancelled = False
         # Widgets
-        self.wTree       = tools.loadGladeFile('Progress.glade')
-        self.dialog      = self.wTree.get_widget('dlg')
-        self.lblCurrent  = self.wTree.get_widget('lbl-current')
-        self.progressBar = self.wTree.get_widget('progress-bar')
+        self.wTree       = tools.loadGladeFile('Progress.ui')
+        self.dialog      = self.wTree.get_object('dlg')
+        self.lblCurrent  = self.wTree.get_object('lbl-current')
+        self.progressBar = self.wTree.get_object('progress-bar')
         # GTK+ handlers
-        self.wTree.get_widget('btn-cancel').connect('clicked', self.onCancel)
+        self.wTree.get_object('btn-cancel').connect('clicked', self.onCancel)
         # Configure and show the progress dialog
         if parent is not None:
             parent.set_sensitive(False)
@@ -72,17 +72,17 @@ class ProgressDlg:
 
     def setPrimaryText(self, txt):
         """ Set the primary text for this progress dialog """
-        self.wTree.get_widget('lbl-primary').set_markup('<b><big>%s</big></b>' % txt)
+        self.wTree.get_object('lbl-primary').set_markup('<b><big>%s</big></b>' % txt)
 
 
     def setSecondaryText(self, txt):
         """ Set the secondary text for this progress dialog """
-        self.wTree.get_widget('lbl-secondary').set_label(txt)
+        self.wTree.get_object('lbl-secondary').set_label(txt)
 
 
     def setCancellable(self, cancellable):
         """ Enable/disable the cancel button """
-        self.wTree.get_widget('btn-cancel').set_sensitive(cancellable)
+        self.wTree.get_object('btn-cancel').set_sensitive(cancellable)
 
 
     def onCancel(self, btn):

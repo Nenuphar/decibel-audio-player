@@ -87,7 +87,7 @@ class AutoShuffle(modules.Module):
         if self.cfgWin is None:
             import gui.window
 
-            self.cfgWin = gui.window.Window('AutoShuffle.glade', 'vbox1', __name__, MOD_INFO[modules.MODINFO_L10N], 340, 180)
+            self.cfgWin = gui.window.Window('AutoShuffle.ui', 'vbox1', __name__, MOD_INFO[modules.MODINFO_L10N], 340, 180)
 
             self.cfgWin.getWidget('btn-ok').connect('clicked', self.onBtnOk)
             self.cfgWin.getWidget('btn-help').connect('clicked', self.onBtnHelp)

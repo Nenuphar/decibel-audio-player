@@ -15,6 +15,7 @@ v1.08 ()
     [ ] On execution, raise if already running (#770111)
     [ ] Show filename instead of title when no title tag exists (#732583)
     [ ] Added a 'filename' column to the tracklist (right-click on column headers to display it)
+    [ ] Convert from Libglade to GtkBuilder (#799738)
 
 
 v1.07 (06/03/11)

@@ -904,7 +904,7 @@ class Library(modules.Module):
         if self.cfgWindow is None:
             from gui import extListview, window
 
-            self.cfgWindow = window.Window('Library.glade', 'vbox1', __name__, MOD_L10N, 370, 400)
+            self.cfgWindow = window.Window('Library.ui', 'vbox1', __name__, MOD_L10N, 370, 400)
             # Create the list of libraries
             txtRdr  = gtk.CellRendererText()
             pixRdr  = gtk.CellRendererPixbuf()

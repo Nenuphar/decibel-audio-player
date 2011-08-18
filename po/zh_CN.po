@@ -119,7 +119,7 @@ msgid ""
 "%(reason)s"
 msgstr ""
 
-#: ../src/gui/authentication.py:133 ../res/Authentication.glade.h:1
+#: ../src/gui/authentication.py:133 ../res/Authentication.ui.h:1
 msgid "Password required"
 msgstr "需要密码"
 
@@ -335,11 +335,11 @@ msgstr ""
 "\n"
 
 #: ../src/modules/CtrlPanel.py:78 ../src/modules/CtrlPanel.py:136
-#: ../res/StatusIconMenu.glade.h:2
+#: ../res/StatusIconMenu.ui.h:2
 msgid "Pause the current track"
 msgstr "暂停当前音轨"
 
-#: ../src/modules/CtrlPanel.py:95 ../res/MainWindow.glade.h:12
+#: ../src/modules/CtrlPanel.py:95 ../res/MainWindow.ui.h:12
 msgid "Play the first track of the playlist"
 msgstr "播放列表中的第一音轨"
 
@@ -381,7 +381,7 @@ msgstr ""
 msgid "Clear Playlist"
 msgstr ""
 
-#: ../src/modules/Tracklist.py:338 ../res/MainWindow.glade.h:18
+#: ../src/modules/Tracklist.py:338 ../res/MainWindow.ui.h:18
 msgid "Repeat"
 msgstr "重复播放"
 
@@ -413,7 +413,7 @@ msgstr ""
 msgid "Collapse all"
 msgstr ""
 
-#: ../src/modules/FileExplorer.py:349 ../res/FileExplorer.glade.h:7
+#: ../src/modules/FileExplorer.py:349 ../res/FileExplorer.ui.h:7
 msgid "Show hidden files"
 msgstr "显示隐藏文件"
 
@@ -761,335 +761,335 @@ msgstr ""
 msgid "Normalize volume"
 msgstr ""
 
-#: ../res/AudioCD.glade.h:1
+#: ../res/AudioCD.ui.h:1
 msgid "<b>CDDB</b>"
 msgstr "<b>CDDB</b>"
 
-#: ../res/AudioCD.glade.h:2 ../res/DesktopNotification.glade.h:2
-#: ../res/FileExplorer.glade.h:1
+#: ../res/AudioCD.ui.h:2 ../res/DesktopNotification.ui.h:2
+#: ../res/FileExplorer.ui.h:1
 msgid "<b>Miscellaneous</b>"
 msgstr "<b>杂项</b>"
 
-#: ../res/AudioCD.glade.h:3
+#: ../res/AudioCD.ui.h:3
 msgid "CD-ROM device:"
 msgstr "CD-ROM设备："
 
-#: ../res/AudioCD.glade.h:4
+#: ../res/AudioCD.ui.h:4
 msgid "Clear cache"
 msgstr "清除缓存"
 
-#: ../res/AudioCD.glade.h:5
+#: ../res/AudioCD.ui.h:5
 msgid "Download disc information"
 msgstr "下载光碟信息"
 
-#: ../res/AudioCD.glade.h:6
+#: ../res/AudioCD.ui.h:6
 msgid "Download disc information from an online database"
 msgstr "从在线数据库下载光碟信息"
 
-#: ../res/AudioCD.glade.h:7
+#: ../res/AudioCD.ui.h:7
 msgid "Location of your CD-ROM device"
 msgstr "CD-ROM设备的位置"
 
-#: ../res/AudioCD.glade.h:8
+#: ../res/AudioCD.ui.h:8
 msgid "Remove all disc information from your hard drive"
 msgstr "从你的硬盘删除所有光碟信息"
 
-#: ../res/AudioCD.glade.h:9
+#: ../res/AudioCD.ui.h:9
 msgid "Save disc information on your hard drive"
 msgstr "将光碟信息保存到你的硬盘"
 
-#: ../res/AudioCD.glade.h:10
+#: ../res/AudioCD.ui.h:10
 msgid "Save information in a local cache"
 msgstr "保存信息到本地缓存"
 
-#: ../res/AudioCDMenu.glade.h:1
+#: ../res/AudioCDMenu.ui.h:1
 msgid "Add to Playlist"
 msgstr "添加到播放列表"
 
-#: ../res/AudioCDMenu.glade.h:2
+#: ../res/AudioCDMenu.ui.h:2
 msgid "Append selection to the playlist"
 msgstr "添加所选到播放列表"
 
-#: ../res/AudioCDMenu.glade.h:3
+#: ../res/AudioCDMenu.ui.h:3
 msgid "Replace the playlist by the selection and start playback"
 msgstr "用所选替代播放列表并开始回放"
 
-#: ../res/AudioCDMenu.glade.h:4
+#: ../res/AudioCDMenu.ui.h:4
 msgid "Rescan the audio disc"
 msgstr "重新扫描音频光碟"
 
-#: ../res/Authentication.glade.h:2
+#: ../res/Authentication.ui.h:2
 msgid "Password:"
 msgstr "口令："
 
-#: ../res/Authentication.glade.h:3
+#: ../res/Authentication.ui.h:3
 msgid "Remember this password"
 msgstr "记住此密码"
 
-#: ../res/Authentication.glade.h:4
+#: ../res/Authentication.ui.h:4
 msgid "Username:"
 msgstr "用户名："
 
-#: ../res/Authentication.glade.h:5 ../res/Progress.glade.h:1
+#: ../res/Authentication.ui.h:5 ../res/Progress.ui.h:1
 msgid "label"
 msgstr "标签"
 
-#: ../res/Covers.glade.h:1
+#: ../res/Covers.ui.h:1
 msgid "<b>Internet Covers</b>"
 msgstr ""
 
-#: ../res/Covers.glade.h:2
+#: ../res/Covers.ui.h:2
 msgid "<b>User Covers</b>"
 msgstr ""
 
-#: ../res/Covers.glade.h:3
+#: ../res/Covers.ui.h:3
 msgid "Always prefer user covers"
 msgstr ""
 
-#: ../res/Covers.glade.h:4
+#: ../res/Covers.ui.h:4
 msgid "Don't download covers when there is a user one"
 msgstr ""
 
-#: ../res/Covers.glade.h:5
+#: ../res/Covers.ui.h:5
 msgid "Download covers"
 msgstr ""
 
-#: ../res/Covers.glade.h:6
+#: ../res/Covers.ui.h:6
 msgid "Filenames to look for (e.g., folder, cover)"
 msgstr ""
 
-#: ../res/Covers.glade.h:7
+#: ../res/Covers.ui.h:7
 msgid "Filenames:"
 msgstr ""
 
-#: ../res/Covers.glade.h:8
+#: ../res/Covers.ui.h:8
 msgid "Try to download covers from the Internet"
 msgstr ""
 
-#: ../res/DesktopNotification.glade.h:1
+#: ../res/DesktopNotification.ui.h:1
 msgid "<b>Body</b>"
 msgstr ""
 
-#: ../res/DesktopNotification.glade.h:3
+#: ../res/DesktopNotification.ui.h:3
 msgid "<b>Title</b>"
 msgstr "<b>标题</b>"
 
-#: ../res/DesktopNotification.glade.h:4
+#: ../res/DesktopNotification.ui.h:4
 msgid "Notification timeout:"
 msgstr "提示超时："
 
-#: ../res/DesktopNotification.glade.h:5
+#: ../res/DesktopNotification.ui.h:5
 msgid "Show a \"skip track\" button"
 msgstr "显示“跳过音轨”按钮"
 
-#: ../res/DesktopNotification.glade.h:6
+#: ../res/DesktopNotification.ui.h:6
 msgid "Time during which the notification is displayed"
 msgstr "提示显示时间"
 
-#: ../res/DesktopNotification.glade.h:7
+#: ../res/DesktopNotification.ui.h:7
 msgid "seconds"
 msgstr "秒"
 
-#: ../res/FileExplorer.glade.h:2
+#: ../res/FileExplorer.ui.h:2
 msgid "<b>Root Folders</b>"
 msgstr "<b>根文件夹</b>"
 
-#: ../res/FileExplorer.glade.h:3
+#: ../res/FileExplorer.ui.h:3
 msgid "Add a new root folder to the file explorer"
 msgstr "在文件浏览器中添加一个新的根文件夹"
 
-#: ../res/FileExplorer.glade.h:4
+#: ../res/FileExplorer.ui.h:4
 msgid "Remove the selected root folders"
 msgstr "移除选定的根文件夹"
 
-#: ../res/FileExplorer.glade.h:5 ../res/Library.glade.h:4
+#: ../res/FileExplorer.ui.h:5 ../res/Library.ui.h:4
 msgid "Rename"
 msgstr "重命名"
 
-#: ../res/FileExplorer.glade.h:6
+#: ../res/FileExplorer.ui.h:6
 msgid "Rename the selected root folder"
 msgstr "重命名所选的根目录"
 
-#: ../res/FileExplorer.glade.h:8
+#: ../res/FileExplorer.ui.h:8
 msgid "Whether hidden files should be shown in the file explorer"
 msgstr "隐藏文件是否显示在文件浏览器中"
 
-#: ../res/IMStatus.glade.h:1
+#: ../res/IMStatus.ui.h:1
 msgid "<b>Sanitized Words</b>"
 msgstr ""
 
-#: ../res/IMStatus.glade.h:2 ../res/Twitter.glade.h:1
+#: ../res/IMStatus.ui.h:2 ../res/Twitter.ui.h:1
 msgid "<b>Status</b>"
 msgstr "<b>状态</b>"
 
-#: ../res/IMStatus.glade.h:3
+#: ../res/IMStatus.ui.h:3
 msgid "<b>When Stopping or Quitting</b>"
 msgstr "<b>何时停止或退出</b>"
 
-#: ../res/IMStatus.glade.h:4
+#: ../res/IMStatus.ui.h:4
 msgid "Do nothing"
 msgstr "什么也不做"
 
-#: ../res/IMStatus.glade.h:5 ../res/Twitter.glade.h:2
+#: ../res/IMStatus.ui.h:5 ../res/Twitter.ui.h:2
 msgid "Message:"
 msgstr "消息："
 
-#: ../res/IMStatus.glade.h:6
+#: ../res/IMStatus.ui.h:6
 msgid "Set status to:"
 msgstr "设置状态为："
 
-#: ../res/IMStatus.glade.h:7
+#: ../res/IMStatus.ui.h:7
 msgid "Update even if not available"
 msgstr "即使不可用仍进行更新"
 
-#: ../res/IMStatus.glade.h:8
+#: ../res/IMStatus.ui.h:8
 msgid "Update when paused"
 msgstr "当暂停时更新"
 
-#: ../res/IMStatus.glade.h:9
+#: ../res/IMStatus.ui.h:9
 msgid "Update your status even if you are marked as unavailable"
 msgstr ""
 
-#: ../res/IMStatus.glade.h:10
+#: ../res/IMStatus.ui.h:10
 msgid "Update your status on pause/unpause events"
 msgstr "在暂停/恢复时更新你的状态"
 
-#: ../res/Library.glade.h:1
+#: ../res/Library.ui.h:1
 msgid "<b>Libraries</b>"
 msgstr "<b>媒体库</b>"
 
-#: ../res/Library.glade.h:2
+#: ../res/Library.ui.h:2
 msgid "Add a new library"
 msgstr "添加新的媒体库"
 
-#: ../res/Library.glade.h:3
+#: ../res/Library.ui.h:3
 msgid "Remove the selected libraries"
 msgstr "移除选定的媒体库"
 
-#: ../res/Library.glade.h:5
+#: ../res/Library.ui.h:5
 msgid "Rename the selected library"
 msgstr "重命名所选的媒体库"
 
-#: ../res/Library.glade.h:6
+#: ../res/Library.ui.h:6
 msgid "Update the selected library by rescanning the disk"
 msgstr "通过重新扫描磁盘更新选定的媒体库"
 
-#: ../res/MainWindow.glade.h:1
+#: ../res/MainWindow.ui.h:1
 msgid "Clear"
 msgstr "清除"
 
-#: ../res/MainWindow.glade.h:2
+#: ../res/MainWindow.ui.h:2
 msgid "Clear the playlist"
 msgstr "清除播放列表"
 
-#: ../res/MainWindow.glade.h:3
+#: ../res/MainWindow.ui.h:3
 msgid "Display about dialog box"
 msgstr "显示关于对话窗口"
 
-#: ../res/MainWindow.glade.h:4 ../res/StatusIconMenu.glade.h:1
+#: ../res/MainWindow.ui.h:4 ../res/StatusIconMenu.ui.h:1
 msgid "Display preferences"
 msgstr "显示首选项"
 
-#: ../res/MainWindow.glade.h:5
+#: ../res/MainWindow.ui.h:5
 msgid "Elapsed time"
 msgstr "逝去时间"
 
-#: ../res/MainWindow.glade.h:6
+#: ../res/MainWindow.ui.h:6
 msgid "Full"
 msgstr ""
 
-#: ../res/MainWindow.glade.h:7
+#: ../res/MainWindow.ui.h:7
 msgid "Mini"
 msgstr ""
 
-#: ../res/MainWindow.glade.h:8
+#: ../res/MainWindow.ui.h:8
 msgid "Nano"
 msgstr ""
 
-#: ../res/MainWindow.glade.h:9
+#: ../res/MainWindow.ui.h:9
 msgid "Online _Help"
 msgstr "在线帮助(_H)"
 
-#: ../res/MainWindow.glade.h:10
+#: ../res/MainWindow.ui.h:10
 msgid "Open the online help web page"
 msgstr "打开在线帮助页面"
 
-#: ../res/MainWindow.glade.h:11
+#: ../res/MainWindow.ui.h:11
 msgid "Play all tracks endlessly"
 msgstr "一直播放所有音轨"
 
-#: ../res/MainWindow.glade.h:13 ../res/StatusIconMenu.glade.h:3
+#: ../res/MainWindow.ui.h:13 ../res/StatusIconMenu.ui.h:3
 msgid "Play the next track"
 msgstr "播放下一音轨"
 
-#: ../res/MainWindow.glade.h:14 ../res/StatusIconMenu.glade.h:4
+#: ../res/MainWindow.ui.h:14 ../res/StatusIconMenu.ui.h:4
 msgid "Play the previous track"
 msgstr "播放上一音轨"
 
-#: ../res/MainWindow.glade.h:15
+#: ../res/MainWindow.ui.h:15
 msgid "Playlist"
 msgstr ""
 
-#: ../res/MainWindow.glade.h:16 ../res/StatusIconMenu.glade.h:6
+#: ../res/MainWindow.ui.h:16 ../res/StatusIconMenu.ui.h:6
 msgid "Quit the application"
 msgstr "退出程序"
 
-#: ../res/MainWindow.glade.h:17
+#: ../res/MainWindow.ui.h:17
 msgid "Remaining time"
 msgstr "剩余时间"
 
-#: ../res/MainWindow.glade.h:19
+#: ../res/MainWindow.ui.h:19
 msgid "Seek a position in the current track"
 msgstr "跳至当前音轨中的某个位置"
 
-#: ../res/MainWindow.glade.h:20
+#: ../res/MainWindow.ui.h:20
 msgid "Select an explorer"
 msgstr "选择一个浏览器"
 
-#: ../res/MainWindow.glade.h:21
+#: ../res/MainWindow.ui.h:21
 msgid "Shuffle"
 msgstr "随机播放"
 
-#: ../res/MainWindow.glade.h:22
+#: ../res/MainWindow.ui.h:22
 msgid "Shuffle the playlist"
 msgstr "在播放列表中随机播放"
 
-#: ../res/MainWindow.glade.h:23 ../res/StatusIconMenu.glade.h:7
+#: ../res/MainWindow.ui.h:23 ../res/StatusIconMenu.ui.h:7
 msgid "Stop the current track"
 msgstr "停止当前音轨"
 
-#: ../res/MainWindow.glade.h:24
+#: ../res/MainWindow.ui.h:24
 msgid "_Edit"
 msgstr "编辑(_E)"
 
-#: ../res/MainWindow.glade.h:25
+#: ../res/MainWindow.ui.h:25
 msgid "_File"
 msgstr "文件(_F)"
 
-#: ../res/MainWindow.glade.h:26
+#: ../res/MainWindow.ui.h:26
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../res/MainWindow.glade.h:27
+#: ../res/MainWindow.ui.h:27
 msgid "_Mode"
 msgstr ""
 
-#: ../res/SelectPath.glade.h:1
+#: ../res/SelectPath.ui.h:1
 msgid "Name:"
 msgstr "名称："
 
-#: ../res/SelectPath.glade.h:2
+#: ../res/SelectPath.ui.h:2
 msgid "Path:"
 msgstr "路径："
 
-#: ../res/StatusFile.glade.h:1
+#: ../res/StatusFile.ui.h:1
 msgid "<b>File</b>"
 msgstr "<b>文件</b>"
 
-#: ../res/StatusFile.glade.h:2
+#: ../res/StatusFile.ui.h:2
 msgid "<b>Playing Status</b>"
 msgstr "<b>播放状态</b>"
 
-#: ../res/StatusIconMenu.glade.h:5
+#: ../res/StatusIconMenu.ui.h:5
 msgid "Play/Unpause"
 msgstr "播放/取消暂停"

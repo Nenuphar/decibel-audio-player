@@ -289,7 +289,7 @@ class IMStatus(modules.Module):
         if self.cfgWindow is None:
             from gui.window import Window
 
-            self.cfgWindow = Window('IMStatus.glade', 'vbox1', __name__, _(MOD_NAME), 440, 290)
+            self.cfgWindow = Window('IMStatus.ui', 'vbox1', __name__, _(MOD_NAME), 440, 290)
             # GTK handlers
             self.cfgWindow.getWidget('rad-stopDoNothing').connect('toggled', self.onRadToggled)
             self.cfgWindow.getWidget('rad-stopSetStatus').connect('toggled', self.onRadToggled)

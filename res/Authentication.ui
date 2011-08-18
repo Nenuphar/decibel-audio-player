@@ -1,57 +1,57 @@
-<?xml version="1.0"?>
-<glade-interface>
-<widget class="GtkDialog" id="dlg-main">
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+<requires lib="gtk+" version="2.16"/>
+<object class="GtkDialog" id="dlg-main">
 <property name="border_width">5</property>
 <property name="window_position">center-on-parent</property>
 <property name="type_hint">dialog</property>
-<property name="has_separator">False</property>
 <child internal-child="vbox">
-<widget class="GtkVBox" id="dialog-vbox1">
+<object class="GtkVBox" id="dialog-vbox1">
 <property name="spacing">2</property>
 <child>
-<widget class="GtkHBox" id="hbox1">
+<object class="GtkHBox" id="hbox1">
 <property name="spacing">12</property>
 <child>
-<widget class="GtkVBox" id="vbox2">
+<object class="GtkVBox" id="vbox2">
 <child>
-<widget class="GtkImage" id="image1">
+<object class="GtkImage" id="image1">
 <property name="xpad">18</property>
 <property name="ypad">18</property>
 <property name="stock">gtk-dialog-authentication</property>
 <property name="icon-size">6</property>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="position">0</property>
 </packing>
 </child>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="position">0</property>
 </packing>
 </child>
 <child>
-<widget class="GtkVBox" id="vbox1">
+<object class="GtkVBox" id="vbox1">
 <property name="spacing">12</property>
 <child>
-<widget class="GtkHBox" id="hbox2">
+<object class="GtkHBox" id="hbox2">
 <child>
-<widget class="GtkAlignment" id="alignment1">
+<object class="GtkAlignment" id="alignment1">
 <property name="bottom_padding">6</property>
 <child>
-<widget class="GtkLabel" id="lbl-title">
+<object class="GtkLabel" id="lbl-title">
 <property name="label" translatable="yes">Password required</property>
 <property name="use_markup">True</property>
-</widget>
+</object>
 </child>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="position">0</property>
 </packing>
 </child>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="fill">False</property>
@@ -59,34 +59,34 @@
 </packing>
 </child>
 <child>
-<widget class="GtkHBox" id="hbox3">
+<object class="GtkHBox" id="hbox3">
 <child>
-<widget class="GtkLabel" id="lbl-reason">
+<object class="GtkLabel" id="lbl-reason">
 <property name="label" translatable="yes">label</property>
 <property name="wrap">True</property>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="position">0</property>
 </packing>
 </child>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="position">1</property>
 </packing>
 </child>
 <child>
-<widget class="GtkTable" id="table1">
+<object class="GtkTable" id="table1">
 <property name="n_rows">2</property>
 <property name="n_columns">2</property>
 <property name="column_spacing">12</property>
 <property name="row_spacing">6</property>
 <child>
-<widget class="GtkEntry" id="txt-passwd">
+<object class="GtkEntry" id="txt-passwd">
 <property name="can_focus">True</property>
 <property name="visibility">False</property>
-</widget>
+</object>
 <packing>
 <property name="left_attach">1</property>
 <property name="right_attach">2</property>
@@ -95,26 +95,26 @@
 </packing>
 </child>
 <child>
-<widget class="GtkEntry" id="txt-login">
+<object class="GtkEntry" id="txt-login">
 <property name="can_focus">True</property>
-</widget>
+</object>
 <packing>
 <property name="left_attach">1</property>
 <property name="right_attach">2</property>
 </packing>
 </child>
 <child>
-<widget class="GtkHBox" id="hbox5">
+<object class="GtkHBox" id="hbox5">
 <child>
-<widget class="GtkLabel" id="label4">
+<object class="GtkLabel" id="label4">
 <property name="label" translatable="yes">Password:</property>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="position">0</property>
 </packing>
 </child>
-</widget>
+</object>
 <packing>
 <property name="top_attach">1</property>
 <property name="bottom_attach">2</property>
@@ -122,68 +122,67 @@
 </packing>
 </child>
 <child>
-<widget class="GtkHBox" id="hbox4">
+<object class="GtkHBox" id="hbox4">
 <child>
-<widget class="GtkLabel" id="label3">
+<object class="GtkLabel" id="label3">
 <property name="label" translatable="yes">Username:</property>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="position">0</property>
 </packing>
 </child>
-</widget>
+</object>
 <packing>
 <property name="x_options">GTK_FILL</property>
 </packing>
 </child>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="position">2</property>
 </packing>
 </child>
 <child>
-<widget class="GtkHBox" id="hbox6">
+<object class="GtkHBox" id="hbox6">
 <child>
-<widget class="GtkCheckButton" id="chk-store">
+<object class="GtkCheckButton" id="chk-store">
 <property name="label" translatable="yes">Remember this password</property>
 <property name="can_focus">True</property>
 <property name="receives_default">False</property>
 <property name="draw_indicator">True</property>
-</widget>
+</object>
 <packing>
 <property name="position">0</property>
 </packing>
 </child>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="fill">False</property>
 <property name="position">3</property>
 </packing>
 </child>
-</widget>
+</object>
 <packing>
 <property name="position">1</property>
 </packing>
 </child>
-</widget>
+</object>
 <packing>
 <property name="position">1</property>
 </packing>
 </child>
 <child internal-child="action_area">
-<widget class="GtkHButtonBox" id="dlg-action_area">
+<object class="GtkHButtonBox" id="dlg-action_area">
 <property name="layout_style">end</property>
 <child>
-<widget class="GtkButton" id="btn-help">
+<object class="GtkButton" id="btn-help">
 <property name="label">gtk-help</property>
-<property name="response_id">-11</property>
 <property name="can_focus">True</property>
 <property name="receives_default">True</property>
 <property name="use_stock">True</property>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="fill">False</property>
@@ -191,13 +190,12 @@
 </packing>
 </child>
 <child>
-<widget class="GtkButton" id="button2">
+<object class="GtkButton" id="button2">
 <property name="label">gtk-cancel</property>
-<property name="response_id">-6</property>
 <property name="can_focus">True</property>
 <property name="receives_default">True</property>
 <property name="use_stock">True</property>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="fill">False</property>
@@ -205,27 +203,31 @@
 </packing>
 </child>
 <child>
-<widget class="GtkButton" id="btn-ok">
+<object class="GtkButton" id="btn-ok">
 <property name="label">gtk-ok</property>
-<property name="response_id">-5</property>
 <property name="can_focus">True</property>
 <property name="receives_default">True</property>
 <property name="use_stock">True</property>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="fill">False</property>
 <property name="position">2</property>
 </packing>
 </child>
-</widget>
+</object>
 <packing>
 <property name="expand">False</property>
 <property name="pack_type">end</property>
 <property name="position">0</property>
 </packing>
 </child>
-</widget>
+</object>
 </child>
-</widget>
-</glade-interface>
+<action-widgets>
+<action-widget response="-11">btn-help</action-widget>
+<action-widget response="-6">button2</action-widget>
+<action-widget response="-5">btn-ok</action-widget>
+</action-widgets>
+</object>
+</interface>

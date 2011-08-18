@@ -121,16 +121,16 @@ def getAuthInfo(id, reason, defaultLogin=None, force=False, parent=None):
             return authInfo
 
     if mAuthDlg is None:
-        wTree      = tools.loadGladeFile('Authentication.glade')
-        mBtnOk     = wTree.get_widget('btn-ok')
-        mAuthDlg   = wTree.get_widget('dlg-main')
-        mChkStore  = wTree.get_widget('chk-store')
-        mTxtLogin  = wTree.get_widget('txt-login')
-        mTxtPasswd = wTree.get_widget('txt-passwd')
+        wTree      = tools.loadGladeFile('Authentication.ui')
+        mBtnOk     = wTree.get_object('btn-ok')
+        mAuthDlg   = wTree.get_object('dlg-main')
+        mChkStore  = wTree.get_object('chk-store')
+        mTxtLogin  = wTree.get_object('txt-login')
+        mTxtPasswd = wTree.get_object('txt-passwd')
 
-        wTree.get_widget('lbl-reason').set_text(_('Enter your username and password for\n%(reason)s') % {'reason': reason})
-        wTree.get_widget('dlg-action_area').set_child_secondary(wTree.get_widget('btn-help'), True)   # Glade fails to do that
-        wTree.get_widget('lbl-title').set_markup('<big><big><big><b>%s</b></big></big></big>' % _('Password required'))
+        wTree.get_object('lbl-reason').set_text(_('Enter your username and password for\n%(reason)s') % {'reason': reason})
+        wTree.get_object('dlg-action_area').set_child_secondary(wTree.get_object('btn-help'), True)   # Glade fails to do that
+        wTree.get_object('lbl-title').set_markup('<big><big><big><b>%s</b></big></big></big>' % _('Password required'))
 
         mAuthDlg.set_title(consts.appName)
         mAuthDlg.resize_children()

@@ -480,7 +480,7 @@ class FileExplorer(modules.Module):
         if self.cfgWin is None:
             from gui import extListview, window
 
-            self.cfgWin = window.Window('FileExplorer.glade', 'vbox1', __name__, MOD_L10N, 370, 400)
+            self.cfgWin = window.Window('FileExplorer.ui', 'vbox1', __name__, MOD_L10N, 370, 400)
             # Create the list of folders
             txtRdr  = gtk.CellRendererText()
             pixRdr  = gtk.CellRendererPixbuf()

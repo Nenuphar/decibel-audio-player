@@ -33,17 +33,17 @@ class MainWindow:
     def __init__(self, wtree, window):
         """ Constructor """
         self.wtree  = wtree
-        self.paned  = wtree.get_widget('pan-main')
+        self.paned  = wtree.get_object('pan-main')
         self.window = window
 
         # Enable the right radio menu button
         viewmode = prefs.get(__name__, 'view-mode', DEFAULT_VIEW_MODE)
 
-        if viewmode == consts.VIEW_MODE_FULL:       self.wtree.get_widget('menu-mode-full').set_active(True)
-        elif viewmode == consts.VIEW_MODE_LEAN:     self.wtree.get_widget('menu-mode-lean').set_active(True)
-        elif viewmode == consts.VIEW_MODE_MINI:     self.wtree.get_widget('menu-mode-mini').set_active(True)
-        elif viewmode == consts.VIEW_MODE_NETBOOK:  self.wtree.get_widget('menu-mode-netbook').set_active(True)
-        elif viewmode == consts.VIEW_MODE_PLAYLIST: self.wtree.get_widget('menu-mode-playlist').set_active(True)
+        if viewmode == consts.VIEW_MODE_FULL:       self.wtree.get_object('menu-mode-full').set_active(True)
+        elif viewmode == consts.VIEW_MODE_LEAN:     self.wtree.get_object('menu-mode-lean').set_active(True)
+        elif viewmode == consts.VIEW_MODE_MINI:     self.wtree.get_object('menu-mode-mini').set_active(True)
+        elif viewmode == consts.VIEW_MODE_NETBOOK:  self.wtree.get_object('menu-mode-netbook').set_active(True)
+        elif viewmode == consts.VIEW_MODE_PLAYLIST: self.wtree.get_object('menu-mode-playlist').set_active(True)
 
         # Restore the size and the state of the window
         if prefs.get(__name__, 'win-is-maximized', DEFAULT_MAXIMIZED_STATE):
@@ -71,17 +71,17 @@ class MainWindow:
         self.window.connect('size-allocate', self.onResize)
         self.window.connect('window-state-event', self.onState)
 
-        self.wtree.get_widget('menu-mode-mini').connect('activate', self.onViewMode, consts.VIEW_MODE_MINI)
-        self.wtree.get_widget('menu-mode-full').connect('activate', self.onViewMode, consts.VIEW_MODE_FULL)
-        self.wtree.get_widget('menu-mode-lean').connect('activate', self.onViewMode, consts.VIEW_MODE_LEAN)
-        self.wtree.get_widget('menu-mode-netbook').connect('activate', self.onViewMode, consts.VIEW_MODE_NETBOOK)
-        self.wtree.get_widget('menu-mode-playlist').connect('activate', self.onViewMode, consts.VIEW_MODE_PLAYLIST)
+        self.wtree.get_object('menu-mode-mini').connect('activate', self.onViewMode, consts.VIEW_MODE_MINI)
+        self.wtree.get_object('menu-mode-full').connect('activate', self.onViewMode, consts.VIEW_MODE_FULL)
+        self.wtree.get_object('menu-mode-lean').connect('activate', self.onViewMode, consts.VIEW_MODE_LEAN)
+        self.wtree.get_object('menu-mode-netbook').connect('activate', self.onViewMode, consts.VIEW_MODE_NETBOOK)
+        self.wtree.get_object('menu-mode-playlist').connect('activate', self.onViewMode, consts.VIEW_MODE_PLAYLIST)
 
-        self.wtree.get_widget('menu-help').connect('activate', self.onHelp)
-        self.wtree.get_widget('menu-about').connect('activate', self.onAbout)
-        self.wtree.get_widget('menu-preferences').connect('activate', self.onShowPreferences)
-        self.wtree.get_widget('menu-quit').connect('activate', lambda item: self.onDelete(window, None))
-        self.wtree.get_widget('pan-main').connect('size-allocate', lambda win, rect: prefs.set(__name__, 'paned-pos', self.paned.get_position()))
+        self.wtree.get_object('menu-help').connect('activate', self.onHelp)
+        self.wtree.get_object('menu-about').connect('activate', self.onAbout)
+        self.wtree.get_object('menu-preferences').connect('activate', self.onShowPreferences)
+        self.wtree.get_object('menu-quit').connect('activate', lambda item: self.onDelete(window, None))
+        self.wtree.get_object('pan-main').connect('size-allocate', lambda win, rect: prefs.set(__name__, 'paned-pos', self.paned.get_position()))
 
 
     def setViewMode(self, mode):
@@ -117,14 +117,14 @@ class MainWindow:
 
     def __fromModeLean(self, requestedSize):
         """ Switch from lean mode to full mode """
-        self.wtree.get_widget('box-btn-tracklist').show()
+        self.wtree.get_object('box-btn-tracklist').show()
 
         return requestedSize
 
 
     def __toModeLean(self, requestedSize):
         """ Switch from full mode to lean mode """
-        self.wtree.get_widget('box-btn-tracklist').hide()
+        self.wtree.get_object('box-btn-tracklist').hide()
 
         return requestedSize
 
@@ -133,16 +133,16 @@ class MainWindow:
 
     def __fromModeNetbook(self, requestedSize):
         """ Switch from netbook mode to full mode """
-        self.wtree.get_widget('box-trkinfo').show()
-        self.wtree.get_widget('box-btn-tracklist').show()
+        self.wtree.get_object('box-trkinfo').show()
+        self.wtree.get_object('box-btn-tracklist').show()
 
-        slider           = self.wtree.get_widget('box-slider')
-        btnVolume        = self.wtree.get_widget('btn-volume')
-        ctrlPanel        = self.wtree.get_widget('box-ctrl-panel')
-        ctrlButtons      = self.wtree.get_widget('box-ctrl-buttons-2')
-        comboExplorer    = self.wtree.get_widget('combo-explorer')
-        ctrlButtonsBox   = self.wtree.get_widget('box-ctrl-buttons-1')
-        boxComboExplorer = self.wtree.get_widget('box-combo-explorer')
+        slider           = self.wtree.get_object('box-slider')
+        btnVolume        = self.wtree.get_object('btn-volume')
+        ctrlPanel        = self.wtree.get_object('box-ctrl-panel')
+        ctrlButtons      = self.wtree.get_object('box-ctrl-buttons-2')
+        comboExplorer    = self.wtree.get_object('combo-explorer')
+        ctrlButtonsBox   = self.wtree.get_object('box-ctrl-buttons-1')
+        boxComboExplorer = self.wtree.get_object('box-combo-explorer')
 
         slider.reparent(ctrlPanel)
         btnVolume.reparent(ctrlPanel)
@@ -157,15 +157,15 @@ class MainWindow:
 
     def __toModeNetbook(self, requestedSize):
         """ Switch from full mode to netbook mode """
-        self.wtree.get_widget('box-trkinfo').hide()
-        self.wtree.get_widget('box-btn-tracklist').hide()
+        self.wtree.get_object('box-trkinfo').hide()
+        self.wtree.get_object('box-btn-tracklist').hide()
 
-        slider           = self.wtree.get_widget('box-slider')
-        btnVolume        = self.wtree.get_widget('btn-volume')
-        boxExplorer      = self.wtree.get_widget('box-explorer')
-        ctrlButtons      = self.wtree.get_widget('box-ctrl-buttons-2')
-        comboExplorer    = self.wtree.get_widget('combo-explorer')
-        boxComboExplorer = self.wtree.get_widget('box-combo-explorer')
+        slider           = self.wtree.get_object('box-slider')
+        btnVolume        = self.wtree.get_object('btn-volume')
+        boxExplorer      = self.wtree.get_object('box-explorer')
+        ctrlButtons      = self.wtree.get_object('box-ctrl-buttons-2')
+        comboExplorer    = self.wtree.get_object('combo-explorer')
+        boxComboExplorer = self.wtree.get_object('box-combo-explorer')
 
         slider.reparent(boxExplorer)
         btnVolume.reparent(ctrlButtons)
@@ -184,9 +184,9 @@ class MainWindow:
     def __fromModeMini(self, requestedSize):
         """ Switch from mini mode to full mode """
         self.paned.get_child1().show()
-        self.wtree.get_widget('statusbar').show()
-        self.wtree.get_widget('box-btn-tracklist').show()
-        self.wtree.get_widget('scrolled-tracklist').show()
+        self.wtree.get_object('statusbar').show()
+        self.wtree.get_object('box-btn-tracklist').show()
+        self.wtree.get_object('scrolled-tracklist').show()
 
         (winWidth, winHeight) = requestedSize
 
@@ -196,9 +196,9 @@ class MainWindow:
     def __toModeMini(self, requestedSize):
         """ Switch from full mode to mini mode """
         self.paned.get_child1().hide()
-        self.wtree.get_widget('statusbar').hide()
-        self.wtree.get_widget('box-btn-tracklist').hide()
-        self.wtree.get_widget('scrolled-tracklist').hide()
+        self.wtree.get_object('statusbar').hide()
+        self.wtree.get_object('box-btn-tracklist').hide()
+        self.wtree.get_object('scrolled-tracklist').hide()
 
         (winWidth, winHeight) = requestedSize
 
@@ -210,7 +210,7 @@ class MainWindow:
     def __fromModePlaylist(self, requestedSize):
         """ Switch from playlist mode to full mode """
         self.paned.get_child1().show()
-        self.wtree.get_widget('box-btn-tracklist').show()
+        self.wtree.get_object('box-btn-tracklist').show()
 
         (winWidth, winHeight) = requestedSize
 
@@ -220,7 +220,7 @@ class MainWindow:
     def __toModePlaylist(self, requestedSize):
         """ Switch from full mode to playlist mode """
         self.paned.get_child1().hide()
-        self.wtree.get_widget('box-btn-tracklist').hide()
+        self.wtree.get_object('box-btn-tracklist').hide()
 
         (winWidth, winHeight) = requestedSize
 
@@ -233,7 +233,7 @@ class MainWindow:
     def onResize(self, win, rect):
         """ Save the new size of the window """
         # The first status label gets more or less a third of the window's width
-        self.wtree.get_widget('hbox-status1').set_size_request(rect.width / 3 + 15, -1)
+        self.wtree.get_object('hbox-status1').set_size_request(rect.width / 3 + 15, -1)
 
         # Save size and maximized state
         if win.window is not None and not win.window.get_state() & gtk.gdk.WINDOW_STATE_MAXIMIZED:

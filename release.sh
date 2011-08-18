@@ -23,9 +23,9 @@ cp -R ./pix/ $DEST/
 # Resources
 mkdir $DEST/res/
 cd res
-./optiglade.py
+./opti-ui.py
 cd ..
-cp ./res/*.glade $DEST/res/
+cp ./res/*.ui $DEST/res/
 cp ./res/*.desktop $DEST/res/
 
 # Scripts

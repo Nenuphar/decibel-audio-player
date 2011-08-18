@@ -29,9 +29,9 @@ cp -R src "decibel-audio-player"$INSTALL_DIR"/"
 # Resources
 mkdir -p "decibel-audio-player"$INSTALL_DIR"/res"
 cd res
-./optiglade.py
+./opti-ui.py
 cd ..
-cp res/*.glade "decibel-audio-player"$INSTALL_DIR"/res/"
+cp res/*.ui "decibel-audio-player"$INSTALL_DIR"/res/"
 
 mkdir -p "decibel-audio-player"$INSTALL_DIR"/pix"
 cp pix/*.png "decibel-audio-player"$INSTALL_DIR"/pix/"

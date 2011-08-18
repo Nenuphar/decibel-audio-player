@@ -47,11 +47,11 @@ class Explorer(modules.Module):
 
         # Attributes
         self.store           = gtk.ListStore(gtk.gdk.Pixbuf, gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_INT, gobject.TYPE_BOOLEAN)
-        self.combo           = prefs.getWidgetsTree().get_widget('combo-explorer')
+        self.combo           = prefs.getWidgetsTree().get_object('combo-explorer')
         txtRenderer          = gtk.CellRendererText()
         pixRenderer          = gtk.CellRendererPixbuf()
         self.timeout         = None
-        self.notebook        = prefs.getWidgetsTree().get_widget('notebook-explorer')
+        self.notebook        = prefs.getWidgetsTree().get_object('notebook-explorer')
         self.allExplorers    = {}
         self.notebookPages   = {}
         self.currExplorerIdx = 0

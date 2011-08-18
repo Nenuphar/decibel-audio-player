@@ -1,10 +1,10 @@
 INSTALL ?= install
 
 PYFILES = $(shell find ../src -type f -name "*.py")
-GLADEFILES = $(wildcard ../res/*.glade)
+UIFILES = $(wildcard ../res/*.ui)
 POFILES = $(wildcard *.po)
 
-GLADEHFILES := $(GLADEFILES:.glade=.glade.h)
+UIHFILES := $(UIFILES:.ui=.ui.h)
 
 help:
 	@echo "USAGE:"
@@ -18,8 +18,8 @@ help:
 	sed -i '/^char \*s = N_("gtk-.*");$$/d' $@
 
 
-messages.pot: $(GLADEHFILES) $(PYFILES)
-	xgettext -k_ -kN_ -o messages.pot $(PYFILES) $(GLADEHFILES) --from-code=utf-8
+messages.pot: $(UIHFILES) $(PYFILES)
+	xgettext -k_ -kN_ -o messages.pot $(PYFILES) $(UIHFILES) --from-code=utf-8
 
 %.po: messages.pot
 	@if test -f $@; then \
@@ -41,7 +41,7 @@ update: $(POFILES)
 dist: $(POFILES:%.po=../locale/%/LC_MESSAGES/decibel-audio-player.mo)
 
 clean:
-	$(RM) $(GLADEHFILES)
+	$(RM) $(UIHFILES)
 	$(RM) $(POFILES:%.po=../locale/%/LC_MESSAGES/decibel-audio-player.mo)
 	#$(RM) messages.pot
 

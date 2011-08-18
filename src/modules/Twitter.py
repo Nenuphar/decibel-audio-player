@@ -95,7 +95,7 @@ class Twitter(modules.ThreadedModule):
     def configure(self, parent):
         """ Show the configuration window """
         if self.cfgWindow is None:
-            self.cfgWindow = gui.window.Window('Twitter.glade', 'vbox1', __name__, _(MOD_INFO[modules.MODINFO_NAME]), 440, 141)
+            self.cfgWindow = gui.window.Window('Twitter.ui', 'vbox1', __name__, _(MOD_INFO[modules.MODINFO_NAME]), 440, 141)
             # GTK handlers
             self.cfgWindow.getWidget('btn-ok').connect('clicked', self.onBtnOk)
             self.cfgWindow.getWidget('btn-cancel').connect('clicked', lambda btn: self.cfgWindow.hide())

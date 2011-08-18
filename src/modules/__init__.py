@@ -178,7 +178,7 @@ def __addMenuItem(label, callback, accelerator):
     """ This is the 'real' addMenuItem function, which must be executed in the GTK main loop """
     global mAccelGroup, mSeparator
 
-    menu = prefs.getWidgetsTree().get_widget('menu-edit')
+    menu = prefs.getWidgetsTree().get_object('menu-edit')
 
     # Remove all menu items
     if len(mMenuItems) != 0:
@@ -196,7 +196,7 @@ def __addMenuItem(label, callback, accelerator):
     if accelerator is not None:
         if mAccelGroup is None:
             mAccelGroup = gtk.AccelGroup()
-            prefs.getWidgetsTree().get_widget('win-main').add_accel_group(mAccelGroup)
+            prefs.getWidgetsTree().get_object('win-main').add_accel_group(mAccelGroup)
 
         key, mod = gtk.accelerator_parse(accelerator)
         menuitem.add_accelerator('activate', mAccelGroup, key, mod, gtk.ACCEL_VISIBLE)
@@ -223,7 +223,7 @@ def __delMenuItem(label):
     if label not in mMenuItems:
         return
 
-    menu = prefs.getWidgetsTree().get_widget('menu-edit')
+    menu = prefs.getWidgetsTree().get_object('menu-edit')
 
     # Remove all current menu items
     menu.remove(mSeparator)

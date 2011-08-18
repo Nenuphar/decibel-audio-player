@@ -41,7 +41,7 @@ class Preferences:
 
         from gui import extListview, window
 
-        self.window  = window.Window('Preferences.glade', 'vbox1', __name__, _('Preferences'), 495, 440)
+        self.window  = window.Window('Preferences.ui', 'vbox1', __name__, _('Preferences'), 495, 440)
         self.currCat = consts.MODCAT_NONE
 
         # List of modules

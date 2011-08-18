@@ -21,11 +21,11 @@ cp -R ./pix/ $DEST/
 
 # Resources
 cd res
-./optiglade.py
+./opti-ui.py
 cd ..
 mkdir $DEST/res/
 cp res/*.py $DEST/res/
-cp res/*.glade $DEST/res/
+cp res/*.ui $DEST/res/
 cp res/*.desktop $DEST/res/
 
 # Locales

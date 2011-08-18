@@ -25,12 +25,12 @@ class SelectPath:
 
     def __init__(self, title, parent, forbiddenNames=[], forbiddenChars=[]):
         """ Constructor """
-        wTree               = tools.loadGladeFile('SelectPath.glade')
-        self.btnOk          = wTree.get_widget('btn-ok')
-        self.dialog         = wTree.get_widget('dlg')
-        self.txtName        = wTree.get_widget('txt-name')
-        self.txtPath        = wTree.get_widget('txt-path')
-        self.btnOpen        = wTree.get_widget('btn-open')
+        wTree               = tools.loadGladeFile('SelectPath.ui')
+        self.btnOk          = wTree.get_object('btn-ok')
+        self.dialog         = wTree.get_object('dlg')
+        self.txtName        = wTree.get_object('txt-name')
+        self.txtPath        = wTree.get_object('txt-path')
+        self.btnOpen        = wTree.get_object('btn-open')
         self.forbiddenNames = forbiddenNames
         self.forbiddenChars = forbiddenChars
 

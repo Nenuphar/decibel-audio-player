@@ -57,14 +57,14 @@ class CtrlPanel(modules.Module):
 
         # Widgets
         wTree             = prefs.getWidgetsTree()
-        self.btnStop      = wTree.get_widget('btn-stop')
-        self.btnPlay      = wTree.get_widget('btn-play')
-        self.btnNext      = wTree.get_widget('btn-next')
-        self.btnPrev      = wTree.get_widget('btn-previous')
-        self.sclSeek      = wTree.get_widget('scl-position')
-        self.btnVolume    = wTree.get_widget('btn-volume')
-        self.lblElapsed   = wTree.get_widget('lbl-elapsedTime')
-        self.lblRemaining = wTree.get_widget('lbl-remainingTime')
+        self.btnStop      = wTree.get_object('btn-stop')
+        self.btnPlay      = wTree.get_object('btn-play')
+        self.btnNext      = wTree.get_object('btn-next')
+        self.btnPrev      = wTree.get_object('btn-previous')
+        self.sclSeek      = wTree.get_object('scl-position')
+        self.btnVolume    = wTree.get_object('btn-volume')
+        self.lblElapsed   = wTree.get_object('lbl-elapsedTime')
+        self.lblRemaining = wTree.get_object('lbl-remainingTime')
 
         # Don't show the volume button when using playbin2 and pulseaudio together (#511589)
         if not tools.isPulseAudioRunning() or prefs.getCmdLine()[0].playbin or prefs.getCmdLine()[0].volume_button:

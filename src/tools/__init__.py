@@ -16,7 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
-import consts, cPickle, gtk, gtk.glade, os
+import consts, cPickle, gtk, os
 
 
 __dirCache = {}
@@ -123,8 +123,15 @@ def sec2str(seconds, alwaysShowHours=False):
 
 def loadGladeFile(file, root=None):
     """ Load the given Glade file and return the tree of widgets """
-    if root is None: return gtk.glade.XML(os.path.join(consts.dirRes, file), domain=consts.appNameShort)
-    else:            return gtk.glade.XML(os.path.join(consts.dirRes, file), root, consts.appNameShort)
+    builder = gtk.Builder()
+
+    if root is None:
+        builder.add_from_file(os.path.join(consts.dirRes, file))
+        return builder
+    else:
+        builder.add_from_file(os.path.join(consts.dirRes, file))
+        widget = builder.get_object(root)
+        return widget, builder
 
 
 def pickleLoad(file):

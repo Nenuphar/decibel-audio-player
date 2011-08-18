@@ -383,7 +383,7 @@ class AudioCD(modules.ThreadedModule):
     def configure(self, parent):
         """ Show the configuration window """
         if self.cfgWin is None:
-            self.cfgWin = gui.window.Window('AudioCD.glade', 'vbox1', __name__, MOD_L10N, 335, 270)
+            self.cfgWin = gui.window.Window('AudioCD.ui', 'vbox1', __name__, MOD_L10N, 335, 270)
             self.cfgWin.getWidget('btn-ok').connect('clicked', self.onBtnOk)
             self.cfgWin.getWidget('btn-help').connect('clicked', self.onBtnHelp)
             self.cfgWin.getWidget('chk-useCDDB').connect('toggled', self.onUseCDDBToggled)

@@ -111,11 +111,11 @@ class TrackPanel(modules.Module):
         """ Real initialization function, called when this module has been loaded """
         # Widgets
         wTree                  = tools.prefs.getWidgetsTree()
-        evtBox                 = wTree.get_widget('evtbox-cover')
-        self.img               = wTree.get_widget('img-cover')
-        self.txtMisc           = wTree.get_widget('lbl-trkMisc')
-        self.txtTitle          = wTree.get_widget('lbl-trkTitle')
-        self.imgFrame          = wTree.get_widget('frm-cover')
+        evtBox                 = wTree.get_object('evtbox-cover')
+        self.img               = wTree.get_object('img-cover')
+        self.txtMisc           = wTree.get_object('lbl-trkMisc')
+        self.txtTitle          = wTree.get_object('lbl-trkTitle')
+        self.imgFrame          = wTree.get_object('frm-cover')
         self.currTrack         = None
         self.coverWindow       = None
         self.coverTimerId      = None

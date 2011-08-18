@@ -50,7 +50,7 @@ install:
 	$(INSTALL) -m 644 src/media/track/*.py $(SRCDIR)/media/track
 	$(INSTALL) -m 644 src/media/format/*.py $(SRCDIR)/media/format
 	$(INSTALL) -m 644 src/modules/*.py $(SRCDIR)/modules
-	$(INSTALL) -m 644 res/*.glade $(RESDIR)
+	$(INSTALL) -m 644 res/*.ui $(RESDIR)
 	$(INSTALL) -m 644 doc/decibel-audio-player.1 $(MANDIR)
 	$(INSTALL) -m 644 doc/decibel-audio-player-remote.1 $(MANDIR)
 	$(INSTALL) -m 644 pix/*.png $(PIXDIR)
