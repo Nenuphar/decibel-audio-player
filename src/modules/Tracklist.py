@@ -88,7 +88,7 @@ class Tracklist(modules.Module):
                         consts.MSG_CMD_TRACKLIST_DEL:        self.remove,
                         consts.MSG_CMD_TRACKLIST_ADD:        self.insert,
                         consts.MSG_CMD_TRACKLIST_SET:        self.set,
-                        consts.MSG_CMD_TRACKLIST_CLR:        lambda: self.set(None, None),
+                        consts.MSG_CMD_TRACKLIST_CLR:        lambda: self.set(None, False, False),
                         consts.MSG_CMD_TRACKLIST_PLAY:       self.onTracklistPlay,
                         consts.MSG_EVT_TRACK_ENDED_OK:       lambda: self.onTrackEnded(False),
                         consts.MSG_CMD_TRACKLIST_REPEAT:     self.setRepeat,
@@ -188,7 +188,7 @@ class Tracklist(modules.Module):
                 else:                    self.jumpTo(len(self.previousTracklist))
 
 
-    def set(self, tracks, playNow):
+    def set(self, tracks, playNow, keepCurrTrack = False):
         """ Replace the tracklist, clear it if tracks is None """
         self.playtime = 0
 
@@ -196,7 +196,25 @@ class Tracklist(modules.Module):
         # The insert() function would overwrite it otherwise
         previousTracklist = [row[ROW_TRK] for row in self.list]
 
-        if self.list.hasMark() and ((not playNow) or (tracks is None) or (len(tracks) == 0)):
+        # Should we stop playback?
+        sendStop        = False
+        keepTrackNewIdx = -1
+
+        # If we should keep the current track but it doesn't belong to the new playlist
+        if keepCurrTrack and self.list.hasMark():
+            sendStop  = True
+            currTrack = self.list.getRow(self.list.getMark())[ROW_TRK]
+
+            for idx, track in enumerate(tracks):
+                if track == currTrack:
+                    sendStop        = False
+                    keepTrackNewIdx = idx
+                    break
+        # Or if we shouldn't start playback now or the new playlist is empty
+        elif self.list.hasMark() and ((not playNow) or (tracks is None) or (len(tracks) == 0)):
+            sendStop = True
+
+        if sendStop:
             modules.postMsg(consts.MSG_CMD_STOP)
 
         self.list.clear()
@@ -205,6 +223,10 @@ class Tracklist(modules.Module):
             self.insert(tracks, playNow)
 
         self.previousTracklist = previousTracklist
+
+        # Mark the current track if we kept the same one
+        if keepCurrTrack and keepTrackNewIdx != -1:
+            self.jumpTo(keepTrackNewIdx, False, False)
 
 
     def savePlaylist(self):
@@ -251,7 +273,7 @@ class Tracklist(modules.Module):
 
     def revertTracklist(self):
         """ Back to the previous tracklist """
-        self.set(self.previousTracklist, False)
+        self.set(self.previousTracklist, False, True)
         self.previousTracklist = None
 
 
