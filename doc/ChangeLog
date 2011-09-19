@@ -2,7 +2,10 @@
 [-] Bug fixed
 
 
-v1.08 ()
+v1.09 ()
+
+
+v1.08 (19/09/11)
     [-] Keyboard interruption (Ctrl+C) doesn't work (#817803)
     [-] AudioScrobbler cache lost when Decibel is not closed properly (#787989)
     [-] Exception when the cover cannot be retrieved (#825083)
