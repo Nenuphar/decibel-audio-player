@@ -124,7 +124,7 @@ class Covers(modules.ThreadedModule):
 
     def generateFullSizeCover(self, inFile, outFile, format):
         """ Resize inFile if needed, and write it to outFile (outFile and inFile may be equal) """
-        import Image
+        import PIL.Image as Image
 
         try:
             # Open the image
@@ -144,7 +144,7 @@ class Covers(modules.ThreadedModule):
 
     def generateThumbnail(self, inFile, outFile, format):
         """ Generate a thumbnail from inFile (e.g., resize it) and write it to outFile (outFile and inFile may be equal) """
-        import Image
+        import PIL.Image as Image
 
         try:
             # Open the image
